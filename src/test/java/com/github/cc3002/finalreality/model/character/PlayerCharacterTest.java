@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
  * Set of tests for the {@code GameCharacter} class.
  *
  * @author Ignacio Slater Muñoz.
- * @author <Your name>
+ * @author Franco Seguel
  * @see PlayerCharacter
  */
 class PlayerCharacterTest extends AbstractCharacterTest {
@@ -25,6 +25,8 @@ class PlayerCharacterTest extends AbstractCharacterTest {
   private static final String WHITE_MAGE_NAME = "Eiko";
   private static final String ENGINEER_NAME = "Cid";
   private static final String THIEF_NAME = "Zidane";
+  private static final int CHARACTER_HEALTH_POINTS = 10;
+  private static final int CHARACTER_DEF = 5;
   private Map<CharacterClass, String> characterNames;
 
   /**
@@ -45,7 +47,7 @@ class PlayerCharacterTest extends AbstractCharacterTest {
     for (var characterClass :
         characterNames.keySet()) {
       testCharacters.add(
-          new PlayerCharacter(characterNames.get(characterClass), turns, characterClass));
+          new PlayerCharacter(characterNames.get(characterClass), turns, characterClass, CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
     }
   }
 
@@ -54,17 +56,17 @@ class PlayerCharacterTest extends AbstractCharacterTest {
    */
   @Test
   void constructorTest() {
-    var enemy = new Enemy("Enemy", 10, turns);
+    var enemy = new Enemy("Enemy", 10, turns, 10,5);
     for (var character :
         testCharacters) {
       var characterClass = character.getCharacterClass();
       var characterName = characterNames.get(characterClass);
-      checkConstruction(new PlayerCharacter(characterName, turns, characterClass),
+      checkConstruction(new PlayerCharacter(characterName, turns, characterClass, CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
           character,
-          new PlayerCharacter("Test", turns, characterClass),
+          new PlayerCharacter("Test", turns, characterClass,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
           new PlayerCharacter(characterName, turns,
               characterClass == CharacterClass.THIEF ? CharacterClass.BLACK_MAGE
-                  : CharacterClass.THIEF));
+                  : CharacterClass.THIEF, CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
       assertNotEquals(character, enemy);
     }
 

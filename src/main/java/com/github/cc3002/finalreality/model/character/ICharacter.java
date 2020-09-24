@@ -36,5 +36,5 @@ public interface ICharacter {
   /**
    * Returns this character's class.
    */
-  CharacterClass getCharacterClass();
+  String getUnitClass();
 }

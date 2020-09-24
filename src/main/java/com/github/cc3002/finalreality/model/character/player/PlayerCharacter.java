@@ -1,6 +1,6 @@
 package com.github.cc3002.finalreality.model.character.player;
 
-import com.github.cc3002.finalreality.model.character.AbstractCharacter;
+import com.github.cc3002.finalreality.model.character.AbstractUnit;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
@@ -10,10 +10,11 @@ import org.jetbrains.annotations.NotNull;
  * A class that holds all the information of a single character of the game.
  *
  * @author Ignacio Slater Muñoz.
- * @author <Your name>
+ * @author Franco Seguel Lucero
  */
-public class PlayerCharacter extends AbstractCharacter {
+public class PlayerCharacter extends AbstractUnit {
 
+  private int defense;
   /**
    * Creates a new character.
    *
@@ -26,8 +27,11 @@ public class PlayerCharacter extends AbstractCharacter {
    */
   public PlayerCharacter(@NotNull String name,
       @NotNull BlockingQueue<ICharacter> turnsQueue,
-      final CharacterClass characterClass) {
-    super(turnsQueue, name, characterClass);
+      final CharacterClass characterClass,
+                         int healthPoints,
+                         int defense) {
+    super(turnsQueue, name, characterClass, healthPoints);
+    this.defense = defense;
   }
 
   @Override

@@ -21,7 +21,7 @@ public class TimerExample {
       // Gives a random speed to each character to generate different waiting times
       var weapon = new Weapon("", 0, rng.nextInt(50), WeaponType.KNIFE);
       var character = new PlayerCharacter(Integer.toString(i), queue,
-          CharacterClass.THIEF);
+          CharacterClass.THIEF,10,5);
       character.equip(weapon);
       character.waitTurn();
     }
