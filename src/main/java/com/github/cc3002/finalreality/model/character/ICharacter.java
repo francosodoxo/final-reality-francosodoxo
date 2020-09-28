@@ -1,6 +1,7 @@
 package com.github.cc3002.finalreality.model.character;
 
-import com.github.cc3002.finalreality.model.character.player.CharacterClass;
+import com.github.cc3002.finalreality.model.character.player.UnitClass;
+import com.github.cc3002.finalreality.model.weapon.IWeapon;
 import com.github.cc3002.finalreality.model.weapon.Weapon;
 
 /**
@@ -8,7 +9,7 @@ import com.github.cc3002.finalreality.model.weapon.Weapon;
  * A character can be controlled by the player or by the CPU (an enemy).
  *
  * @author Ignacio Slater Muñoz.
- * @author <Your name>
+ * @author Franco Seguel
  */
 public interface ICharacter {
 
@@ -26,15 +27,15 @@ public interface ICharacter {
   /**
    * Equips a weapon to the character.
    */
-  void equip(Weapon weapon);
+  void equip(IWeapon weapon);
 
   /**
    * Return this character's equipped weapon.
    */
-  Weapon getEquippedWeapon();
+  IWeapon getEquippedWeapon();
 
   /**
    * Returns this character's class.
    */
-  CharacterClass getCharacterClass();
+  UnitClass getUnitClass();
 }

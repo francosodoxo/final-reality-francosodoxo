@@ -1,6 +1,6 @@
 package com.github.cc3002.finalreality.model.character;
 
-import com.github.cc3002.finalreality.model.character.player.CharacterClass;
+import com.github.cc3002.finalreality.model.character.player.UnitClass;
 import com.github.cc3002.finalreality.model.character.player.PlayerCharacter;
 import com.github.cc3002.finalreality.model.weapon.Weapon;
 import java.util.concurrent.BlockingQueue;
@@ -13,29 +13,46 @@ import org.jetbrains.annotations.NotNull;
  * An abstract class that holds the common behaviour of all the characters in the game.
  *
  * @author Ignacio Slater Muñoz.
- * @author <Your name>
+ * @author Franco Seguel Lucero
  */
-public abstract class AbstractCharacter implements ICharacter {
+public abstract class AbstractUnit implements IUnit{
 
   protected final BlockingQueue<ICharacter> turnsQueue;
   protected final String name;
-  private final CharacterClass characterClass;
-  private Weapon equippedWeapon = null;
+  private int healthPoints;
+  private UnitClass unitClass;
+
   private ScheduledExecutorService scheduledExecutor;
 
-  protected AbstractCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,
-      @NotNull String name, CharacterClass characterClass) {
+  /**
+   * Holds the common parameters the subclasses have
+   *
+   * @param turnsQueue
+   *    The turn the unit will have to wait for
+   * @param name
+   *    The unit's name
+   * @param healthPoints
+   *    The unit's name
+   * @param unitClass
+   *    The unit's class
+   */
+  protected AbstractUnit(@NotNull BlockingQueue<ICharacter> turnsQueue,
+                         @NotNull String name, int healthPoints, UnitClass unitClass) {
     this.turnsQueue = turnsQueue;
     this.name = name;
-    this.characterClass = characterClass;
+    this.healthPoints = healthPoints;
+    this.unitClass = unitClass;
   }
-
+  /**
+   * Sets a scheduled executor to make this character (thread) wait for {@code speed / 10}
+   * seconds before adding the character to the queue.
+   */
   @Override
   public void waitTurn() {
     scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
     if (this instanceof PlayerCharacter) {
       scheduledExecutor
-          .schedule(this::addToQueue, equippedWeapon.getWeight() / 10, TimeUnit.SECONDS);
+          .schedule(this::addToQueue, this.getEquippedWeapon().getWeight() / 10, TimeUnit.SECONDS);
     } else {
       var enemy = (Enemy) this;
       scheduledExecutor
@@ -46,30 +63,25 @@ public abstract class AbstractCharacter implements ICharacter {
   /**
    * Adds this character to the turns queue.
    */
-  private void addToQueue() {
+  @Override
+  public void addToQueue() {
     turnsQueue.add(this);
     scheduledExecutor.shutdown();
   }
 
+  /**
+   * Get the unit's name
+   * */
   @Override
   public String getName() {
     return name;
   }
 
+  /**
+   * Get the unit's class
+   */
   @Override
-  public void equip(Weapon weapon) {
-    if (this instanceof PlayerCharacter) {
-      this.equippedWeapon = weapon;
-    }
-  }
-
-  @Override
-  public Weapon getEquippedWeapon() {
-    return equippedWeapon;
-  }
-
-  @Override
-  public CharacterClass getCharacterClass() {
-    return characterClass;
+  public UnitClass getUnitClass() {
+    return unitClass;
   }
 }

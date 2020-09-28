@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import com.github.cc3002.finalreality.model.character.player.CharacterClass;
+import com.github.cc3002.finalreality.model.character.player.UnitClass;
 import com.github.cc3002.finalreality.model.character.player.PlayerCharacter;
 import java.util.EnumMap;
 import java.util.Map;
@@ -15,17 +15,19 @@ import org.junit.jupiter.api.Test;
  * Set of tests for the {@code GameCharacter} class.
  *
  * @author Ignacio Slater Muñoz.
- * @author <Your name>
+ * @author Franco Seguel
  * @see PlayerCharacter
  */
 class PlayerCharacterTest extends AbstractCharacterTest {
 
-  private static final String BLACK_MAGE_NAME = "Vivi";
+  private static final String BLACK_MAGICIAN_NAME = "Vivi";
   private static final String KNIGHT_NAME = "Adelbert";
-  private static final String WHITE_MAGE_NAME = "Eiko";
+  private static final String WHITE_MAGICIAN_NAME = "Eiko";
   private static final String ENGINEER_NAME = "Cid";
   private static final String THIEF_NAME = "Zidane";
-  private Map<CharacterClass, String> characterNames;
+  private static final int CHARACTER_HEALTH_POINTS = 10;
+  private static final int CHARACTER_DEF = 5;
+  private Map<UnitClass, String> characterNames;
 
   /**
    * Setup method.
@@ -35,17 +37,17 @@ class PlayerCharacterTest extends AbstractCharacterTest {
   void setUp() {
     super.basicSetUp();
 
-    characterNames = new EnumMap<>(CharacterClass.class);
-    characterNames.put(CharacterClass.BLACK_MAGE, BLACK_MAGE_NAME);
-    characterNames.put(CharacterClass.KNIGHT, KNIGHT_NAME);
-    characterNames.put(CharacterClass.WHITE_MAGE, WHITE_MAGE_NAME);
-    characterNames.put(CharacterClass.ENGINEER, ENGINEER_NAME);
-    characterNames.put(CharacterClass.THIEF, THIEF_NAME);
+    characterNames = new EnumMap<>(UnitClass.class);
+    characterNames.put(UnitClass.BLACK_MAGICIAN, BLACK_MAGICIAN_NAME);
+    characterNames.put(UnitClass.KNIGHT, KNIGHT_NAME);
+    characterNames.put(UnitClass.WHITE_MAGICIAN, WHITE_MAGICIAN_NAME);
+    characterNames.put(UnitClass.ENGINEER, ENGINEER_NAME);
+    characterNames.put(UnitClass.THIEF, THIEF_NAME);
 
     for (var characterClass :
         characterNames.keySet()) {
       testCharacters.add(
-          new PlayerCharacter(characterNames.get(characterClass), turns, characterClass));
+          new PlayerCharacter(characterNames.get(characterClass), turns, characterClass, CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
     }
   }
 
@@ -54,17 +56,17 @@ class PlayerCharacterTest extends AbstractCharacterTest {
    */
   @Test
   void constructorTest() {
-    var enemy = new Enemy("Enemy", 10, turns);
+    var enemy = new Enemy("Enemy", 10, turns, 10,5);
     for (var character :
         testCharacters) {
-      var characterClass = character.getCharacterClass();
+      var characterClass = character.getUnitClass();
       var characterName = characterNames.get(characterClass);
-      checkConstruction(new PlayerCharacter(characterName, turns, characterClass),
+      checkConstruction(new PlayerCharacter(characterName, turns, characterClass, CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
           character,
-          new PlayerCharacter("Test", turns, characterClass),
+          new PlayerCharacter("Test", turns, characterClass,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
           new PlayerCharacter(characterName, turns,
-              characterClass == CharacterClass.THIEF ? CharacterClass.BLACK_MAGE
-                  : CharacterClass.THIEF));
+              characterClass == UnitClass.THIEF ? UnitClass.BLACK_MAGICIAN
+                  : UnitClass.THIEF, CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
       assertNotEquals(character, enemy);
     }
 
