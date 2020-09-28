@@ -5,11 +5,26 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * Class that manages engineers
+ * */
 public class Engineer extends AbstractCharacter {
+    /**
+     * Creates a Engineer
+     *
+     * @param name
+     *      This character's name
+     * @param turnsQueue
+     *      The turn this character will have to wait for
+     * @param healthPoints
+     *      The health points this Engineer will have
+     * @param defense
+     *      The defense this Engineer will have
+     * */
     public Engineer(@NotNull String name,
                     @NotNull BlockingQueue<ICharacter> turnsQueue,
                     int healthPoints,
                     int defense){
-        super(name,"Engineer",turnsQueue,healthPoints,defense);
+        super(name,UnitClass.ENGINEER,turnsQueue,healthPoints,defense);
     }
 }

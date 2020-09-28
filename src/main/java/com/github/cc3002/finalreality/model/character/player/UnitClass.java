@@ -4,8 +4,8 @@ package com.github.cc3002.finalreality.model.character.player;
  * Enumeration of the classes a player character may have.
  *
  * @author Ignacio Slater Muñoz.
- * @author <Your name>
+ * @author Franco Seguel Lucero
  */
-public enum CharacterClass {
-  KNIGHT, ENGINEER, THIEF, BLACK_MAGE, WHITE_MAGE, ENEMY
+public enum UnitClass {
+  KNIGHT, ENGINEER, THIEF, BLACK_MAGICIAN, WHITE_MAGICIAN, ENEMY
 }

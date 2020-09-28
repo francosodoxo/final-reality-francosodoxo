@@ -1,6 +1,6 @@
 package com.github.cc3002.finalreality.model.character;
 
-import com.github.cc3002.finalreality.model.character.player.CharacterClass;
+import com.github.cc3002.finalreality.model.character.player.UnitClass;
 import com.github.cc3002.finalreality.model.character.player.PlayerCharacter;
 import com.github.cc3002.finalreality.model.weapon.Weapon;
 import java.util.concurrent.BlockingQueue;
@@ -20,15 +20,28 @@ public abstract class AbstractUnit implements IUnit{
   protected final BlockingQueue<ICharacter> turnsQueue;
   protected final String name;
   private int healthPoints;
+  private UnitClass unitClass;
 
   private ScheduledExecutorService scheduledExecutor;
 
-
+  /**
+   * Holds the common parameters the subclasses have
+   *
+   * @param turnsQueue
+   *    The turn the unit will have to wait for
+   * @param name
+   *    The unit's name
+   * @param healthPoints
+   *    The unit's name
+   * @param unitClass
+   *    The unit's class
+   */
   protected AbstractUnit(@NotNull BlockingQueue<ICharacter> turnsQueue,
-                         @NotNull String name, int healthPoints) {
+                         @NotNull String name, int healthPoints, UnitClass unitClass) {
     this.turnsQueue = turnsQueue;
     this.name = name;
     this.healthPoints = healthPoints;
+    this.unitClass = unitClass;
   }
   /**
    * Sets a scheduled executor to make this character (thread) wait for {@code speed / 10}
@@ -39,7 +52,7 @@ public abstract class AbstractUnit implements IUnit{
     scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
     if (this instanceof PlayerCharacter) {
       scheduledExecutor
-          .schedule(this::addToQueue, equippedWeapon.getWeight() / 10, TimeUnit.SECONDS);
+          .schedule(this::addToQueue, this.getEquippedWeapon().getWeight() / 10, TimeUnit.SECONDS);
     } else {
       var enemy = (Enemy) this;
       scheduledExecutor
@@ -56,13 +69,19 @@ public abstract class AbstractUnit implements IUnit{
     scheduledExecutor.shutdown();
   }
 
+  /**
+   * Get the unit's name
+   * */
   @Override
   public String getName() {
     return name;
   }
 
+  /**
+   * Get the unit's class
+   */
   @Override
-  public String getUnitClass() {
-    return this.getUnitClass();
+  public UnitClass getUnitClass() {
+    return unitClass;
   }
 }

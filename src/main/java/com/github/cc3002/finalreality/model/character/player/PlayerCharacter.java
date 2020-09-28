@@ -22,15 +22,15 @@ public class PlayerCharacter extends AbstractUnit {
    *     the character's name
    * @param turnsQueue
    *     the queue with the characters waiting for their turn
-   * @param characterClass
+   * @param unitClass
    *     the class of this character
    */
   public PlayerCharacter(@NotNull String name,
       @NotNull BlockingQueue<ICharacter> turnsQueue,
-      final CharacterClass characterClass,
+      final UnitClass unitClass,
                          int healthPoints,
                          int defense) {
-    super(turnsQueue, name, characterClass, healthPoints);
+    super(turnsQueue, name, unitClass, healthPoints);
     this.defense = defense;
   }
 
