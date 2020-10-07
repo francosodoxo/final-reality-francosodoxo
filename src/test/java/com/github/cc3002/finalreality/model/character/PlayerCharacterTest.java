@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Ignacio Slater Muñoz.
  * @author Franco Seguel
- * @see PlayerCharacter
+ * @see AbstractCharacter
  */
 class PlayerCharacterTest extends AbstractCharacterTest {
 
@@ -58,6 +58,10 @@ class PlayerCharacterTest extends AbstractCharacterTest {
           break;
         case THIEF:
           testCharacters.add(new Thief(characterNames.get(characterClass), turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
+          break;
+        case WHITE_MAGICIAN:
+          testCharacters.add(new WhiteMagician(characterNames.get(characterClass),turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
+          break;
       }
     }
   }

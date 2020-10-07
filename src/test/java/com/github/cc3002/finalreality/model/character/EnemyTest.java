@@ -1,8 +1,6 @@
 package com.github.cc3002.finalreality.model.character;
 
 import com.github.cc3002.finalreality.model.character.player.Thief;
-import com.github.cc3002.finalreality.model.character.player.UnitClass;
-import com.github.cc3002.finalreality.model.character.player.PlayerCharacter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

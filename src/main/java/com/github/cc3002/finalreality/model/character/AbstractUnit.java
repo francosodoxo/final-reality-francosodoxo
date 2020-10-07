@@ -1,8 +1,7 @@
 package com.github.cc3002.finalreality.model.character;
 
-import com.github.cc3002.finalreality.model.character.player.AbstractCharacter;
 import com.github.cc3002.finalreality.model.character.player.UnitClass;
-import com.github.cc3002.finalreality.model.character.player.PlayerCharacter;
+
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
