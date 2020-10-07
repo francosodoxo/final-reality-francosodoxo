@@ -1,6 +1,7 @@
 package com.github.cc3002.finalreality.model.character.player;
 
 import com.github.cc3002.finalreality.model.character.ICharacter;
+import com.github.cc3002.finalreality.model.character.IUnit;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
@@ -8,7 +9,7 @@ import java.util.concurrent.BlockingQueue;
 /**
  * Class to group the Magicians
  * */
-public class AbstractMagician extends AbstractCharacter{
+public abstract class AbstractMagician extends AbstractCharacter{
     private int mana;
 
     /**
@@ -27,7 +28,7 @@ public class AbstractMagician extends AbstractCharacter{
      * */
     public AbstractMagician(@NotNull String name,
                             @NotNull UnitClass unitClass,
-                            @NotNull BlockingQueue<ICharacter> turnsQueue,
+                            @NotNull BlockingQueue<IUnit> turnsQueue,
                             int healthPoints,
                             int defense){
         super(name,
@@ -38,4 +39,6 @@ public class AbstractMagician extends AbstractCharacter{
         mana = 0;
     }
 
+    @Override
+    protected abstract IUnit copy();
 }

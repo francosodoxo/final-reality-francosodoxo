@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import com.github.cc3002.finalreality.model.character.player.UnitClass;
-import com.github.cc3002.finalreality.model.character.player.PlayerCharacter;
+import com.github.cc3002.finalreality.model.character.player.*;
+
 import java.util.EnumMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
@@ -46,6 +46,19 @@ class PlayerCharacterTest extends AbstractCharacterTest {
 
     for (var characterClass :
         characterNames.keySet()) {
+      switch (characterClass){
+        case BLACK_MAGICIAN:
+          testCharacters.add(new BlackMagician(characterNames.get(characterClass),turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
+          break;
+        case ENGINEER:
+          testCharacters.add(new Engineer(characterNames.get(characterClass), turns, CHARACTER_HEALTH_POINTS, CHARACTER_DEF));
+          break;
+        case KNIGHT:
+          testCharacters.add(new Knight(characterNames.get(characterClass), turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
+          break;
+        case THIEF:
+          testCharacters.add(new Thief(characterNames.get(characterClass), turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
+      }
       testCharacters.add(
           new PlayerCharacter(characterNames.get(characterClass), turns, characterClass, CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
     }
@@ -61,12 +74,99 @@ class PlayerCharacterTest extends AbstractCharacterTest {
         testCharacters) {
       var characterClass = character.getUnitClass();
       var characterName = characterNames.get(characterClass);
-      checkConstruction(new PlayerCharacter(characterName, turns, characterClass, CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
-          character,
-          new PlayerCharacter("Test", turns, characterClass,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
-          new PlayerCharacter(characterName, turns,
-              characterClass == UnitClass.THIEF ? UnitClass.BLACK_MAGICIAN
-                  : UnitClass.THIEF, CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
+      switch(characterClass){
+        case BLACK_MAGICIAN:
+          checkConstruction(new BlackMagician(characterName,turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  character,
+                  new BlackMagician("black1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  new Engineer(characterName,turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF)
+                  );
+          checkConstruction(new BlackMagician(characterName,turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  character,
+                  new BlackMagician("black1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  new Knight("knight1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
+          checkConstruction(new BlackMagician(characterName,turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  character,
+                  new BlackMagician("black1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  new Thief("thief1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
+          checkConstruction(new BlackMagician(characterName,turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  character,
+                  new BlackMagician("black1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  new WhiteMagician("white1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
+          break;
+        case ENGINEER:
+          checkConstruction(new Engineer(characterName,turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  character,
+                  new Engineer("engineer1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  new BlackMagician("black1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
+          checkConstruction(new Engineer(characterName,turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  character,
+                  new Engineer("engineer1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  new Knight("knight1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
+          checkConstruction(new Engineer(characterName,turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  character,
+                  new Engineer("engineer1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  new Thief("thief1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
+          checkConstruction(new Engineer(characterName,turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  character,
+                  new Engineer("engineer1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  new WhiteMagician("white1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
+          break;
+        case KNIGHT:
+          checkConstruction(new Knight(characterName,turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  character,
+                  new Knight("knight1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  new BlackMagician("black1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
+          checkConstruction(new Knight(characterName,turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  character,
+                  new Knight("knight1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  new Engineer("engineer1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
+          checkConstruction(new Knight(characterName,turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  character,
+                  new Knight("knight1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  new Thief("thief1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
+          checkConstruction(new Knight(characterName,turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  character,
+                  new Knight("knight1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  new WhiteMagician("white1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
+          break;
+        case THIEF:
+          checkConstruction(new Thief(characterName,turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  character,
+                  new Thief("thief1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  new BlackMagician("black1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
+          checkConstruction(new Thief(characterName,turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  character,
+                  new Thief("thief1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  new Engineer("engineer1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
+          checkConstruction(new Thief(characterName,turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  character,
+                  new Thief("thief1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  new Knight("knight1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
+          checkConstruction(new Thief(characterName,turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  character,
+                  new Thief("thief1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  new WhiteMagician("white1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
+          break;
+        case WHITE_MAGICIAN:
+          checkConstruction(new WhiteMagician(characterName,turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  character,
+                  new WhiteMagician("white1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  new BlackMagician("black1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
+          checkConstruction(new WhiteMagician(characterName,turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  character,
+                  new WhiteMagician("white1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  new Engineer("engineer1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
+          checkConstruction(new WhiteMagician(characterName,turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  character,
+                  new WhiteMagician("white1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  new Knight("knight1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
+          checkConstruction(new WhiteMagician(characterName,turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  character,
+                  new WhiteMagician("white1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF),
+                  new Thief("thief1",turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
+
+      }
       assertNotEquals(character, enemy);
     }
 
@@ -76,9 +176,14 @@ class PlayerCharacterTest extends AbstractCharacterTest {
   void equipWeaponTest() {
     for (var character :
         testCharacters) {
-      assertNull(character.getEquippedWeapon());
-      character.equip(testWeapon);
-      assertEquals(testWeapon, character.getEquippedWeapon());
+      if(!character.getUnitClass().equals(UnitClass.ENEMY)) {
+        /* here is clear that character is not an enemy, so it is totally safe
+           to equip a weapon
+           */
+        assertNull(((ICharacter) character).getEquippedWeapon());
+        ((ICharacter) character).equip(testWeapon);
+        assertEquals(testWeapon, ( (ICharacter) character).getEquippedWeapon());
+      }
     }
   }
 }

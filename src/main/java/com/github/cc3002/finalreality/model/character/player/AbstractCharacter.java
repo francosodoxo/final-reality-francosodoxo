@@ -4,7 +4,6 @@ import com.github.cc3002.finalreality.model.character.AbstractUnit;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.IUnit;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
-import com.github.cc3002.finalreality.model.weapon.Weapon;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
@@ -32,7 +31,7 @@ public abstract class AbstractCharacter extends AbstractUnit implements ICharact
      * */
     protected AbstractCharacter(@NotNull String name,
                                 @NotNull UnitClass unitClass,
-                                @NotNull BlockingQueue<ICharacter> turnsQueue,
+                                @NotNull BlockingQueue<IUnit> turnsQueue,
                                 int healthPoints,
                                 int defense){
         super(turnsQueue,name,healthPoints,unitClass);
@@ -50,10 +49,17 @@ public abstract class AbstractCharacter extends AbstractUnit implements ICharact
 
     /**
      * Returns the Character's name
-     * */
+     *
     @Override
     public String getName() {
         return super.getName();
+    }*/
+
+    /**
+     * Get the Character defense points
+     * */
+    public int getDefense(){
+        return defense;
     }
 
     /**

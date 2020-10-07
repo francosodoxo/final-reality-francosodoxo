@@ -1,6 +1,7 @@
 package com.github.cc3002.finalreality.model.character.player;
 
 import com.github.cc3002.finalreality.model.character.ICharacter;
+import com.github.cc3002.finalreality.model.character.IUnit;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
@@ -21,9 +22,14 @@ public class Thief extends AbstractCharacter {
      *          This unit's defense
      * */
     public Thief(@NotNull String name,
-                 @NotNull BlockingQueue<ICharacter> turnsQueue,
+                 @NotNull BlockingQueue<IUnit> turnsQueue,
                  int healthPoints,
                  int defense){
         super(name,UnitClass.THIEF,turnsQueue,healthPoints,defense);
+    }
+
+    @Override
+    protected IUnit copy() {
+        return new Thief(this.getName(),this.getTurnsQueue(),this.getHealthPoints(),this.getDefense());
     }
 }

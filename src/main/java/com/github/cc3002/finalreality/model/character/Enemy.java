@@ -2,6 +2,9 @@ package com.github.cc3002.finalreality.model.character;
 
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
+
+import com.github.cc3002.finalreality.model.character.player.UnitClass;
+import com.github.cc3002.finalreality.model.weapon.IWeapon;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -19,9 +22,12 @@ public class Enemy extends AbstractUnit{
    * Creates a new enemy with a name, a weight and the queue with the characters ready to
    * play.
    */
-  public Enemy(@NotNull final String name, final int weight,
-      @NotNull final BlockingQueue<ICharacter> turnsQueue, int healthPoints, int atk) {
-    super(turnsQueue, name, healthPoints);
+  public Enemy(@NotNull final String name,
+               final int weight,
+      @NotNull final BlockingQueue<IUnit> turnsQueue,
+               int healthPoints,
+               int atk) {
+    super(turnsQueue, name, healthPoints, UnitClass.ENEMY);
     this.weight = weight;
     this.atk = atk;
   }
@@ -48,5 +54,14 @@ public class Enemy extends AbstractUnit{
   @Override
   public int hashCode() {
     return Objects.hash(getWeight());
+  }
+
+  @Override
+  protected IUnit copy() {
+    return new Enemy(this.getName(),this.getWeight(),this.getTurnsQueue(),this.getHealthPoints(),this.getAtk());
+  }
+
+  public int getAtk() {
+    return atk;
   }
 }

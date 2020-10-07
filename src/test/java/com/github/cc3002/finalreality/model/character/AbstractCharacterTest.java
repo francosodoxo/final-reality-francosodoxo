@@ -3,6 +3,7 @@ package com.github.cc3002.finalreality.model.character;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import com.github.cc3002.finalreality.model.character.player.UnitClass;
 import com.github.cc3002.finalreality.model.weapon.Axe;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
 import com.github.cc3002.finalreality.model.weapon.WeaponType;
@@ -22,8 +23,8 @@ import org.junit.jupiter.api.Test;
  */
 public abstract class AbstractCharacterTest {
 
-  protected BlockingQueue<ICharacter> turns;
-  protected List<ICharacter> testCharacters;
+  protected BlockingQueue<IUnit> turns;
+  protected List<IUnit> testCharacters;
   protected IWeapon testWeapon;
 
   /**
@@ -48,14 +49,17 @@ public abstract class AbstractCharacterTest {
     }
   }
 
-  private void tryToEquip(ICharacter character) {
-    character.equip(testWeapon);
+  private void tryToEquip(IUnit character) {
+    if(!character.getUnitClass().equals(UnitClass.ENEMY)){
+      /* Here is sure that character is not an enemy, so is safe to cast the character */
+      ( (ICharacter) character).equip(testWeapon);
+    }
   }
 
-  protected void checkConstruction(final ICharacter expectedCharacter,
-      final ICharacter testEqualCharacter,
-      final ICharacter sameClassDifferentCharacter,
-      final ICharacter differentClassCharacter) {
+  protected void checkConstruction(final IUnit expectedCharacter,
+      final IUnit testEqualCharacter,
+      final IUnit sameClassDifferentCharacter,
+      final IUnit differentClassCharacter) {
     assertEquals(expectedCharacter, testEqualCharacter);
     assertNotEquals(sameClassDifferentCharacter, testEqualCharacter);
     assertNotEquals(testEqualCharacter, differentClassCharacter);

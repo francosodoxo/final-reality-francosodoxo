@@ -1,6 +1,7 @@
 package com.github.cc3002.finalreality.model.character;
 
 import com.github.cc3002.finalreality.model.character.player.UnitClass;
+import com.github.cc3002.finalreality.model.weapon.IWeapon;
 
 /**
  * This represents a unit from the game. That is to say, the player's characters
@@ -27,5 +28,4 @@ public interface IUnit {
      * Get the unit's class
      * */
     UnitClass getUnitClass();
-
 }

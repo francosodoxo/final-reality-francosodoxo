@@ -1,8 +1,8 @@
 package com.github.cc3002.finalreality.model.character;
 
+import com.github.cc3002.finalreality.model.character.player.AbstractCharacter;
 import com.github.cc3002.finalreality.model.character.player.UnitClass;
 import com.github.cc3002.finalreality.model.character.player.PlayerCharacter;
-import com.github.cc3002.finalreality.model.weapon.Weapon;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class AbstractUnit implements IUnit{
 
-  protected final BlockingQueue<ICharacter> turnsQueue;
+  protected final BlockingQueue<IUnit> turnsQueue;
   protected final String name;
   private int healthPoints;
   private UnitClass unitClass;
@@ -36,7 +36,7 @@ public abstract class AbstractUnit implements IUnit{
    * @param unitClass
    *    The unit's class
    */
-  protected AbstractUnit(@NotNull BlockingQueue<ICharacter> turnsQueue,
+  protected AbstractUnit(@NotNull BlockingQueue<IUnit> turnsQueue,
                          @NotNull String name, int healthPoints, UnitClass unitClass) {
     this.turnsQueue = turnsQueue;
     this.name = name;
@@ -50,9 +50,9 @@ public abstract class AbstractUnit implements IUnit{
   @Override
   public void waitTurn() {
     scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
-    if (this instanceof PlayerCharacter) {
+    if (this instanceof ICharacter) {
       scheduledExecutor
-          .schedule(this::addToQueue, this.getEquippedWeapon().getWeight() / 10, TimeUnit.SECONDS);
+          .schedule(this::addToQueue, ((ICharacter) this).getEquippedWeapon().getWeight() / 10, TimeUnit.SECONDS);
     } else {
       var enemy = (Enemy) this;
       scheduledExecutor
@@ -65,8 +65,24 @@ public abstract class AbstractUnit implements IUnit{
    */
   @Override
   public void addToQueue() {
-    turnsQueue.add(this);
+    turnsQueue.add(this.copy());
     scheduledExecutor.shutdown();
+  }
+
+  protected abstract IUnit copy();
+
+  /**
+   * Get the turns Queue
+   * */
+  public BlockingQueue<IUnit> getTurnsQueue(){
+    return turnsQueue;
+  }
+
+  /**
+   * Get the health points
+   * */
+  public int getHealthPoints(){
+    return healthPoints;
   }
 
   /**
