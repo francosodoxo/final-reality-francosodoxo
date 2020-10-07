@@ -40,6 +40,16 @@ public class AbstractWeapon implements IWeapon {
   }
 
   /**
+   * For the null weapon
+   * */
+  public AbstractWeapon(){
+    name = "NullWeapon";
+    damage = 0;
+    weight = 0;
+    type = WeaponType.NULL;
+  }
+
+  /**
    * Returns the weapon's name
    * */
   public String getName() {
@@ -68,24 +78,6 @@ public class AbstractWeapon implements IWeapon {
   @Override
   public WeaponType getType() {
     return type;
-  }
-
-  /**
-   * Compares to another object or itself
-   * */
-  @Override
-  public boolean equals(final Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (!(o instanceof AbstractWeapon)) {
-      return false;
-    }
-    final IWeapon weapon = (IWeapon) o;
-    return getDamage() == weapon.getDamage() &&
-        getWeight() == weapon.getWeight() &&
-        getName().equals(weapon.getName()) &&
-        getType() == weapon.getType();
   }
 
   /**

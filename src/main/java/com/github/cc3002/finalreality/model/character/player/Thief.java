@@ -2,6 +2,7 @@ package com.github.cc3002.finalreality.model.character.player;
 
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.IUnit;
+import com.github.cc3002.finalreality.model.weapon.NullWeapon;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
@@ -26,10 +27,34 @@ public class Thief extends AbstractCharacter {
                  int healthPoints,
                  int defense){
         super(name,UnitClass.THIEF,turnsQueue,healthPoints,defense);
+        equip(NullWeapon.getNullWeapon());
     }
 
     @Override
     protected IUnit copy() {
         return new Thief(this.getName(),this.getTurnsQueue(),this.getHealthPoints(),this.getDefense());
+    }
+    @Override
+    public boolean equals(Object o){
+        if (o == this){
+            return true;
+        }
+        if (!(o instanceof Thief)){
+            return false;
+        }
+        final Thief t = (Thief) o;
+        if (!NullWeapon.getNullWeapon().equals(getEquippedWeapon())) {
+            return getName().equals(t.getName()) &&
+                    getTurnsQueue().equals(t.getTurnsQueue()) &&
+                    getHealthPoints() == t.getHealthPoints() &&
+                    getDefense() == t.getDefense() &&
+                    getEquippedWeapon().equals(t.getEquippedWeapon());
+        }
+        else{
+            return getName().equals(t.getName()) &&
+                    getTurnsQueue().equals(t.getTurnsQueue()) &&
+                    getHealthPoints() == t.getHealthPoints() &&
+                    getDefense() == t.getDefense();
+        }
     }
 }

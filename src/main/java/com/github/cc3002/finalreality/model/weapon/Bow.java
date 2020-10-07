@@ -19,4 +19,28 @@ public class Bow extends AbstractWeapon {
                final int weight){
         super(name,damage,weight,WeaponType.BOW);
     }
+
+    /**
+     * Get a copy of this weapon
+     * */
+    public Bow copy(){
+        return new Bow(getName(),getDamage(),getWeight());
+    }
+
+    /**
+     * Compare to another objects or itself
+     * */
+    @Override
+    public boolean equals(Object o){
+        if( o == this ){
+            return true;
+        }
+        if(!(o instanceof Bow)){
+            return false;
+        }
+        final Bow bow = (Bow) o;
+        return getName().equals(bow.getName()) &&
+                getDamage() == bow.getDamage() &&
+                getWeight() == bow.getWeight();
+    }
 }

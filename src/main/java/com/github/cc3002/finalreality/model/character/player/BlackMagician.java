@@ -2,6 +2,7 @@ package com.github.cc3002.finalreality.model.character.player;
 
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.IUnit;
+import com.github.cc3002.finalreality.model.weapon.NullWeapon;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
@@ -31,11 +32,33 @@ public class BlackMagician extends AbstractMagician {
                 turnsQueue,
                 healthPoints,
                 defense);
-
+        equip(NullWeapon.getNullWeapon());
     }
 
     @Override
     protected IUnit copy() {
         return new BlackMagician(this.getName(),this.getTurnsQueue(),this.getHealthPoints(), this.getDefense());
+    }
+    @Override
+    public boolean equals(Object o){
+        if (o == this){
+            return true;
+        }
+        if (!(o instanceof BlackMagician)){
+            return false;
+        }
+        final BlackMagician b = (BlackMagician) o;
+        if(!NullWeapon.getNullWeapon().equals(getEquippedWeapon())) {
+            return b.getName().equals(this.getName()) &&
+                    b.getTurnsQueue().equals(this.getTurnsQueue()) &&
+                    b.getHealthPoints() == this.getHealthPoints() &&
+                    b.getDefense() == this.getDefense() &&
+                    b.getEquippedWeapon() == this.getEquippedWeapon();
+        }else{
+            return b.getName().equals(this.getName()) &&
+                    b.getTurnsQueue().equals(this.getTurnsQueue()) &&
+                    b.getHealthPoints() == this.getHealthPoints() &&
+                    b.getDefense() == this.getDefense();
+        }
     }
 }

@@ -8,6 +8,8 @@ import com.github.cc3002.finalreality.model.character.player.*;
 
 import java.util.EnumMap;
 import java.util.Map;
+
+import com.github.cc3002.finalreality.model.weapon.NullWeapon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -182,7 +184,7 @@ class PlayerCharacterTest extends AbstractCharacterTest {
         /* here is clear that character is not an enemy, so it is totally safe
            to equip a weapon
            */
-        assertNull(((ICharacter) character).getEquippedWeapon());
+        assertEquals(NullWeapon.getNullWeapon(),((ICharacter) character).getEquippedWeapon());
         ((ICharacter) character).equip(testWeapon);
         assertEquals(testWeapon, ( (ICharacter) character).getEquippedWeapon());
       }

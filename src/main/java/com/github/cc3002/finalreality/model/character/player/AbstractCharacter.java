@@ -40,22 +40,6 @@ public abstract class AbstractCharacter extends AbstractUnit implements ICharact
     }
 
     /**
-     * This method is called to wait turn
-     * */
-    @Override
-    public void waitTurn() {
-
-    }
-
-    /**
-     * Returns the Character's name
-     *
-    @Override
-    public String getName() {
-        return super.getName();
-    }*/
-
-    /**
      * Get the Character defense points
      * */
     public int getDefense(){
@@ -85,4 +69,5 @@ public abstract class AbstractCharacter extends AbstractUnit implements ICharact
     public UnitClass getUnitClass() {
         return super.getUnitClass();
     }
+
 }

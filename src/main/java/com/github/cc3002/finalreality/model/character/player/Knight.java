@@ -2,6 +2,7 @@ package com.github.cc3002.finalreality.model.character.player;
 
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.IUnit;
+import com.github.cc3002.finalreality.model.weapon.NullWeapon;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
@@ -27,10 +28,41 @@ public class Knight extends AbstractCharacter {
                   int healthPoints,
                   int defense){
         super(name,UnitClass.KNIGHT,turnsQueue,healthPoints,defense);
+        equip(NullWeapon.getNullWeapon());
     }
 
+
+    /**
+     * Creates a copy of this knight
+     * */
     @Override
     protected IUnit copy() {
         return new Knight(this.getName(), this.getTurnsQueue(),this.getHealthPoints(),this.getDefense());
+    }
+
+    /**
+     * Compares itself or with another unit
+     * */
+    @Override
+    public boolean equals(Object o){
+        if(o == this){
+            return true;
+        }
+        if(!(o instanceof Knight)){
+            return false;
+        }
+        final Knight k = (Knight) o;
+        if( !NullWeapon.getNullWeapon().equals(getEquippedWeapon()) ) {
+            return getName().equals(k.getName()) &&
+                    getTurnsQueue().equals(k.getTurnsQueue()) &&
+                    getHealthPoints() == k.getHealthPoints() &&
+                    getDefense() == k.getDefense() &&
+                    getEquippedWeapon().equals(k.getEquippedWeapon());
+        }else{
+            return getName().equals(k.getName()) &&
+                    getTurnsQueue().equals(k.getTurnsQueue()) &&
+                    getHealthPoints() == k.getHealthPoints() &&
+                    getDefense() == k.getDefense();
+        }
     }
 }

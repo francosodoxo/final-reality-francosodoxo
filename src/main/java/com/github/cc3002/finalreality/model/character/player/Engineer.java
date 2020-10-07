@@ -2,6 +2,7 @@ package com.github.cc3002.finalreality.model.character.player;
 
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.IUnit;
+import com.github.cc3002.finalreality.model.weapon.NullWeapon;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
@@ -27,10 +28,34 @@ public class Engineer extends AbstractCharacter {
                     int healthPoints,
                     int defense){
         super(name,UnitClass.ENGINEER,turnsQueue,healthPoints,defense);
+        equip(NullWeapon.getNullWeapon());
     }
 
     @Override
     protected IUnit copy() {
         return new Engineer(this.getName(),this.getTurnsQueue(),this.getHealthPoints(),this.getDefense());
+    }
+    @Override
+    public boolean equals(Object o){
+        if (this == o){
+            return true;
+        }
+        if(!(o instanceof Engineer)){
+            return false;
+        }
+        final Engineer e = (Engineer) o;
+        if (!NullWeapon.getNullWeapon().equals(getEquippedWeapon())) {
+            return getName().equals(e.getName()) &&
+                    getTurnsQueue().equals(e.getTurnsQueue()) &&
+                    getHealthPoints() == e.getHealthPoints() &&
+                    getDefense() == e.getDefense() &&
+                    getEquippedWeapon().equals(e.getEquippedWeapon());
+        }
+        else{
+            return getName().equals(e.getName()) &&
+                    getTurnsQueue().equals(e.getTurnsQueue()) &&
+                    getHealthPoints() == e.getHealthPoints() &&
+                    getDefense() == e.getDefense();
+        }
     }
 }
