@@ -36,8 +36,10 @@ public class BlackMagician extends AbstractMagician {
     }
 
     @Override
-    protected IUnit copy() {
-        return new BlackMagician(this.getName(),this.getTurnsQueue(),this.getHealthPoints(), this.getDefense());
+    public IUnit copy() {
+        BlackMagician newBlackMagician = new BlackMagician(this.getName(),this.getTurnsQueue(),this.getHealthPoints(), this.getDefense());
+        newBlackMagician.equip(getEquippedWeapon());
+        return newBlackMagician;
     }
     @Override
     public boolean equals(Object o){

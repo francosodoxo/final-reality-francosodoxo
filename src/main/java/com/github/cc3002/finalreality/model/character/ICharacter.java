@@ -37,4 +37,5 @@ public interface ICharacter {
    * Returns this character's class.
    */
   UnitClass getUnitClass();
+
 }

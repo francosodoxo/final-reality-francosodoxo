@@ -3,6 +3,7 @@ package com.github.cc3002.finalreality.model.character;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import com.github.cc3002.finalreality.model.character.player.Thief;
 import com.github.cc3002.finalreality.model.character.player.UnitClass;
 import com.github.cc3002.finalreality.model.weapon.Axe;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
@@ -26,6 +27,8 @@ public abstract class AbstractCharacterTest {
   protected BlockingQueue<IUnit> turns;
   protected List<IUnit> testCharacters;
   protected IWeapon testWeapon;
+  private int HEALTH_POINTS;
+  private int DEFENSE;
 
   /**
    * Checks that the character waits the appropriate amount of time for it's turn.
@@ -63,12 +66,30 @@ public abstract class AbstractCharacterTest {
     assertEquals(expectedCharacter, testEqualCharacter);
     assertNotEquals(sameClassDifferentCharacter, testEqualCharacter);
     assertNotEquals(testEqualCharacter, differentClassCharacter);
-    //assertEquals(expectedCharacter.hashCode(), testEqualCharacter.hashCode());
+    assertEquals(expectedCharacter.hashCode(), testEqualCharacter.hashCode());
   }
 
   protected void basicSetUp() {
     turns = new LinkedBlockingQueue<>();
     testWeapon = new Axe("Test", 15, 10);
     testCharacters = new ArrayList<>();
+    HEALTH_POINTS = 10;
+    DEFENSE = 5;
+  }
+
+  public BlockingQueue<IUnit> getTurns(){
+    return turns;
+  }
+
+  public int getHealthPoints(){
+    return HEALTH_POINTS;
+  }
+
+  public int getDefense(){
+    return DEFENSE;
+  }
+
+  public IWeapon getTestWeapon(){
+    return testWeapon;
   }
 }

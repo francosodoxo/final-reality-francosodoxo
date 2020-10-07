@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
 /**
- * Class that manages Thiefs units
+ * Class that manages Thieves units
  * */
 public class Thief extends AbstractCharacter {
     /**
@@ -30,10 +30,19 @@ public class Thief extends AbstractCharacter {
         equip(NullWeapon.getNullWeapon());
     }
 
+    /**
+     * Creates a copy of this Character
+     * */
     @Override
-    protected IUnit copy() {
-        return new Thief(this.getName(),this.getTurnsQueue(),this.getHealthPoints(),this.getDefense());
+    public IUnit copy() {
+        Thief newThief = new Thief(this.getName(),this.getTurnsQueue(),this.getHealthPoints(),this.getDefense());
+        newThief.equip(getEquippedWeapon());
+        return newThief;
     }
+
+    /**
+     * Compare with another object or itself
+     * */
     @Override
     public boolean equals(Object o){
         if (o == this){

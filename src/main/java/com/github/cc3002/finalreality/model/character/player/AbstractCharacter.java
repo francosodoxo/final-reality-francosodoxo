@@ -6,6 +6,7 @@ import com.github.cc3002.finalreality.model.character.IUnit;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 
 /**
@@ -68,6 +69,14 @@ public abstract class AbstractCharacter extends AbstractUnit implements ICharact
     @Override
     public UnitClass getUnitClass() {
         return super.getUnitClass();
+    }
+
+    /**
+     * Hashcode to work with
+     * */
+    @Override
+    public int hashCode(){
+        return Objects.hash(defense);
     }
 
 }

@@ -42,7 +42,7 @@ public class Enemy extends AbstractUnit{
   @Override
   public boolean equals(final Object o) {
     if (this == o) {
-      return true;
+      return true;  //Check construction
     }
     if (!(o instanceof Enemy)) {
       return false;
@@ -61,6 +61,9 @@ public class Enemy extends AbstractUnit{
     return new Enemy(this.getName(),this.getWeight(),this.getTurnsQueue(),this.getHealthPoints(),this.getAtk());
   }
 
+  /**
+   * Get the current atk of this character
+   * */
   public int getAtk() {
     return atk;
   }

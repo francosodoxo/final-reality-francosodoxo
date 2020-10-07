@@ -32,8 +32,10 @@ public class Engineer extends AbstractCharacter {
     }
 
     @Override
-    protected IUnit copy() {
-        return new Engineer(this.getName(),this.getTurnsQueue(),this.getHealthPoints(),this.getDefense());
+    public IUnit copy() {
+        Engineer newEngineer = new Engineer(this.getName(),this.getTurnsQueue(),this.getHealthPoints(),this.getDefense());
+        newEngineer.equip(getEquippedWeapon());
+        return newEngineer;
     }
     @Override
     public boolean equals(Object o){

@@ -36,8 +36,10 @@ public class WhiteMagician extends AbstractMagician {
     }
 
     @Override
-    protected IUnit copy() {
-        return new WhiteMagician(this.getName(),this.getTurnsQueue(),this.getHealthPoints(),this.getDefense());
+    public IUnit copy() {
+        WhiteMagician newWhiteMagician = new WhiteMagician(this.getName(),this.getTurnsQueue(),this.getHealthPoints(),this.getDefense());
+        newWhiteMagician.equip(getEquippedWeapon());
+        return newWhiteMagician;
     }
 
     @Override

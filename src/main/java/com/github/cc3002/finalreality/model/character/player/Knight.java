@@ -36,8 +36,10 @@ public class Knight extends AbstractCharacter {
      * Creates a copy of this knight
      * */
     @Override
-    protected IUnit copy() {
-        return new Knight(this.getName(), this.getTurnsQueue(),this.getHealthPoints(),this.getDefense());
+    public IUnit copy() {
+        Knight newKnight = new Knight(this.getName(), this.getTurnsQueue(),this.getHealthPoints(),this.getDefense());
+        newKnight.equip(getEquippedWeapon());
+        return newKnight;
     }
 
     /**
