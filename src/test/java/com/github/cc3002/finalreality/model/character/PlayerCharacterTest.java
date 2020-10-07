@@ -59,8 +59,6 @@ class PlayerCharacterTest extends AbstractCharacterTest {
         case THIEF:
           testCharacters.add(new Thief(characterNames.get(characterClass), turns,CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
       }
-      testCharacters.add(
-          new PlayerCharacter(characterNames.get(characterClass), turns, characterClass, CHARACTER_HEALTH_POINTS,CHARACTER_DEF));
     }
   }
 
