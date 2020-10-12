@@ -38,4 +38,11 @@ public interface ICharacter {
    */
   UnitClass getUnitClass();
 
+  /**
+   * Returns this character defense
+   * */
+  int getDefense();
+
+
+  void setDefense(int newDefense);
 }

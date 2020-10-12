@@ -40,5 +40,5 @@ public abstract class AbstractMagician extends AbstractCharacter{
     }
 
     @Override
-    protected abstract IUnit copy();
+    public abstract IUnit copy();
 }

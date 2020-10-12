@@ -17,6 +17,7 @@ public class WhiteMagicianTest extends AbstractCharacterTest{
                 super.getTurns(),
                 super.getHealthPoints(),
                 super.getDefense());
+        testCharacters.add(whiteMagician);
     }
     @Test
     public void testCopyNoWeapon(){

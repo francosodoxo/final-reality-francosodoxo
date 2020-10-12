@@ -21,4 +21,6 @@ public interface IWeapon {
     /**
      * Get the weapon's type*/
     WeaponType getType();
+
+    IWeapon copy();
 }

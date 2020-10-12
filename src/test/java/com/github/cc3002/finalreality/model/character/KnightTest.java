@@ -17,6 +17,7 @@ public class KnightTest extends AbstractCharacterTest {
                 super.getTurns(),
                 super.getHealthPoints(),
                 super.getDefense());
+        testCharacters.add(knight);
     }
     @Test
     public void testCopyNoWeapon(){

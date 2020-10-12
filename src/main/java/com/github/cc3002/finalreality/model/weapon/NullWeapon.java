@@ -14,6 +14,14 @@ public class NullWeapon extends AbstractWeapon implements IWeapon{
     }
 
     /**
+     * Only one instace of this object
+     * */
+    @Override
+    public IWeapon copy() {
+        return nullWeapon;
+    }
+
+    /**
      * Returns the same weapon instance
      * */
     public static NullWeapon getNullWeapon(){

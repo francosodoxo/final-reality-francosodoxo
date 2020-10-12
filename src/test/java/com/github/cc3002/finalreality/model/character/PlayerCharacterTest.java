@@ -73,7 +73,7 @@ class PlayerCharacterTest extends AbstractCharacterTest {
    */
   @Test
   void constructorTest() {
-    var enemy = new Enemy("Enemy", 10, turns, 10,5);
+    var enemy = new Enemy("Enemy", 10, turns, 10,5,4);
     for (var character :
         testCharacters) {
       var characterClass = character.getUnitClass();

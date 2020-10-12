@@ -54,14 +54,12 @@ public class Thief extends AbstractCharacter {
         final Thief t = (Thief) o;
         if (!NullWeapon.getNullWeapon().equals(getEquippedWeapon())) {
             return getName().equals(t.getName()) &&
-                    getTurnsQueue().equals(t.getTurnsQueue()) &&
                     getHealthPoints() == t.getHealthPoints() &&
                     getDefense() == t.getDefense() &&
                     getEquippedWeapon().equals(t.getEquippedWeapon());
         }
         else{
             return getName().equals(t.getName()) &&
-                    getTurnsQueue().equals(t.getTurnsQueue()) &&
                     getHealthPoints() == t.getHealthPoints() &&
                     getDefense() == t.getDefense();
         }

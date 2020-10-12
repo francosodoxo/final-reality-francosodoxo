@@ -17,6 +17,8 @@ public class EngineerTest extends AbstractCharacterTest {
                 super.getTurns(),
                 super.getHealthPoints(),
                 super.getDefense());
+
+        testCharacters.add(engineer);
     }
 
     @Test

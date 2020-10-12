@@ -35,8 +35,7 @@ public abstract class AbstractCharacter extends AbstractUnit implements ICharact
                                 @NotNull BlockingQueue<IUnit> turnsQueue,
                                 int healthPoints,
                                 int defense){
-        super(turnsQueue,name,healthPoints,unitClass);
-        this.defense = defense;
+        super(turnsQueue,name,healthPoints,unitClass,defense);
         this.equippedWeapon = null;
     }
 
@@ -45,6 +44,14 @@ public abstract class AbstractCharacter extends AbstractUnit implements ICharact
      * */
     public int getDefense(){
         return defense;
+    }
+
+    /**
+     * Set this character defense
+     * */
+    @Override
+    public void setDefense(int newDefense){
+        defense = newDefense;
     }
 
     /**

@@ -5,9 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import com.github.cc3002.finalreality.model.character.player.Thief;
 import com.github.cc3002.finalreality.model.character.player.UnitClass;
-import com.github.cc3002.finalreality.model.weapon.Axe;
-import com.github.cc3002.finalreality.model.weapon.IWeapon;
-import com.github.cc3002.finalreality.model.weapon.WeaponType;
+import com.github.cc3002.finalreality.model.weapon.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
@@ -49,6 +48,67 @@ public abstract class AbstractCharacterTest {
       Assertions.assertEquals(testCharacters.get(0), turns.peek());
     } catch (InterruptedException e) {
       e.printStackTrace();
+    }
+  }
+
+  @Test
+  public void sameInstance() {
+    assertEquals(testCharacters.get(0), testCharacters.get(0));
+  }
+
+  @Test
+  public void carryNullWeapon() {
+    if (testCharacters.get(0).getUnitClass() != UnitClass.ENEMY) {
+      ICharacter otherCharacter = (ICharacter) testCharacters.get(0);
+      otherCharacter.equip(getTestWeapon());
+      assertEquals( testCharacters.get(0), otherCharacter);
+    }
+  }
+
+  @Test
+  public void setHealthPointsTest(){
+    testCharacters.get(0).setHealthPoints(0);
+    assertEquals(0,testCharacters.get(0).getHealthPoints());
+  }
+  @Test
+  public void changeHealthPointsNoWeapon(){
+    IUnit otherCharacter = testCharacters.get(0).copy();
+    otherCharacter.setHealthPoints(2);
+    assertNotEquals(otherCharacter,testCharacters.get(0));
+  }
+  @Test
+  public void changeDefenseNoWeapon(){
+      IUnit otherCharacter = testCharacters.get(0).copy();
+      otherCharacter.setDefense(otherCharacter.getDefense()+1);
+      assertNotEquals(otherCharacter,testCharacters.get(0));
+  }
+
+  @Test
+  public void testChangeHealthPointsWithWeapon(){
+    if(testCharacters.get(0).getUnitClass() != UnitClass.ENEMY){
+      ((ICharacter) testCharacters.get(0)).equip(testWeapon);
+      IUnit otherCharacter = testCharacters.get(0).copy();
+      otherCharacter.setHealthPoints(otherCharacter.getHealthPoints()+1);
+      assertNotEquals(otherCharacter,testCharacters.get(0));
+    }
+  }
+  @Test
+  public void testChangeDefenseWithWeapon(){
+    if(testCharacters.get(0).getUnitClass() != UnitClass.ENEMY){
+      ((ICharacter) testCharacters.get(0)).equip(testWeapon);
+      IUnit otherCharacter  = testCharacters.get(0).copy();
+      otherCharacter.setHealthPoints(otherCharacter.getHealthPoints()+1);
+      assertNotEquals(otherCharacter,testCharacters.get(0));
+    }
+  }
+
+  @Test
+  public void testChangeWeaponEquipped(){
+    if(testCharacters.get(0).getUnitClass() != UnitClass.ENEMY){
+      Bow otherWeapon = new Bow("otherBowWeapon",10,5);
+      IUnit otherCharacter = testCharacters.get(0).copy();
+      ((ICharacter) otherCharacter).equip(otherWeapon);
+      assertNotEquals(otherCharacter,testCharacters.get(0));
     }
   }
 

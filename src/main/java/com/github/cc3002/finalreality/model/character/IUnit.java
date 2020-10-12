@@ -28,4 +28,23 @@ public interface IUnit {
      * Get the unit's class
      * */
     UnitClass getUnitClass();
+
+    /**
+     * Set the health points
+     * */
+    void setHealthPoints(int newValue);
+
+    IUnit copy();
+
+    /**
+     * Get Health points
+     * */
+    int getHealthPoints();
+
+    /**
+     * Set this unit defense
+     * */
+    void setDefense(int i);
+
+    int getDefense();
 }

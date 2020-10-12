@@ -17,6 +17,7 @@ public class ThiefTest extends AbstractCharacterTest{
                 super.getTurns(),
                 super.getHealthPoints(),
                 super.getDefense());
+        testCharacters.add(thief);
     }
 
     @Test

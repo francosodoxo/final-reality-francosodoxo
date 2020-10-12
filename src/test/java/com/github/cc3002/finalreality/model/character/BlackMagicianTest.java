@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.concurrent.BlockingQueue;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class BlackMagicianTest extends AbstractCharacterTest {
     private BlackMagician blackMagician;
@@ -19,6 +20,7 @@ public class BlackMagicianTest extends AbstractCharacterTest {
                 super.getTurns(),
                 super.getHealthPoints(),
                 super.getDefense());
+        testCharacters.add(blackMagician);
     }
 
     //check methods

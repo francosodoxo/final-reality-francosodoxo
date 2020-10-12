@@ -8,7 +8,7 @@ import java.util.Objects;
  * @author Ignacio Slater Muñoz.
  * @author Franco Seguel
  */
-public class AbstractWeapon implements IWeapon {
+public abstract class  AbstractWeapon implements IWeapon {
 
   private final String name;
   private final int damage;
@@ -39,10 +39,7 @@ public class AbstractWeapon implements IWeapon {
     this.type = type;
   }
 
-  /**
-   * For the null weapon
-   * */
-  public AbstractWeapon(){
+  protected AbstractWeapon(){
     name = "NullWeapon";
     damage = 0;
     weight = 0;
@@ -79,6 +76,12 @@ public class AbstractWeapon implements IWeapon {
   public WeaponType getType() {
     return type;
   }
+
+  /**
+   * Get a copy of this weapon
+   * */
+  public abstract IWeapon copy();
+
 
   /**
    * Get the weapon's hashcode

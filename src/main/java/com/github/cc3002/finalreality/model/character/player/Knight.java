@@ -56,13 +56,11 @@ public class Knight extends AbstractCharacter {
         final Knight k = (Knight) o;
         if( !NullWeapon.getNullWeapon().equals(getEquippedWeapon()) ) {
             return getName().equals(k.getName()) &&
-                    getTurnsQueue().equals(k.getTurnsQueue()) &&
                     getHealthPoints() == k.getHealthPoints() &&
                     getDefense() == k.getDefense() &&
                     getEquippedWeapon().equals(k.getEquippedWeapon());
         }else{
             return getName().equals(k.getName()) &&
-                    getTurnsQueue().equals(k.getTurnsQueue()) &&
                     getHealthPoints() == k.getHealthPoints() &&
                     getDefense() == k.getDefense();
         }

@@ -19,6 +19,7 @@ public abstract class AbstractUnit implements IUnit{
   protected final BlockingQueue<IUnit> turnsQueue;
   protected final String name;
   private int healthPoints;
+  private int defense;
   private UnitClass unitClass;
 
   private ScheduledExecutorService scheduledExecutor;
@@ -36,11 +37,13 @@ public abstract class AbstractUnit implements IUnit{
    *    The unit's class
    */
   protected AbstractUnit(@NotNull BlockingQueue<IUnit> turnsQueue,
-                         @NotNull String name, int healthPoints, UnitClass unitClass) {
+                         @NotNull String name, int healthPoints, UnitClass unitClass,
+                         int defense) {
     this.turnsQueue = turnsQueue;
     this.name = name;
     this.healthPoints = healthPoints;
     this.unitClass = unitClass;
+    this.defense = defense;
   }
   /**
    * Sets a scheduled executor to make this character (thread) wait for {@code speed / 10}
@@ -68,8 +71,6 @@ public abstract class AbstractUnit implements IUnit{
     scheduledExecutor.shutdown();
   }
 
-  protected abstract IUnit copy();
-
   /**
    * Get the turns Queue
    * */
@@ -93,10 +94,37 @@ public abstract class AbstractUnit implements IUnit{
   }
 
   /**
+   * Get this unit's defense
+   * */
+  public int getDefense(){
+    return defense;
+  }
+
+  /**
+   * Set this unit defense
+   * */
+  public void setDefense(int i){
+    defense = i;
+  }
+
+
+  /**
    * Get the unit's class
    */
   @Override
   public UnitClass getUnitClass() {
     return unitClass;
   }
+
+  /**
+   * Set the health points
+   * */
+  public void setHealthPoints(int newValue){
+    healthPoints = newValue;
+  }
+
+  /**
+   * Copy the Unit
+   * */
+  public abstract IUnit copy();
 }

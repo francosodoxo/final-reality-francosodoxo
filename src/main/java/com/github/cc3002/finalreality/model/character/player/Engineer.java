@@ -48,14 +48,12 @@ public class Engineer extends AbstractCharacter {
         final Engineer e = (Engineer) o;
         if (!NullWeapon.getNullWeapon().equals(getEquippedWeapon())) {
             return getName().equals(e.getName()) &&
-                    getTurnsQueue().equals(e.getTurnsQueue()) &&
                     getHealthPoints() == e.getHealthPoints() &&
                     getDefense() == e.getDefense() &&
                     getEquippedWeapon().equals(e.getEquippedWeapon());
         }
         else{
             return getName().equals(e.getName()) &&
-                    getTurnsQueue().equals(e.getTurnsQueue()) &&
                     getHealthPoints() == e.getHealthPoints() &&
                     getDefense() == e.getDefense();
         }

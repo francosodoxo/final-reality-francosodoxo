@@ -26,8 +26,9 @@ public class Enemy extends AbstractUnit{
                final int weight,
       @NotNull final BlockingQueue<IUnit> turnsQueue,
                int healthPoints,
-               int atk) {
-    super(turnsQueue, name, healthPoints, UnitClass.ENEMY);
+               int atk,
+               int defense) {
+    super(turnsQueue, name, healthPoints, UnitClass.ENEMY,defense);
     this.weight = weight;
     this.atk = atk;
   }
@@ -48,7 +49,11 @@ public class Enemy extends AbstractUnit{
       return false;
     }
     final Enemy enemy = (Enemy) o;
-    return getWeight() == enemy.getWeight();
+    return getAtk() == enemy.getAtk() &&
+            getHealthPoints() == enemy.getHealthPoints() &&
+            getWeight() == enemy.getWeight() &&
+            getName().equals(enemy.getName()) &&
+            getDefense() == enemy.getDefense();
   }
 
   @Override
@@ -57,8 +62,8 @@ public class Enemy extends AbstractUnit{
   }
 
   @Override
-  protected IUnit copy() {
-    return new Enemy(this.getName(),this.getWeight(),this.getTurnsQueue(),this.getHealthPoints(),this.getAtk());
+  public IUnit copy() {
+    return new Enemy(this.getName(),this.getWeight(),this.getTurnsQueue(),this.getHealthPoints(),this.getAtk(), this.getDefense());
   }
 
   /**
@@ -66,5 +71,12 @@ public class Enemy extends AbstractUnit{
    * */
   public int getAtk() {
     return atk;
+  }
+
+  /**
+   * Set this unit atk
+   * */
+  public void setAtk(int newValue){
+    atk = newValue;
   }
 }
