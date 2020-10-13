@@ -20,14 +20,14 @@ This project run with Java 14.
 
 Compile
 ---
-Compile this projet with the Gradle script provided and choose
+Compile this project with the Gradle script provided and choose
 the java version 14.
 
 Run
 ---
 Run this project with the Gradle script provided by default. Be careful
 with the java version you want to run. This will not run with newer java 
-versions.
+versions unless you update the Gradle configurations.
 
 Description
 -----------
@@ -35,9 +35,9 @@ This project was designed using SOLID principles. The player has characters
 and weapons that thier characters can equip to attack enemies.
 
 On one hand, the enemies and the characters are abstracted in AbstractUnit using the 
-public interface IUnit and the characters are abstracted in a AbstractUnit's
+public interface IUnit, and the characters are abstracted in a AbstractUnit's
 subclass called AbstractCharacter too. This second abstact class implements
 the public interface ICharacter. On the other hand, the weapons are abstracted to
 AbstractWeapon class that implements the IWeapon interface.
 
-The characters are compared in all its properties but the turns queue.
+The characters are compared in all its properties, but the turns queue.
