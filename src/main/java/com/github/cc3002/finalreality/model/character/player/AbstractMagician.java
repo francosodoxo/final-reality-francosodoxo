@@ -39,6 +39,9 @@ public abstract class AbstractMagician extends AbstractCharacter{
         mana = 0;
     }
 
+    /**
+     * To create a copy of this unit
+     * */
     @Override
     public abstract IUnit copy();
 }

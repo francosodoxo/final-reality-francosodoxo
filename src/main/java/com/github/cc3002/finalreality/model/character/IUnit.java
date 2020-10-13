@@ -34,6 +34,9 @@ public interface IUnit {
      * */
     void setHealthPoints(int newValue);
 
+    /**
+     * Get a copy of this unit
+     * */
     IUnit copy();
 
     /**
@@ -46,5 +49,8 @@ public interface IUnit {
      * */
     void setDefense(int i);
 
+    /**
+     * Get the defense points of this unit
+     * */
     int getDefense();
 }

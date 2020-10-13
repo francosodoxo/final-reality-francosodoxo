@@ -43,6 +43,8 @@ public interface ICharacter {
    * */
   int getDefense();
 
-
+  /**
+   * This method set the defense of the Character
+   * */
   void setDefense(int newDefense);
 }

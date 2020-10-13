@@ -35,6 +35,9 @@ public class WhiteMagician extends AbstractMagician {
         equip(NullWeapon.getNullWeapon());
     }
 
+    /**
+     * Get a copy of this unit
+     * */
     @Override
     public IUnit copy() {
         WhiteMagician newWhiteMagician = new WhiteMagician(this.getName(),this.getTurnsQueue(),this.getHealthPoints(),this.getDefense());
@@ -42,6 +45,9 @@ public class WhiteMagician extends AbstractMagician {
         return newWhiteMagician;
     }
 
+    /**
+     * Compare this unit with another one or itself
+     * */
     @Override
     public boolean equals(Object o){
         if (o == this){

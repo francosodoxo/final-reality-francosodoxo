@@ -35,12 +35,19 @@ public class BlackMagician extends AbstractMagician {
         equip(NullWeapon.getNullWeapon());
     }
 
+    /**
+     * This method copy this character
+     * */
     @Override
     public IUnit copy() {
         BlackMagician newBlackMagician = new BlackMagician(this.getName(),this.getTurnsQueue(),this.getHealthPoints(), this.getDefense());
         newBlackMagician.equip(getEquippedWeapon());
         return newBlackMagician;
     }
+
+    /**
+     * Compare this object with another or itself
+     * */
     @Override
     public boolean equals(Object o){
         if (o == this){

@@ -31,12 +31,19 @@ public class Engineer extends AbstractCharacter {
         equip(NullWeapon.getNullWeapon());
     }
 
+    /**
+     * Get a copy of this character
+     * */
     @Override
     public IUnit copy() {
         Engineer newEngineer = new Engineer(this.getName(),this.getTurnsQueue(),this.getHealthPoints(),this.getDefense());
         newEngineer.equip(getEquippedWeapon());
         return newEngineer;
     }
+
+    /**
+     * Compare this character with another objects or itself
+     * */
     @Override
     public boolean equals(Object o){
         if (this == o){
