@@ -1,6 +1,7 @@
 package com.github.cc3002.finalreality.model.character;
 
 import com.github.cc3002.finalreality.model.character.player.UnitClass;
+import com.github.cc3002.finalreality.model.weapon.IWeapon;
 
 /**
  * This represents a unit from the game. That is to say, the player's characters
@@ -28,4 +29,28 @@ public interface IUnit {
      * */
     UnitClass getUnitClass();
 
+    /**
+     * Set the health points
+     * */
+    void setHealthPoints(int newValue);
+
+    /**
+     * Get a copy of this unit
+     * */
+    IUnit copy();
+
+    /**
+     * Get Health points
+     * */
+    int getHealthPoints();
+
+    /**
+     * Set this unit defense
+     * */
+    void setDefense(int i);
+
+    /**
+     * Get the defense points of this unit
+     * */
+    int getDefense();
 }

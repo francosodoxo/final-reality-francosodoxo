@@ -19,4 +19,27 @@ public class Staff extends AbstractWeapon {
                  final int weight){
         super(name,damage,weight,WeaponType.STAFF);
     }
+    /**
+     * Creates a copy of this object
+     * */
+    public Staff copy(){
+        return new Staff(getName(),getDamage(),getWeight());
+    }
+
+    /**
+     * Compares to another objects or itself
+     * */
+    @Override
+    public boolean equals(Object o){
+        if(o == this){
+            return true;
+        }
+        if(!(o instanceof Staff)){
+            return false;
+        }
+        final Staff staff = (Staff) o;
+        return getName().equals(staff.getName()) &&
+                getDamage() == staff.getDamage() &&
+                getWeight() == staff.getWeight();
+    }
 }

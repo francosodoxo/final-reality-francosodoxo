@@ -1,6 +1,8 @@
 package com.github.cc3002.finalreality.model.character.player;
 
 import com.github.cc3002.finalreality.model.character.ICharacter;
+import com.github.cc3002.finalreality.model.character.IUnit;
+import com.github.cc3002.finalreality.model.weapon.NullWeapon;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
@@ -22,7 +24,7 @@ public class BlackMagician extends AbstractMagician {
      *      The defense points this magician will have
      */
     public BlackMagician(@NotNull String name,
-                         @NotNull BlockingQueue<ICharacter> turnsQueue,
+                         @NotNull BlockingQueue<IUnit> turnsQueue,
                          int healthPoints,
                          int defense){
         super(name,
@@ -30,6 +32,40 @@ public class BlackMagician extends AbstractMagician {
                 turnsQueue,
                 healthPoints,
                 defense);
+        equip(NullWeapon.getNullWeapon());
+    }
 
+    /**
+     * This method copy this character
+     * */
+    @Override
+    public IUnit copy() {
+        BlackMagician newBlackMagician = new BlackMagician(this.getName(),this.getTurnsQueue(),this.getHealthPoints(), this.getDefense());
+        newBlackMagician.equip(getEquippedWeapon());
+        return newBlackMagician;
+    }
+
+    /**
+     * Compare this object with another or itself
+     * */
+    @Override
+    public boolean equals(Object o){
+        if (o == this){
+            return true;
+        }
+        if (!(o instanceof BlackMagician)){
+            return false;
+        }
+        final BlackMagician b = (BlackMagician) o;
+        if(!NullWeapon.getNullWeapon().equals(getEquippedWeapon())) {
+            return b.getName().equals(this.getName()) &&
+                    b.getHealthPoints() == this.getHealthPoints() &&
+                    b.getDefense() == this.getDefense() &&
+                    b.getEquippedWeapon().equals(this.getEquippedWeapon());
+        }else{
+            return b.getName().equals(this.getName()) &&
+                    b.getHealthPoints() == this.getHealthPoints() &&
+                    b.getDefense() == this.getDefense();
+        }
     }
 }

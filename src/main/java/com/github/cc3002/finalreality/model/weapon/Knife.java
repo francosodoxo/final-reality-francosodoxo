@@ -19,4 +19,28 @@ public class Knife extends AbstractWeapon{
                  final int weight){
         super(name,damage,weight,WeaponType.KNIFE);
     }
+
+    /**
+     * Get a copy of this weapon
+     * */
+    public Knife copy(){
+        return new Knife(getName(),getDamage(),getWeight());
+    }
+
+    /**
+     * Compares to another objects or itself
+     * */
+    @Override
+    public boolean equals(Object o){
+        if(o == this){
+            return true;
+        }
+        if(!(o instanceof Knife)){
+            return false;
+        }
+        final Knife knife = (Knife) o;
+        return getName().equals(knife.getName()) &&
+                getDamage() == knife.getDamage() &&
+                getWeight() == knife.getWeight();
+    }
 }

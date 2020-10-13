@@ -4,9 +4,9 @@ import com.github.cc3002.finalreality.model.character.AbstractUnit;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.IUnit;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
-import com.github.cc3002.finalreality.model.weapon.Weapon;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 
 /**
@@ -32,28 +32,26 @@ public abstract class AbstractCharacter extends AbstractUnit implements ICharact
      * */
     protected AbstractCharacter(@NotNull String name,
                                 @NotNull UnitClass unitClass,
-                                @NotNull BlockingQueue<ICharacter> turnsQueue,
+                                @NotNull BlockingQueue<IUnit> turnsQueue,
                                 int healthPoints,
                                 int defense){
-        super(turnsQueue,name,healthPoints,unitClass);
-        this.defense = defense;
+        super(turnsQueue,name,healthPoints,unitClass,defense);
         this.equippedWeapon = null;
     }
 
     /**
-     * This method is called to wait turn
+     * Get the Character defense points
      * */
-    @Override
-    public void waitTurn() {
-
+    public int getDefense(){
+        return defense;
     }
 
     /**
-     * Returns the Character's name
+     * Set this character defense
      * */
     @Override
-    public String getName() {
-        return super.getName();
+    public void setDefense(int newDefense){
+        defense = newDefense;
     }
 
     /**
@@ -79,4 +77,13 @@ public abstract class AbstractCharacter extends AbstractUnit implements ICharact
     public UnitClass getUnitClass() {
         return super.getUnitClass();
     }
+
+    /**
+     * Hashcode to work with
+     * */
+    @Override
+    public int hashCode(){
+        return Objects.hash(defense);
+    }
+
 }

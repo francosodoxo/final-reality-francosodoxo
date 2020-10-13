@@ -1,8 +1,7 @@
 package com.github.cc3002.finalreality.model.character;
 
 import com.github.cc3002.finalreality.model.character.player.UnitClass;
-import com.github.cc3002.finalreality.model.character.player.PlayerCharacter;
-import com.github.cc3002.finalreality.model.weapon.Weapon;
+
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -17,9 +16,10 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class AbstractUnit implements IUnit{
 
-  protected final BlockingQueue<ICharacter> turnsQueue;
+  protected final BlockingQueue<IUnit> turnsQueue;
   protected final String name;
   private int healthPoints;
+  private int defense;
   private UnitClass unitClass;
 
   private ScheduledExecutorService scheduledExecutor;
@@ -36,12 +36,14 @@ public abstract class AbstractUnit implements IUnit{
    * @param unitClass
    *    The unit's class
    */
-  protected AbstractUnit(@NotNull BlockingQueue<ICharacter> turnsQueue,
-                         @NotNull String name, int healthPoints, UnitClass unitClass) {
+  protected AbstractUnit(@NotNull BlockingQueue<IUnit> turnsQueue,
+                         @NotNull String name, int healthPoints, UnitClass unitClass,
+                         int defense) {
     this.turnsQueue = turnsQueue;
     this.name = name;
     this.healthPoints = healthPoints;
     this.unitClass = unitClass;
+    this.defense = defense;
   }
   /**
    * Sets a scheduled executor to make this character (thread) wait for {@code speed / 10}
@@ -50,9 +52,9 @@ public abstract class AbstractUnit implements IUnit{
   @Override
   public void waitTurn() {
     scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
-    if (this instanceof PlayerCharacter) {
+    if (this instanceof ICharacter) {
       scheduledExecutor
-          .schedule(this::addToQueue, this.getEquippedWeapon().getWeight() / 10, TimeUnit.SECONDS);
+          .schedule(this::addToQueue, ((ICharacter) this).getEquippedWeapon().getWeight() / 10, TimeUnit.SECONDS);
     } else {
       var enemy = (Enemy) this;
       scheduledExecutor
@@ -65,8 +67,22 @@ public abstract class AbstractUnit implements IUnit{
    */
   @Override
   public void addToQueue() {
-    turnsQueue.add(this);
+    turnsQueue.add(this.copy());
     scheduledExecutor.shutdown();
+  }
+
+  /**
+   * Get the turns Queue
+   * */
+  public BlockingQueue<IUnit> getTurnsQueue(){
+    return turnsQueue;
+  }
+
+  /**
+   * Get the health points
+   * */
+  public int getHealthPoints(){
+    return healthPoints;
   }
 
   /**
@@ -78,10 +94,37 @@ public abstract class AbstractUnit implements IUnit{
   }
 
   /**
+   * Get this unit's defense
+   * */
+  public int getDefense(){
+    return defense;
+  }
+
+  /**
+   * Set this unit defense
+   * */
+  public void setDefense(int i){
+    defense = i;
+  }
+
+
+  /**
    * Get the unit's class
    */
   @Override
   public UnitClass getUnitClass() {
     return unitClass;
   }
+
+  /**
+   * Set the health points
+   * */
+  public void setHealthPoints(int newValue){
+    healthPoints = newValue;
+  }
+
+  /**
+   * Copy the Unit
+   * */
+  public abstract IUnit copy();
 }

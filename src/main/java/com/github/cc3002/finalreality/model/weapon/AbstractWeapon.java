@@ -8,7 +8,7 @@ import java.util.Objects;
  * @author Ignacio Slater Muñoz.
  * @author Franco Seguel
  */
-public class AbstractWeapon implements IWeapon {
+public abstract class  AbstractWeapon implements IWeapon {
 
   private final String name;
   private final int damage;
@@ -37,6 +37,13 @@ public class AbstractWeapon implements IWeapon {
     this.damage = damage;
     this.weight = weight;
     this.type = type;
+  }
+
+  protected AbstractWeapon(){
+    name = "NullWeapon";
+    damage = 0;
+    weight = 0;
+    type = WeaponType.NULL;
   }
 
   /**
@@ -71,22 +78,10 @@ public class AbstractWeapon implements IWeapon {
   }
 
   /**
-   * Compares to another object or itself
+   * Get a copy of this weapon
    * */
-  @Override
-  public boolean equals(final Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (!(o instanceof AbstractWeapon)) {
-      return false;
-    }
-    final IWeapon weapon = (IWeapon) o;
-    return getDamage() == weapon.getDamage() &&
-        getWeight() == weapon.getWeight() &&
-        getName().equals(weapon.getName()) &&
-        getType() == weapon.getType();
-  }
+  public abstract IWeapon copy();
+
 
   /**
    * Get the weapon's hashcode
