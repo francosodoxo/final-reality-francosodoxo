@@ -4,8 +4,11 @@ import com.github.cc3002.finalreality.model.character.IUnit;
 import com.github.cc3002.finalreality.model.character.player.*;
 import com.github.cc3002.finalreality.model.weapon.*;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.BlockingQueue;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestEquipWeapon {
   private BlackMagician blackMagician;
@@ -68,5 +71,47 @@ public class TestEquipWeapon {
     knife = new Knife(KNIFE_NAME,DAMAGE,WEIGHT);
     staff = new Staff(STAFF_NAME,DAMAGE, WEIGHT);
     sword = new Sword(SWORD_NAME,DAMAGE,WEIGHT);
+  }
+
+  @Test
+  public void axeToBlackMag(){
+    assertEquals(NullWeapon.getNullWeapon(),blackMagician.getEquippedWeapon());
+    blackMagician.equip(axe);
+    assertEquals(NullWeapon.getNullWeapon(),blackMagician.getEquippedWeapon());
+  }
+
+  @Test
+  public void axeToWhiteMag(){
+    assertEquals(NullWeapon.getNullWeapon(),whiteMagician.getEquippedWeapon());
+    whiteMagician.equip(axe);
+    assertEquals(NullWeapon.getNullWeapon(),whiteMagician.getEquippedWeapon());
+  }
+
+  @Test
+  public void axeToEngineer(){
+    assertEquals(NullWeapon.getNullWeapon(),engineer.getEquippedWeapon());
+    engineer.equip(axe);
+    assertEquals(axe,engineer.getEquippedWeapon());
+  }
+
+  @Test
+  public void axeToKnight(){
+    assertEquals(NullWeapon.getNullWeapon(),knight.getEquippedWeapon());
+    knight.equip(axe);
+    assertEquals(axe,knight.getEquippedWeapon());
+  }
+
+  @Test
+  public void axeToThief(){
+    assertEquals(NullWeapon.getNullWeapon(),thief.getEquippedWeapon());
+    thief.equip(axe);
+    assertEquals(NullWeapon.getNullWeapon(),thief.getEquippedWeapon());
+  }
+
+  @Test
+  public void BowToThief(){
+    assertEquals(NullWeapon.getNullWeapon(),thief.getEquippedWeapon());
+    thief.equip(axe);
+    assertEquals(axe,thief.getEquippedWeapon());
   }
 }
