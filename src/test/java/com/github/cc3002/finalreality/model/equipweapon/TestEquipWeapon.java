@@ -1,8 +1,11 @@
 package com.github.cc3002.finalreality.model.equipweapon;
 
+import com.github.cc3002.finalreality.model.character.IUnit;
 import com.github.cc3002.finalreality.model.character.player.*;
 import com.github.cc3002.finalreality.model.weapon.*;
 import org.junit.jupiter.api.BeforeEach;
+
+import java.util.concurrent.BlockingQueue;
 
 public class TestEquipWeapon {
   private BlackMagician blackMagician;
@@ -27,8 +30,14 @@ public class TestEquipWeapon {
   private int DEFENSE_POINTS;
   private int DAMAGE;
   private int WEIGHT;
+
+  private BlockingQueue<IUnit> turnsQueue;
   @BeforeEach
   public void setUp(){
-    blackMagician = new BlackMagician();
+    blackMagician = new BlackMagician(BLACK_MAGICIAN_NAME,turnsQueue,HEALTH_POINTS,DEFENSE_POINTS);
+    whiteMagician = new WhiteMagician(WHITE_MAGICIAN_NAME,turnsQueue,HEALTH_POINTS,DEFENSE_POINTS);
+    engineer = new Engineer(ENGINEER_NAME,turnsQueue,HEALTH_POINTS,DEFENSE_POINTS);
+    knight = new Knight(KNIGHT_NAME,turnsQueue,HEALTH_POINTS,DEFENSE_POINTS);
+    thief = new Thief(THIEF_NAME,turnsQueue,HEALTH_POINTS,DEFENSE_POINTS);
   }
 }
