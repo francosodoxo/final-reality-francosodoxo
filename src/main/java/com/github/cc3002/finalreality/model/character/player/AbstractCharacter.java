@@ -4,8 +4,11 @@ import com.github.cc3002.finalreality.model.character.AbstractUnit;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.IUnit;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
+import com.github.cc3002.finalreality.model.weapon.NullWeapon;
+import com.github.cc3002.finalreality.model.weapon.WeaponType;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 
@@ -16,6 +19,8 @@ public abstract class AbstractCharacter extends AbstractUnit implements ICharact
     private int defense;
     private IWeapon equippedWeapon;
     private UnitClass unitClass;
+    private ArrayList<WeaponType> allowedWeapons;
+
     /**
      * Abstract Constructor for this class
      *
@@ -36,7 +41,8 @@ public abstract class AbstractCharacter extends AbstractUnit implements ICharact
                                 int healthPoints,
                                 int defense){
         super(turnsQueue,name,healthPoints,unitClass,defense);
-        this.equippedWeapon = null;
+        this.equippedWeapon = NullWeapon.getNullWeapon();
+        allowedWeapons = new ArrayList<>();
     }
 
     /**
@@ -59,7 +65,11 @@ public abstract class AbstractCharacter extends AbstractUnit implements ICharact
      * */
     @Override
     public void equip(IWeapon weapon) {
-        this.equippedWeapon = weapon;
+        if(allowedWeapons.contains(weapon.getType())) {
+            this.equippedWeapon = weapon;
+        }else{
+            this.equippedWeapon = NullWeapon.getNullWeapon();
+        }
     }
 
     /**
@@ -84,6 +94,14 @@ public abstract class AbstractCharacter extends AbstractUnit implements ICharact
     @Override
     public int hashCode(){
         return Objects.hash(defense);
+    }
+
+
+    /**
+     * Method to set the allowed weapons for this character
+     * */
+    protected void setAllowedWeapon(WeaponType weapon){
+        allowedWeapons.add(weapon);
     }
 
 }

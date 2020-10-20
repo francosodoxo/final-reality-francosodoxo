@@ -41,6 +41,7 @@ public class TestEquipWeapon {
   private int WEIGHT;
 
   private BlockingQueue<IUnit> turnsQueue;
+
   @BeforeEach
   public void setUp(){
     BLACK_MAGICIAN_NAME = "Javier";
@@ -108,10 +109,10 @@ public class TestEquipWeapon {
     assertEquals(NullWeapon.getNullWeapon(),thief.getEquippedWeapon());
   }
 
-  @Test
+  /*@Test
   public void BowToThief(){
     assertEquals(NullWeapon.getNullWeapon(),thief.getEquippedWeapon());
     thief.equip(axe);
     assertEquals(axe,thief.getEquippedWeapon());
-  }
+  }*/
 }

@@ -3,6 +3,7 @@ package com.github.cc3002.finalreality.model.character.player;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.IUnit;
 import com.github.cc3002.finalreality.model.weapon.NullWeapon;
+import com.github.cc3002.finalreality.model.weapon.WeaponType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
@@ -29,6 +30,8 @@ public class Engineer extends AbstractCharacter {
                     int defense){
         super(name,UnitClass.ENGINEER,turnsQueue,healthPoints,defense);
         equip(NullWeapon.getNullWeapon());
+        setAllowedWeapon(WeaponType.AXE);
+        setAllowedWeapon(WeaponType.BOW);
     }
 
     /**
