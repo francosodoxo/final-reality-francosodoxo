@@ -173,21 +173,5 @@ class PlayerCharacterTest extends AbstractCharacterTest {
       }
       assertNotEquals(character, enemy);
     }
-
-  }
-
-  @Test
-  void equipWeaponTest() {
-    for (var character :
-        testCharacters) {
-      if(!character.getUnitClass().equals(UnitClass.ENEMY)) {
-        /* here is clear that character is not an enemy, so it is totally safe
-           to equip a weapon
-           */
-        assertEquals(NullWeapon.getNullWeapon(),((ICharacter) character).getEquippedWeapon());
-        ((ICharacter) character).equip(testWeapon);
-        assertEquals(testWeapon, ( (ICharacter) character).getEquippedWeapon());
-      }
-    }
   }
 }
