@@ -65,10 +65,12 @@ public abstract class AbstractCharacter extends AbstractUnit implements ICharact
      * */
     @Override
     public void equip(IWeapon weapon) {
-        if(allowedWeapons.contains(weapon.getType())) {
-            this.equippedWeapon = weapon;
-        }else{
-            this.equippedWeapon = NullWeapon.getNullWeapon();
+        if(getHealthPoints()>0) {
+            if (allowedWeapons.contains(weapon.getType())) {
+                this.equippedWeapon = weapon;
+            } else {
+                this.equippedWeapon = NullWeapon.getNullWeapon();
+            }
         }
     }
 
