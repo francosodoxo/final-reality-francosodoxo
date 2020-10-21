@@ -57,4 +57,25 @@ public class SwordTest extends AbstractWeaponTest {
     public void testSwordType(){
         assertEquals(sword.getType(),WeaponType.SWORD);
     }
+
+    @Test
+    public void testSwordName(){
+        Sword sword1 = new Sword("sword1",10,8);
+        Sword sword2 = new Sword("sword2",10,8);
+        assertNotEquals(sword1,sword2);
+    }
+
+    @Test
+    public void testSwordDamage(){
+        Sword sword1 = new Sword("sword1",10,8);
+        Sword sword2 = new Sword("sword1",8,8);
+        assertNotEquals(sword1,sword2);
+    }
+
+    @Test
+    public void testSwordWeight(){
+        Sword sword1 = new Sword("sword1",10,8);
+        Sword sword2 = new Sword("sword1",10,7);
+        assertNotEquals(sword1,sword2);
+    }
 }

@@ -60,7 +60,7 @@ public class BlackMagician extends AbstractMagician {
             return false;
         }
         final BlackMagician b = (BlackMagician) o;
-        if(!NullWeapon.getNullWeapon().equals(getEquippedWeapon())) {
+        if(!getEquippedWeapon().equals(NullWeapon.getNullWeapon())) {
             return b.getName().equals(this.getName()) &&
                     b.getHealthPoints() == this.getHealthPoints() &&
                     b.getDefense() == this.getDefense() &&
