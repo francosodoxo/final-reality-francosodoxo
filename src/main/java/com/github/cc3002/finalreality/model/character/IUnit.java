@@ -53,4 +53,9 @@ public interface IUnit {
      * Get the defense points of this unit
      * */
     int getDefense();
+
+    /**
+     * Receive the corresponding attack
+     * */
+    void receiveAtk(int atk);
 }

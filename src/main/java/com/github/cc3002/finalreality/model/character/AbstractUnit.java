@@ -120,11 +120,31 @@ public abstract class AbstractUnit implements IUnit{
    * Set the health points
    * */
   public void setHealthPoints(int newValue){
-    healthPoints = newValue;
+    healthPoints = Math.max(0,newValue);
   }
 
   /**
    * Copy the Unit
    * */
   public abstract IUnit copy();
+
+  /**
+   * Attack to a unit
+   * */
+  public abstract void attackTo(IUnit character);
+
+  /**
+   * Receive the atk
+   * */
+  public void receiveAtk(int atk){
+    int damage = atk-getDefense();
+    reduceHealthPoints(damage);
+  }
+
+  /**
+   * Reduce health points only accesible to this unit
+   * */
+  private void reduceHealthPoints(int damage){
+    setHealthPoints(getHealthPoints()-damage);
+  }
 }
