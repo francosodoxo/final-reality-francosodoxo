@@ -53,4 +53,25 @@ public class KnifeTest extends AbstractWeaponTest {
     public void testKnifeType(){
         assertEquals(knife.getType(),WeaponType.KNIFE);
     }
+
+    @Test
+    public void testKnifeName(){
+        Knife knife1 = new Knife("knife1",10,8);
+        Knife knife2 = new Knife("knife2",10,8);
+        assertNotEquals(knife1,knife2);
+    }
+
+    @Test
+    public void testKnifeDamage(){
+        Knife knife1 = new Knife("knife1",10,8);
+        Knife knife2 = new Knife("knife1",8,8);
+        assertNotEquals(knife1,knife2);
+    }
+
+    @Test
+    public void testKnifeWeight(){
+        Knife knife1 = new Knife("knife1",10,8);
+        Knife knife2 = new Knife("knife1",10,5);
+        assertNotEquals(knife1,knife2);
+    }
 }

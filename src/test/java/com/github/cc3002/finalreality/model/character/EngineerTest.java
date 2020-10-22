@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class EngineerTest extends AbstractCharacterTest {
     private Engineer engineer;
@@ -30,6 +31,15 @@ public class EngineerTest extends AbstractCharacterTest {
     public void testCopyWithWeapon(){
         engineer.equip(super.getTestWeapon());
         assertEquals(engineer,engineer.copy());
+    }
+
+    @Test
+    public void testOnlyNameDiff(){
+        Engineer engineer1 = new Engineer("engineer1",turns,super.getHealthPoints(),super.getDefense());
+        engineer1.equip(super.getTestWeapon());
+        Engineer engineer2 = new Engineer("engineer2",turns,super.getHealthPoints(),super.getDefense());
+        engineer2.equip(super.getTestWeapon());
+        assertNotEquals(engineer1,engineer2);
     }
 
 }
