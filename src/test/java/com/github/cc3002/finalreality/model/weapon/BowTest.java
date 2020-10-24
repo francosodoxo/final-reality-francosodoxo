@@ -53,4 +53,25 @@ public class BowTest extends AbstractWeaponTest {
     public void testBowType(){
         assertEquals(bow.getType(),WeaponType.BOW);
     }
+    @Test
+    public void testBowName(){
+        Bow bow1 = new Bow("bow1",10,8);
+        Bow bow2 = new Bow("bow2",10,8);
+        assertNotEquals(bow1,bow2);
+    }
+
+    @Test
+    public void testBowDamage(){
+        Bow bow1 = new Bow("bow1",10,8);
+        Bow bow2 = new Bow("bow1",9,8);
+        assertNotEquals(bow1,bow2);
+    }
+
+    @Test
+    public void testBowWeight(){
+        Bow bow1 = new Bow("bow1",10,8);
+        Bow bow2 = new Bow("bow1",10,7);
+        assertNotEquals(bow1,bow2);
+    }
+
 }

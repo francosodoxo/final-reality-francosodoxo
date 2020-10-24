@@ -36,4 +36,11 @@ class EnemyTest extends AbstractCharacterTest {
     copyOf.setAtk(2);
     assertNotEquals(fixEnemy,copyOf);
   }
+
+  @Test
+  public void testEnemyNameEquals(){
+    Enemy enemy1 = new Enemy("enemy1",11,turns,ENEMY_HEALTH_POINTS,ENEMY_ATK,ENEMY_DEFENSE);
+    Enemy enemy2 = new Enemy("enemy2",11,turns,ENEMY_HEALTH_POINTS,ENEMY_ATK,ENEMY_DEFENSE);
+    assertNotEquals(enemy1,enemy2);
+  }
 }

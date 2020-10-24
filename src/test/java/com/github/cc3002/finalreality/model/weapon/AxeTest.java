@@ -52,4 +52,25 @@ public class AxeTest extends AbstractWeaponTest {
     public void testAxeType(){
         assertEquals(testAxe.getType(),WeaponType.AXE);
     }
+
+    @Test
+    public void testAxeName(){
+        Axe axe1 = new Axe("axe1",10,8);
+        Axe axe2 = new Axe("axe2",10,8);
+        assertNotEquals(axe1,axe2);
+    }
+
+    @Test
+    public void testAxeDamage(){
+        Axe axe1 = new Axe("axe1",10,8);
+        Axe axe2 = new Axe("axe1",9,8);
+        assertNotEquals(axe1,axe2);
+    }
+
+    @Test
+    public void testAxeWeight(){
+        Axe axe1 = new Axe("axe1",10,8);
+        Axe axe2 = new Axe("axe1",10,7);
+        assertNotEquals(axe1,axe2);
+    }
 }

@@ -52,4 +52,25 @@ public class StaffTest extends AbstractWeaponTest {
     public void testStaffTyep(){
         assertEquals(staff.getType(),WeaponType.STAFF);
     }
+
+    @Test
+    public void testStaffName(){
+        Staff staff1 = new Staff("staff1",10,8);
+        Staff staff2 = new Staff("staff2",10,8);
+        assertNotEquals(staff1,staff2);
+    }
+
+    @Test
+    public void testStaffDamage(){
+        Staff staff1 = new Staff("staff1",10,8);
+        Staff staff2 = new Staff("staff1",8,8);
+        assertNotEquals(staff1,staff2);
+    }
+
+    @Test
+    public void testStaffWeight(){
+        Staff staff1 = new Staff("staff1",10,8);
+        Staff staff2 = new Staff("staff1",10,5);
+        assertNotEquals(staff1,staff2);
+    }
 }
