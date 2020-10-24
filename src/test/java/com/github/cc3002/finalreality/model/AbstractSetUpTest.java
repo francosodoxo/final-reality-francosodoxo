@@ -1,5 +1,6 @@
 package com.github.cc3002.finalreality.model;
 
+import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.IUnit;
 import com.github.cc3002.finalreality.model.character.player.*;
 import com.github.cc3002.finalreality.model.weapon.*;
@@ -13,6 +14,7 @@ public class AbstractSetUpTest {
   private Engineer engineer;
   private Knight knight;
   private Thief thief;
+  private Enemy enemy;
 
   private IWeapon axe;
   private IWeapon bow;
@@ -63,6 +65,7 @@ public class AbstractSetUpTest {
     engineer = new Engineer(ENGINEER_NAME, turnsQueue, HEALTH_POINTS, DEFENSE_POINTS);
     knight = new Knight(KNIGHT_NAME, turnsQueue, HEALTH_POINTS, DEFENSE_POINTS);
     thief = new Thief(THIEF_NAME, turnsQueue, HEALTH_POINTS, DEFENSE_POINTS);
+    enemy = new Enemy("enemy1",10,getTurnsQueue(),10,7,6);
 
     axe = new Axe(AXE_NAME, DAMAGE, WEIGHT);
     bow = new Bow(BOW_NAME, DAMAGE, WEIGHT);
@@ -89,6 +92,10 @@ public class AbstractSetUpTest {
 
   public WhiteMagician getWhiteMagician(){
     return whiteMagician;
+  }
+
+  public Enemy getEnemy(){
+    return enemy;
   }
 
   public IWeapon getAxe(){
