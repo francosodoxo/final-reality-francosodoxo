@@ -11,15 +11,15 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Class that manages the player's characters
  * */
 public abstract class AbstractCharacter extends AbstractUnit implements ICharacter, IUnit {
   private int defense;
-  private IWeapon equippedWeapon;
   private UnitClass unitClass;
-  private ArrayList<WeaponType> allowedWeapons;
 
   /**
    * Abstract Constructor for this class
@@ -41,8 +41,6 @@ public abstract class AbstractCharacter extends AbstractUnit implements ICharact
                               int healthPoints,
                               int defense){
     super(turnsQueue,name,healthPoints,unitClass,defense);
-    this.equippedWeapon = NullWeapon.getNullWeapon();
-    allowedWeapons = new ArrayList<>();
   }
 
   /**
@@ -60,25 +58,6 @@ public abstract class AbstractCharacter extends AbstractUnit implements ICharact
     defense = newDefense;
   }
 
-  /**
-   * Set the equipped weapon for this character
-   * */
-  @Override
-  public void equip(IWeapon weapon) {
-    if(getHealthPoints()>0) {
-      if (allowedWeapons.contains(weapon.getType())) {
-        this.equippedWeapon = weapon;
-      }
-    }
-  }
-
-  /**
-   * Returns the equipped weapon this character has
-   * */
-  @Override
-  public IWeapon getEquippedWeapon() {
-    return this.equippedWeapon;
-  }
 
   /**
    * Returns this unit class
@@ -88,6 +67,8 @@ public abstract class AbstractCharacter extends AbstractUnit implements ICharact
     return super.getUnitClass();
   }
 
+
+
   /**
    * Hashcode to work with
    * */
@@ -96,22 +77,15 @@ public abstract class AbstractCharacter extends AbstractUnit implements ICharact
     return Objects.hash(defense);
   }
 
-
-  /**
-   * Method to set the allowed weapons for this character
-   * */
-  protected void setAllowedWeapon(WeaponType weapon){
-    allowedWeapons.add(weapon);
-  }
-
   /**
    * Do an attack against an IUnit
    * */
   @Override
-  public void attackTo(IUnit enemy) {
-    if(enemy.getHealthPoints()>0 && !enemy.equals(this)){
-      enemy.receiveAtk(getEquippedWeapon().getDamage());
-    }
-  }
+  public abstract void attackTo(IUnit enemy);
+
+  public abstract void waitTurn(); /*{
+    super.getScheduledExecutor()
+            .schedule(this::addToQueue, this.getEquippedWeapon().getWeight() / 10, TimeUnit.SECONDS);
+  }*/
 
 }

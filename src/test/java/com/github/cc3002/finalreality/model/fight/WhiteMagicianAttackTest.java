@@ -22,7 +22,7 @@ public class WhiteMagicianAttackTest extends AbstractSetUpTest {
   @Test
   public void whiteMagAttackWithStaff(){
     WhiteMagician character = (WhiteMagician) super.getWhiteMagician().copy();
-    character.equip(getStaff());
+    character.equip(getStaffWhite());
     Enemy enemy1 = getEnemy();
     int enemyHealthPoints = enemy1.getHealthPoints();
     character.attackTo(enemy1);
@@ -34,7 +34,7 @@ public class WhiteMagicianAttackTest extends AbstractSetUpTest {
   @Test
   public void whiteMagAtkWithStaffToDeadEnemy(){
     WhiteMagician character = (WhiteMagician) super.getWhiteMagician().copy();
-    character.equip(getStaff());
+    character.equip(getStaffWhite());
     Enemy enemy1 = getEnemy();
     enemy1.setHealthPoints(0);
     character.attackTo(enemy1);
@@ -44,7 +44,7 @@ public class WhiteMagicianAttackTest extends AbstractSetUpTest {
   @Test
   public void whiteMagAttackItselfWithStaff(){
     WhiteMagician character = (WhiteMagician) super.getWhiteMagician().copy();
-    character.equip(getStaff());
+    character.equip(getStaffWhite());
     int characterHp = character.getHealthPoints();
     character.attackTo(character);
     assertEquals(characterHp,character.getHealthPoints());

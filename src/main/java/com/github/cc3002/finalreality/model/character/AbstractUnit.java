@@ -44,24 +44,24 @@ public abstract class AbstractUnit implements IUnit{
     this.healthPoints = healthPoints;
     this.unitClass = unitClass;
     this.defense = defense;
+    scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
   }
   /**
    * Sets a scheduled executor to make this character (thread) wait for {@code speed / 10}
    * seconds before adding the character to the queue.
    */
   @Override
-  public void waitTurn() {
+  public abstract void waitTurn(); /*{
     scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
     if (this instanceof ICharacter) {
-      scheduledExecutor
-          .schedule(this::addToQueue, ((ICharacter) this).getEquippedWeapon().getWeight() / 10, TimeUnit.SECONDS);
+
     } else {
       var enemy = (Enemy) this;
       scheduledExecutor
           .schedule(this::addToQueue, enemy.getWeight() / 10, TimeUnit.SECONDS);
     }
   }
-
+*/
   /**
    * Adds this character to the turns queue.
    */
@@ -146,5 +146,9 @@ public abstract class AbstractUnit implements IUnit{
    * */
   private void reduceHealthPoints(int damage){
     setHealthPoints(getHealthPoints()-damage);
+  }
+
+  public ScheduledExecutorService getScheduledExecutor(){
+    return scheduledExecutor;
   }
 }

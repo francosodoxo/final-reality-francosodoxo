@@ -16,11 +16,18 @@ public class AbstractSetUpTest {
   private Thief thief;
   private Enemy enemy;
 
-  private IWeapon axe;
-  private IWeapon bow;
-  private IWeapon knife;
-  private IWeapon staff;
-  private IWeapon sword;
+  private IWeaponKnight axeKnight;
+  private IWeaponEngineer axeEngineer;
+  private IWeaponEngineer bowEngineer;
+  private IWeaponThief bowThief;
+  private IWeaponKnight knifeKnight;
+  private IWeaponThief knifeThief;
+  private IWeaponBlack knifeBlack;
+  private IWeaponThief staffThief;
+  private IWeaponBlack staffBlack;
+  private IWeaponWhite staffWhite;
+  private IWeaponKnight swordKnight;
+  private IWeaponThief swordThief;
 
   private String BLACK_MAGICIAN_NAME;
   private String WHITE_MAGICIAN_NAME;
@@ -67,11 +74,17 @@ public class AbstractSetUpTest {
     thief = new Thief(THIEF_NAME, turnsQueue, HEALTH_POINTS, DEFENSE_POINTS);
     enemy = new Enemy("enemy1",10,getTurnsQueue(),10,7,6);
 
-    axe = new Axe(AXE_NAME, DAMAGE, WEIGHT);
-    bow = new Bow(BOW_NAME, DAMAGE, WEIGHT);
-    knife = new Knife(KNIFE_NAME, DAMAGE, WEIGHT);
-    staff = new Staff(STAFF_NAME, DAMAGE, WEIGHT);
-    sword = new Sword(SWORD_NAME, DAMAGE, WEIGHT);
+    axeKnight = new Axe(AXE_NAME, DAMAGE, WEIGHT);
+    axeEngineer = new Axe(AXE_NAME, DAMAGE, WEIGHT);
+    bowEngineer = new Bow(BOW_NAME, DAMAGE, WEIGHT);
+    bowThief = new Bow(BOW_NAME, DAMAGE, WEIGHT);
+    knifeKnight = new Knife(KNIFE_NAME, DAMAGE, WEIGHT);
+    knifeBlack = new Knife(KNIFE_NAME, DAMAGE, WEIGHT);
+    staffThief = new Staff(STAFF_NAME, DAMAGE, WEIGHT);
+    staffBlack = new Staff(STAFF_NAME, DAMAGE, WEIGHT);
+    staffWhite = new Staff(STAFF_NAME, DAMAGE, WEIGHT);
+    swordKnight = new Sword(SWORD_NAME, DAMAGE, WEIGHT);
+    swordThief = new Sword(SWORD_NAME, DAMAGE, WEIGHT);
   }
 
   public BlackMagician getBlackMagician(){
@@ -98,24 +111,45 @@ public class AbstractSetUpTest {
     return enemy;
   }
 
-  public IWeapon getAxe(){
-    return axe;
+  public IWeaponKnight getAxeKnight(){
+    return axeKnight;
   }
 
-  public IWeapon getBow(){
-    return bow;
+  public IWeaponEngineer getAxeEngineer(){
+    return axeEngineer;
   }
 
-  public IWeapon getKnife(){
-    return knife;
+  public IWeaponEngineer getBowEngineer(){
+    return bowEngineer;
   }
 
-  public IWeapon getStaff(){
-    return staff;
+  public IWeaponThief getBowThief(){
+    return bowThief;
   }
 
-  public IWeapon getSword(){
-    return sword;
+  public IWeaponKnight getKnifeKnight(){
+    return knifeKnight;
+  }
+
+  public IWeaponBlack getKnifeBlack(){
+    return knifeBlack;
+  }
+
+  public IWeaponThief getStaffThief(){
+    return staffThief;
+  }
+  public IWeaponBlack getStaffBlack(){
+    return staffBlack;
+  }
+  public IWeaponWhite getStaffWhite(){
+    return staffWhite;
+  }
+
+  public IWeaponKnight getSwordKnight(){
+    return swordKnight;
+  }
+  public IWeaponThief getSwordThief(){
+    return swordThief;
   }
 
   public void setHealthPoints(int HEALTH_POINTS) {

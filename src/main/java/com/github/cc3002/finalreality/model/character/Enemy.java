@@ -2,6 +2,7 @@ package com.github.cc3002.finalreality.model.character;
 
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 import com.github.cc3002.finalreality.model.character.player.UnitClass;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
@@ -75,6 +76,12 @@ public class Enemy extends AbstractUnit{
   @Override
   public int hashCode() {
     return Objects.hash(getWeight());
+  }
+
+  @Override
+  public void waitTurn() {
+    super.getScheduledExecutor()
+            .schedule(this::addToQueue, this.getWeight() / 10, TimeUnit.SECONDS);
   }
 
   /**

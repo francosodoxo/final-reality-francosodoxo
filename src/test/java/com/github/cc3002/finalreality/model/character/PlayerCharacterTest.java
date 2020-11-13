@@ -9,7 +9,6 @@ import com.github.cc3002.finalreality.model.character.player.*;
 import java.util.EnumMap;
 import java.util.Map;
 
-import com.github.cc3002.finalreality.model.weapon.NullWeapon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -75,7 +74,7 @@ class PlayerCharacterTest extends AbstractCharacterTest {
   void constructorTest() {
     var enemy = new Enemy("Enemy", 10, turns, 10,5,4);
     for (var character :
-        testCharacters) {
+            testCharacters) {
       var characterClass = character.getUnitClass();
       var characterName = characterNames.get(characterClass);
       switch(characterClass){
