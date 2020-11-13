@@ -1,4 +1,7 @@
 package com.github.cc3002.finalreality.model.weapon;
+
+import com.github.cc3002.finalreality.model.character.ICharacter;
+
 /**
  * This shows what a Weapon can do, whatever it is
  * */
@@ -26,4 +29,6 @@ public interface IWeapon {
      * Get a copy of this weapon
      * */
     IWeapon copy();
+
+
 }

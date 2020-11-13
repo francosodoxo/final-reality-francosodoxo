@@ -24,16 +24,6 @@ public interface ICharacter {
   String getName();
 
   /**
-   * Equips a weapon to the character.
-   */
-  void equip(IWeapon weapon);
-
-  /**
-   * Return this character's equipped weapon.
-   */
-  IWeapon getEquippedWeapon();
-
-  /**
    * Returns this character's class.
    */
   UnitClass getUnitClass();

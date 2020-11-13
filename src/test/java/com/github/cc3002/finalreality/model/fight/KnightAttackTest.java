@@ -21,7 +21,7 @@ public class KnightAttackTest extends AbstractSetUpTest {
   @Test
   public void knightAttackWithAxe(){
     Knight character = (Knight) super.getKnight().copy();
-    character.equip(getAxe());
+    character.equip(getAxeKnight());
     Enemy enemy1 = getEnemy();
     int enemyHealthPoints = enemy1.getHealthPoints();
     character.attackTo(enemy1);
@@ -33,7 +33,7 @@ public class KnightAttackTest extends AbstractSetUpTest {
   @Test
   public void knightAtkWithAxeToDeadEnemy(){
     Knight character = (Knight) super.getKnight().copy();
-    character.equip(getAxe());
+    character.equip(getAxeKnight());
     Enemy enemy1 = getEnemy();
     enemy1.setHealthPoints(0);
     character.attackTo(enemy1);
@@ -43,7 +43,7 @@ public class KnightAttackTest extends AbstractSetUpTest {
   @Test
   public void knightAttackItselfWithAxe(){
     Knight character = (Knight) super.getKnight().copy();
-    character.equip(getAxe());
+    character.equip(getAxeKnight());
     int characterHp = character.getHealthPoints();
     character.attackTo(character);
     assertEquals(characterHp,character.getHealthPoints());
@@ -52,7 +52,7 @@ public class KnightAttackTest extends AbstractSetUpTest {
   @Test
   public void knightAttackWithKnife(){
     Knight character = (Knight) super.getKnight().copy();
-    character.equip(getKnife());
+    character.equip(getKnifeKnight());
     Enemy enemy1 = getEnemy();
     int enemyHealthPoints = enemy1.getHealthPoints();
     character.attackTo(enemy1);
@@ -64,7 +64,7 @@ public class KnightAttackTest extends AbstractSetUpTest {
   @Test
   public void knightAtkWithKnifeToDeadEnemy(){
     Knight character = (Knight) super.getKnight().copy();
-    character.equip(getKnife());
+    character.equip(getKnifeKnight());
     Enemy enemy1 = getEnemy();
     enemy1.setHealthPoints(0);
     character.attackTo(enemy1);
@@ -74,7 +74,7 @@ public class KnightAttackTest extends AbstractSetUpTest {
   @Test
   public void knightAttackItselfWithKnife(){
     Knight character = (Knight) super.getKnight().copy();
-    character.equip(getKnife());
+    character.equip(getKnifeKnight());
     int characterHp = character.getHealthPoints();
     character.attackTo(character);
     assertEquals(characterHp,character.getHealthPoints());
@@ -83,7 +83,7 @@ public class KnightAttackTest extends AbstractSetUpTest {
   @Test
   public void knightAttackWithSword(){
     Knight character = (Knight) super.getKnight().copy();
-    character.equip(getSword());
+    character.equip(getSwordKnight());
     Enemy enemy1 = getEnemy();
     int enemyHealthPoints = enemy1.getHealthPoints();
     character.attackTo(enemy1);
@@ -95,7 +95,7 @@ public class KnightAttackTest extends AbstractSetUpTest {
   @Test
   public void knightAtkWithSwordToDeadEnemy(){
     Knight character = (Knight) super.getKnight().copy();
-    character.equip(getSword());
+    character.equip(getSwordKnight());
     Enemy enemy1 = getEnemy();
     enemy1.setHealthPoints(0);
     character.attackTo(enemy1);
@@ -105,7 +105,7 @@ public class KnightAttackTest extends AbstractSetUpTest {
   @Test
   public void knightAttackItselfWithSword(){
     Knight character = (Knight) super.getKnight().copy();
-    character.equip(getSword());
+    character.equip(getSwordKnight());
     int characterHp = character.getHealthPoints();
     character.attackTo(character);
     assertEquals(characterHp,character.getHealthPoints());

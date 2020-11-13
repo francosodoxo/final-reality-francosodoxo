@@ -21,7 +21,7 @@ public class ThiefAttackTest extends AbstractSetUpTest {
   @Test
   public void thiefAttackWithBow(){
     Thief character = (Thief) super.getThief().copy();
-    character.equip(getBow());
+    character.equip(getBowThief());
     Enemy enemy1 = getEnemy();
     int enemyHealthPoints = enemy1.getHealthPoints();
     character.attackTo(enemy1);
@@ -33,7 +33,7 @@ public class ThiefAttackTest extends AbstractSetUpTest {
   @Test
   public void thiefAtkWithBowToDeadEnemy(){
     Thief character = (Thief) super.getThief().copy();
-    character.equip(getBow());
+    character.equip(getBowThief());
     Enemy enemy1 = getEnemy();
     enemy1.setHealthPoints(0);
     character.attackTo(enemy1);
@@ -43,7 +43,7 @@ public class ThiefAttackTest extends AbstractSetUpTest {
   @Test
   public void thiefAttackItselfWithBow(){
     Thief character = (Thief) super.getThief().copy();
-    character.equip(getBow());
+    character.equip(getBowThief());
     int characterHp = character.getHealthPoints();
     character.attackTo(character);
     assertEquals(characterHp,character.getHealthPoints());
@@ -52,7 +52,7 @@ public class ThiefAttackTest extends AbstractSetUpTest {
   @Test
   public void thiefAttackWithStaff(){
     Thief character = (Thief) super.getThief().copy();
-    character.equip(getStaff());
+    character.equip(getStaffThief());
     Enemy enemy1 = getEnemy();
     int enemyHealthPoints = enemy1.getHealthPoints();
     character.attackTo(enemy1);
@@ -64,7 +64,7 @@ public class ThiefAttackTest extends AbstractSetUpTest {
   @Test
   public void thiefAtkWithStaffToDeadEnemy(){
     Thief character = (Thief) super.getThief().copy();
-    character.equip(getStaff());
+    character.equip(getStaffThief());
     Enemy enemy1 = getEnemy();
     enemy1.setHealthPoints(0);
     character.attackTo(enemy1);
@@ -74,7 +74,7 @@ public class ThiefAttackTest extends AbstractSetUpTest {
   @Test
   public void thiefAttackItselfWithStaff(){
     Thief character = (Thief) super.getThief().copy();
-    character.equip(getStaff());
+    character.equip(getStaffThief());
     int characterHp = character.getHealthPoints();
     character.attackTo(character);
     assertEquals(characterHp,character.getHealthPoints());
@@ -83,7 +83,7 @@ public class ThiefAttackTest extends AbstractSetUpTest {
   @Test
   public void thiefAttackWithSword(){
     Thief character = (Thief) super.getThief().copy();
-    character.equip(getSword());
+    character.equip(getSwordThief());
     Enemy enemy1 = getEnemy();
     int enemyHealthPoints = enemy1.getHealthPoints();
     character.attackTo(enemy1);
@@ -95,7 +95,7 @@ public class ThiefAttackTest extends AbstractSetUpTest {
   @Test
   public void thiefAtkWithSwordToDeadEnemy(){
     Thief character = (Thief) super.getThief().copy();
-    character.equip(getSword());
+    character.equip(getSwordThief());
     Enemy enemy1 = getEnemy();
     enemy1.setHealthPoints(0);
     character.attackTo(enemy1);
@@ -105,7 +105,7 @@ public class ThiefAttackTest extends AbstractSetUpTest {
   @Test
   public void thiefAttackItselfWithSword(){
     Thief character = (Thief) super.getThief().copy();
-    character.equip(getSword());
+    character.equip(getSwordThief());
     int characterHp = character.getHealthPoints();
     character.attackTo(character);
     assertEquals(characterHp,character.getHealthPoints());

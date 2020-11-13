@@ -23,7 +23,7 @@ public class BlackMagicianAttackTest extends AbstractSetUpTest {
   @Test
   public void blackMagAttackWithKnife(){
     BlackMagician character = (BlackMagician) super.getBlackMagician().copy();
-    character.equip(getKnife());
+    character.equip(getKnifeBlack());
     Enemy enemy1 = getEnemy();
     int enemyHealthPoints = enemy1.getHealthPoints();
     character.attackTo(enemy1);
@@ -34,8 +34,8 @@ public class BlackMagicianAttackTest extends AbstractSetUpTest {
 
   @Test
   public void blackMagAtkWithKnifeToDeadEnemy(){
-    WhiteMagician character = (WhiteMagician) super.getWhiteMagician().copy();
-    character.equip(getKnife());
+    BlackMagician character = (BlackMagician) super.getBlackMagician().copy();
+    character.equip(getKnifeBlack());
     Enemy enemy1 = getEnemy();
     enemy1.setHealthPoints(0);
     character.attackTo(enemy1);
@@ -45,7 +45,7 @@ public class BlackMagicianAttackTest extends AbstractSetUpTest {
   @Test
   public void blackMagAttackItselfWithKnife(){
     BlackMagician character = (BlackMagician) getBlackMagician().copy();
-    character.equip(getKnife());
+    character.equip(getKnifeBlack());
     int characterHp = character.getHealthPoints();
     character.attackTo(character);
     assertEquals(characterHp,character.getHealthPoints());
@@ -55,7 +55,7 @@ public class BlackMagicianAttackTest extends AbstractSetUpTest {
   @Test
   public void blackMagAttackWithStaff(){
     BlackMagician character = (BlackMagician) super.getBlackMagician().copy();
-    character.equip(getStaff());
+    character.equip(getStaffBlack());
     Enemy enemy1 = getEnemy();
     int enemyHealthPoints = enemy1.getHealthPoints();
     character.attackTo(enemy1);
@@ -66,8 +66,8 @@ public class BlackMagicianAttackTest extends AbstractSetUpTest {
 
   @Test
   public void blackMagAtkWithBowToDeadEnemy(){
-    WhiteMagician character = (WhiteMagician) super.getWhiteMagician().copy();
-    character.equip(getStaff());
+    BlackMagician character = (BlackMagician) super.getBlackMagician().copy();
+    character.equip(getStaffBlack());
     Enemy enemy1 = getEnemy();
     enemy1.setHealthPoints(0);
     character.attackTo(enemy1);
@@ -77,7 +77,7 @@ public class BlackMagicianAttackTest extends AbstractSetUpTest {
   @Test
   public void blackMagAttackItselfWithStaff(){
     BlackMagician character = (BlackMagician) getBlackMagician().copy();
-    character.equip(getStaff());
+    character.equip(getStaffBlack());
     int characterHp = character.getHealthPoints();
     character.attackTo(character);
     assertEquals(characterHp,character.getHealthPoints());

@@ -29,11 +29,11 @@ public class TestEquipWeapon extends AbstractSetUpTest {
   public void testBlackMagicianCopiesInstancesWhenChangedWeapon() {
     assertEquals(NullWeapon.getNullWeapon(), super.getBlackMagician().getEquippedWeapon());
     BlackMagician otherBlackMagician = (BlackMagician) super.getBlackMagician().copy();
-    otherBlackMagician.equip(super.getKnife());
+    otherBlackMagician.equip(super.getKnifeBlack());
     assertNotEquals(otherBlackMagician, super.getBlackMagician());
-    super.getBlackMagician().equip(super.getKnife());
+    super.getBlackMagician().equip(super.getKnifeBlack());
     assertEquals(otherBlackMagician, super.getBlackMagician());
-    otherBlackMagician.equip(super.getStaff());
+    otherBlackMagician.equip(super.getStaffBlack());
     assertNotEquals(otherBlackMagician, super.getBlackMagician());
   }
 
@@ -41,11 +41,11 @@ public class TestEquipWeapon extends AbstractSetUpTest {
   public void testEngineerCopiesInstancesWhenChangedWeapon() {
     assertEquals(NullWeapon.getNullWeapon(), super.getEngineer().getEquippedWeapon());
     Engineer otherEngineer = (Engineer) super.getEngineer().copy();
-    otherEngineer.equip(super.getAxe());
+    otherEngineer.equip(super.getAxeEngineer());
     assertNotEquals(otherEngineer, super.getEngineer());
-    super.getEngineer().equip(super.getAxe());
+    super.getEngineer().equip(super.getAxeEngineer());
     assertEquals(otherEngineer, super.getEngineer());
-    otherEngineer.equip(super.getBow());
+    otherEngineer.equip(super.getBowEngineer());
     assertNotEquals(otherEngineer, super.getEngineer());
   }
 
@@ -53,17 +53,17 @@ public class TestEquipWeapon extends AbstractSetUpTest {
   public void testKnightCopiesInstancesWhenChangedWeapon() {
     assertEquals(NullWeapon.getNullWeapon(), super.getKnight().getEquippedWeapon());
     Knight otherKnight = (Knight) super.getKnight().copy();
-    otherKnight.equip(super.getSword());
+    otherKnight.equip(super.getSwordKnight());
     assertNotEquals(otherKnight, super.getKnight());
-    super.getKnight().equip(super.getSword());
+    super.getKnight().equip(super.getSwordKnight());
     assertEquals(otherKnight, super.getKnight());
-    otherKnight.equip(super.getAxe());
+    otherKnight.equip(super.getAxeKnight());
     assertNotEquals(otherKnight, super.getKnight());
-    super.getKnight().equip(super.getAxe());
+    super.getKnight().equip(super.getAxeKnight());
     assertEquals(otherKnight, super.getKnight());
-    otherKnight.equip(super.getKnife());
+    otherKnight.equip(super.getKnifeKnight());
     assertNotEquals(otherKnight, super.getKnight());
-    super.getKnight().equip(super.getKnife());
+    super.getKnight().equip(super.getKnifeKnight());
     assertEquals(otherKnight, super.getKnight());
   }
 
@@ -71,17 +71,17 @@ public class TestEquipWeapon extends AbstractSetUpTest {
   public void testThiefCopiesInstancesWhenChangedWeapon() {
     assertEquals(NullWeapon.getNullWeapon(), super.getThief().getEquippedWeapon());
     Thief otherThief = (Thief) super.getThief().copy();
-    otherThief.equip(super.getSword());
+    otherThief.equip(super.getSwordThief());
     assertNotEquals(otherThief, super.getThief());
-    super.getThief().equip(super.getSword());
+    super.getThief().equip(super.getSwordThief());
     assertEquals(otherThief, super.getThief());
-    otherThief.equip(super.getStaff());
+    otherThief.equip(super.getStaffThief());
     assertNotEquals(otherThief, super.getThief());
-    super.getThief().equip(super.getStaff());
+    super.getThief().equip(super.getStaffThief());
     assertEquals(otherThief, super.getThief());
-    otherThief.equip(super.getBow());
+    otherThief.equip(super.getBowThief());
     assertNotEquals(otherThief, super.getThief());
-    super.getThief().equip(super.getBow());
+    super.getThief().equip(super.getBowThief());
     assertEquals(otherThief, super.getThief());
   }
 
@@ -89,10 +89,10 @@ public class TestEquipWeapon extends AbstractSetUpTest {
   public void testWhiteMagCopiesInstancesWhenChangedWeapon() {
     assertEquals(NullWeapon.getNullWeapon(), super.getWhiteMagician().getEquippedWeapon());
     WhiteMagician otherWhite = (WhiteMagician) super.getWhiteMagician().copy();
-    otherWhite.equip(super.getStaff());
+    otherWhite.equip(super.getStaffWhite());
     assertNotEquals(otherWhite, super.getWhiteMagician());
     Staff otherStaff = new Staff("otherNewStaff", 30, 25);
-    super.getWhiteMagician().equip(super.getStaff());
+    super.getWhiteMagician().equip(super.getStaffWhite());
     assertEquals(otherWhite, super.getWhiteMagician());
     otherWhite.equip(otherStaff);
     assertNotEquals(otherWhite, super.getWhiteMagician());
@@ -101,276 +101,181 @@ public class TestEquipWeapon extends AbstractSetUpTest {
   }
 
   @Test
-  public void axeToBlackMag() {
-    assertEquals(NullWeapon.getNullWeapon(), super.getBlackMagician().getEquippedWeapon());
-    super.getBlackMagician().equip(super.getAxe());
-    assertEquals(NullWeapon.getNullWeapon(), super.getBlackMagician().getEquippedWeapon());
-  }
-
-  @Test
-  public void axeToWhiteMag() {
-    assertEquals(NullWeapon.getNullWeapon(), super.getWhiteMagician().getEquippedWeapon());
-    super.getWhiteMagician().equip(super.getAxe());
-    assertEquals(NullWeapon.getNullWeapon(), super.getWhiteMagician().getEquippedWeapon());
-  }
-
-  @Test
   public void axeToEngineer() {
     assertEquals(NullWeapon.getNullWeapon(), super.getEngineer().getEquippedWeapon());
-    super.getEngineer().equip(super.getAxe());
-    assertEquals(super.getAxe(), super.getEngineer().getEquippedWeapon());
+    super.getEngineer().equip(super.getAxeEngineer());
+    assertEquals(super.getAxeEngineer(), super.getEngineer().getEquippedWeapon());
   }
 
   @Test
   public void axeToKnight() {
     assertEquals(NullWeapon.getNullWeapon(), super.getKnight().getEquippedWeapon());
-    super.getKnight().equip(super.getAxe());
-    assertEquals(super.getAxe(), super.getKnight().getEquippedWeapon());
-  }
-
-  @Test
-  public void axeToThief() {
-    assertEquals(NullWeapon.getNullWeapon(), super.getThief().getEquippedWeapon());
-    super.getThief().equip(super.getAxe());
-    assertEquals(NullWeapon.getNullWeapon(), super.getThief().getEquippedWeapon());
-  }
-
-  @Test
-  public void bowToBlackMag() {
-    assertEquals(NullWeapon.getNullWeapon(), super.getBlackMagician().getEquippedWeapon());
-    super.getBlackMagician().equip(super.getBow());
-    assertEquals(NullWeapon.getNullWeapon(), super.getBlackMagician().getEquippedWeapon());
-  }
-
-  @Test
-  public void bowToWhiteMag() {
-    assertEquals(NullWeapon.getNullWeapon(), super.getWhiteMagician().getEquippedWeapon());
-    super.getWhiteMagician().equip(super.getBow());
-    assertEquals(NullWeapon.getNullWeapon(), super.getWhiteMagician().getEquippedWeapon());
+    super.getKnight().equip(super.getAxeKnight());
+    assertEquals(super.getAxeKnight(), super.getKnight().getEquippedWeapon());
   }
 
   @Test
   public void bowToEngineer() {
     assertEquals(NullWeapon.getNullWeapon(), super.getEngineer().getEquippedWeapon());
-    super.getEngineer().equip(super.getBow());
-    assertEquals(super.getBow(), super.getEngineer().getEquippedWeapon());
-  }
-
-  @Test
-  public void bowToKnight() {
-    assertEquals(NullWeapon.getNullWeapon(), super.getKnight().getEquippedWeapon());
-    super.getKnight().equip(super.getBow());
-    assertEquals(NullWeapon.getNullWeapon(), super.getKnight().getEquippedWeapon());
+    super.getEngineer().equip(super.getBowEngineer());
+    assertEquals(super.getBowEngineer(), super.getEngineer().getEquippedWeapon());
   }
 
   @Test
   public void bowToThief() {
     assertEquals(NullWeapon.getNullWeapon(), super.getThief().getEquippedWeapon());
-    super.getThief().equip(super.getBow());
-    assertEquals(super.getBow(), super.getThief().getEquippedWeapon());
+    super.getThief().equip(super.getBowThief());
+    assertEquals(super.getBowThief(), super.getThief().getEquippedWeapon());
   }
 
   @Test
   public void knifeToBlackMag() {
     assertEquals(NullWeapon.getNullWeapon(), super.getBlackMagician().getEquippedWeapon());
-    super.getBlackMagician().equip(super.getKnife());
-    assertEquals(super.getKnife(), super.getBlackMagician().getEquippedWeapon());
-  }
-
-  @Test
-  public void knifeToEngineer() {
-    assertEquals(NullWeapon.getNullWeapon(), super.getEngineer().getEquippedWeapon());
-    super.getEngineer().equip(super.getKnife());
-    assertEquals(NullWeapon.getNullWeapon(), super.getEngineer().getEquippedWeapon());
+    super.getBlackMagician().equip(super.getKnifeBlack());
+    assertEquals(super.getKnifeBlack(), super.getBlackMagician().getEquippedWeapon());
   }
 
   @Test
   public void knifeToKnight() {
     assertEquals(NullWeapon.getNullWeapon(), super.getKnight().getEquippedWeapon());
-    super.getKnight().equip(super.getKnife());
-    assertEquals(super.getKnife(), super.getKnight().getEquippedWeapon());
+    super.getKnight().equip(super.getKnifeKnight());
+    assertEquals(super.getKnifeKnight(), super.getKnight().getEquippedWeapon());
   }
 
-  @Test
-  public void knifeToThief() {
-    assertEquals(NullWeapon.getNullWeapon(), super.getThief().getEquippedWeapon());
-    super.getThief().equip(super.getKnife());
-    assertEquals(NullWeapon.getNullWeapon(), super.getThief().getEquippedWeapon());
-  }
-
-  @Test
-  public void knifeToWhiteMag() {
-    assertEquals(NullWeapon.getNullWeapon(), super.getWhiteMagician().getEquippedWeapon());
-    super.getWhiteMagician().equip(super.getKnife());
-    assertEquals(NullWeapon.getNullWeapon(), super.getWhiteMagician().getEquippedWeapon());
-  }
 
   @Test
   public void staffToBlackMag() {
     assertEquals(NullWeapon.getNullWeapon(), super.getBlackMagician().getEquippedWeapon());
-    super.getBlackMagician().equip(super.getStaff());
-    assertEquals(super.getStaff(), super.getBlackMagician().getEquippedWeapon());
-  }
-
-  @Test
-  public void staffToEngineer() {
-    assertEquals(NullWeapon.getNullWeapon(), super.getEngineer().getEquippedWeapon());
-    super.getEngineer().equip(super.getStaff());
-    assertEquals(NullWeapon.getNullWeapon(), super.getEngineer().getEquippedWeapon());
-  }
-
-  @Test
-  public void staffToKnight() {
-    assertEquals(NullWeapon.getNullWeapon(), super.getKnight().getEquippedWeapon());
-    super.getKnight().equip(super.getStaff());
-    assertEquals(NullWeapon.getNullWeapon(), super.getKnight().getEquippedWeapon());
+    super.getBlackMagician().equip(super.getStaffBlack());
+    assertEquals(super.getStaffBlack(), super.getBlackMagician().getEquippedWeapon());
   }
 
   @Test
   public void staffToThief() {
     assertEquals(NullWeapon.getNullWeapon(), super.getThief().getEquippedWeapon());
-    super.getThief().equip(super.getStaff());
-    assertEquals(super.getStaff(), super.getThief().getEquippedWeapon());
+    super.getThief().equip(super.getStaffThief());
+    assertEquals(super.getStaffThief(), super.getThief().getEquippedWeapon());
   }
 
   @Test
   public void staffToWhiteMag(){
     assertEquals(NullWeapon.getNullWeapon(),super.getWhiteMagician().getEquippedWeapon());
-    super.getWhiteMagician().equip(super.getStaff());
-    assertEquals(super.getStaff(),super.getWhiteMagician().getEquippedWeapon());
+    super.getWhiteMagician().equip(super.getStaffWhite());
+    assertEquals(super.getStaffWhite(),super.getWhiteMagician().getEquippedWeapon());
   }
 
-  @Test
-  public void swordToBlackMag(){
-    assertEquals(NullWeapon.getNullWeapon(),super.getBlackMagician().getEquippedWeapon());
-    super.getBlackMagician().equip(super.getSword());
-    assertEquals(NullWeapon.getNullWeapon(),super.getBlackMagician().getEquippedWeapon());
-  }
-  @Test
-  public void swordToEngineer(){
-    assertEquals(NullWeapon.getNullWeapon(),super.getEngineer().getEquippedWeapon());
-    super.getEngineer().equip(super.getSword());
-    assertEquals(NullWeapon.getNullWeapon(),super.getEngineer().getEquippedWeapon());
-  }
 
   @Test
   public void swordToKnight(){
     assertEquals(NullWeapon.getNullWeapon(),super.getKnight().getEquippedWeapon());
-    super.getKnight().equip(super.getSword());
-    assertEquals(super.getSword(),super.getKnight().getEquippedWeapon());
+    super.getKnight().equip(super.getSwordKnight());
+    assertEquals(super.getSwordKnight(),super.getKnight().getEquippedWeapon());
   }
 
   @Test
   public void swordToThief(){
     assertEquals(NullWeapon.getNullWeapon(),super.getThief().getEquippedWeapon());
-    super.getThief().equip(super.getSword());
-    assertEquals(super.getSword(),super.getThief().getEquippedWeapon());
-  }
-
-  @Test
-  public void swordToWhiteMag(){
-    assertEquals(NullWeapon.getNullWeapon(),super.getWhiteMagician().getEquippedWeapon());
-    super.getWhiteMagician().equip(super.getSword());
-    assertEquals(NullWeapon.getNullWeapon(),super.getWhiteMagician().getEquippedWeapon());
+    super.getThief().equip(super.getSwordThief());
+    assertEquals(super.getSwordThief(),super.getThief().getEquippedWeapon());
   }
 
   @Test
   public void equipKnifeAfterDeadBlackMagHavingStaff(){
-    super.getBlackMagician().equip(super.getStaff());
+    super.getBlackMagician().equip(super.getStaffBlack());
     super.getBlackMagician().setHealthPoints(0);
-    super.getBlackMagician().equip(super.getKnife());
-    assertNotEquals(super.getKnife(),super.getBlackMagician().getEquippedWeapon());
-    assertEquals(super.getStaff(),super.getBlackMagician().getEquippedWeapon());
+    super.getBlackMagician().equip(super.getKnifeBlack());
+    assertNotEquals(super.getKnifeBlack(),super.getBlackMagician().getEquippedWeapon());
+    assertEquals(super.getStaffBlack(),super.getBlackMagician().getEquippedWeapon());
   }
 
   @Test
   public void equipStaffAfterDeadBlackMagHavingStaff(){
-    super.getBlackMagician().equip(super.getStaff());
+    super.getBlackMagician().equip(super.getStaffBlack());
     super.getBlackMagician().setHealthPoints(0);
     Staff otherStaff = new Staff("otherStaff",10,8);
     super.getBlackMagician().equip(otherStaff);
     assertNotEquals(otherStaff,super.getBlackMagician().getEquippedWeapon());
-    assertEquals(super.getStaff(),super.getBlackMagician().getEquippedWeapon());
+    assertEquals(super.getStaffBlack(),super.getBlackMagician().getEquippedWeapon());
   }
 
   @Test
   public void equipStaffAfterDeadBlackMagHavingKnife(){
-    super.getBlackMagician().equip(super.getKnife());
+    super.getBlackMagician().equip(super.getKnifeBlack());
     super.getBlackMagician().setHealthPoints(0);
-    super.getBlackMagician().equip(super.getStaff());
-    assertNotEquals(super.getStaff(),super.getBlackMagician().getEquippedWeapon());
-    assertEquals(super.getKnife(),super.getBlackMagician().getEquippedWeapon());
+    super.getBlackMagician().equip(super.getStaffBlack());
+    assertNotEquals(super.getStaffBlack(),super.getBlackMagician().getEquippedWeapon());
+    assertEquals(super.getKnifeBlack(),super.getBlackMagician().getEquippedWeapon());
   }
 
   @Test
   public void equipKnifeAfterDeadBlackMagHavingKnife(){
-    super.getBlackMagician().equip(super.getKnife());
+    super.getBlackMagician().equip(super.getKnifeBlack());
     super.getBlackMagician().setHealthPoints(0);
     Knife otherKnife = new Knife("otherKnife",10,8);
     super.getBlackMagician().equip(otherKnife);
     assertNotEquals(otherKnife,super.getBlackMagician().getEquippedWeapon());
-    assertEquals(super.getKnife(),super.getBlackMagician().getEquippedWeapon());
+    assertEquals(super.getKnifeBlack(),super.getBlackMagician().getEquippedWeapon());
   }
 
   @Test
   public void equipKnifeAfterDeadBlackMagNoInitialWeapon(){
     super.getBlackMagician().setHealthPoints(0);
-    super.getBlackMagician().equip(super.getKnife());
-    assertNotEquals(super.getKnife(),super.getBlackMagician().getEquippedWeapon());
+    super.getBlackMagician().equip(super.getKnifeBlack());
+    assertNotEquals(super.getKnifeBlack(),super.getBlackMagician().getEquippedWeapon());
     assertEquals(NullWeapon.getNullWeapon(),super.getBlackMagician().getEquippedWeapon());
   }
 
   @Test
   public void equipStaffAfterDeadBlackMagNoInitialWeapon(){
     super.getBlackMagician().setHealthPoints(0);
-    super.getBlackMagician().equip(super.getStaff());
-    assertNotEquals(super.getStaff(),super.getBlackMagician().getEquippedWeapon());
+    super.getBlackMagician().equip(super.getStaffBlack());
+    assertNotEquals(super.getStaffBlack(),super.getBlackMagician().getEquippedWeapon());
     assertEquals(NullWeapon.getNullWeapon(),super.getBlackMagician().getEquippedWeapon());
   }
 
   @Test
   public void equipAxeAfterDeadEngineerHavingBow(){
     assertEquals(NullWeapon.getNullWeapon(),super.getEngineer().getEquippedWeapon());
-    super.getEngineer().equip(super.getBow());
-    assertEquals(super.getBow(),super.getEngineer().getEquippedWeapon());
+    super.getEngineer().equip(super.getBowEngineer());
+    assertEquals(super.getBowEngineer(),super.getEngineer().getEquippedWeapon());
     super.getEngineer().setHealthPoints(0);
-    super.getEngineer().equip(super.getAxe());
-    assertEquals(super.getBow(),super.getEngineer().getEquippedWeapon());
-    assertNotEquals(super.getAxe(),super.getEngineer().getEquippedWeapon());
+    super.getEngineer().equip(super.getAxeEngineer());
+    assertEquals(super.getBowEngineer(),super.getEngineer().getEquippedWeapon());
+    assertNotEquals(super.getAxeEngineer(),super.getEngineer().getEquippedWeapon());
   }
 
   @Test
   public void equipBowAfterDeadEngineerHavingBow(){
     assertEquals(NullWeapon.getNullWeapon(),super.getEngineer().getEquippedWeapon());
-    super.getEngineer().equip(super.getBow());
-    assertEquals(super.getBow(),super.getEngineer().getEquippedWeapon());
+    super.getEngineer().equip(super.getBowEngineer());
+    assertEquals(super.getBowEngineer(),super.getEngineer().getEquippedWeapon());
     super.getEngineer().setHealthPoints(0);
     Bow otherBow = new Bow("otherBow",10,8);
     super.getEngineer().equip(otherBow);
-    assertEquals(super.getBow(),super.getEngineer().getEquippedWeapon());
+    assertEquals(super.getBowEngineer(),super.getEngineer().getEquippedWeapon());
     assertNotEquals(otherBow,super.getEngineer().getEquippedWeapon());
   }
 
   @Test
   public void equipBowAfterDeadEngineerHavingAxe(){
     assertEquals(NullWeapon.getNullWeapon(),super.getEngineer().getEquippedWeapon());
-    super.getEngineer().equip(super.getAxe());
-    assertEquals(super.getAxe(),super.getEngineer().getEquippedWeapon());
+    super.getEngineer().equip(super.getAxeEngineer());
+    assertEquals(super.getAxeEngineer(),super.getEngineer().getEquippedWeapon());
     super.getEngineer().setHealthPoints(0);
-    super.getEngineer().equip(super.getBow());
-    assertEquals(super.getAxe(),super.getEngineer().getEquippedWeapon());
-    assertNotEquals(super.getBow(),super.getEngineer().getEquippedWeapon());
+    super.getEngineer().equip(super.getBowEngineer());
+    assertEquals(super.getAxeEngineer(),super.getEngineer().getEquippedWeapon());
+    assertNotEquals(super.getBowEngineer(),super.getEngineer().getEquippedWeapon());
   }
 
   @Test
   public void equipAxeAfterDeadEngineerHavingAxe(){
     assertEquals(NullWeapon.getNullWeapon(),super.getEngineer().getEquippedWeapon());
-    super.getEngineer().equip(super.getAxe());
-    assertEquals(super.getAxe(),super.getEngineer().getEquippedWeapon());
+    super.getEngineer().equip(super.getAxeEngineer());
+    assertEquals(super.getAxeEngineer(),super.getEngineer().getEquippedWeapon());
     super.getEngineer().setHealthPoints(0);
     Axe otherAxe = new Axe("otherAxe",10,9);
     super.getEngineer().equip(otherAxe);
-    assertEquals(super.getAxe(),super.getEngineer().getEquippedWeapon());
+    assertEquals(super.getAxeEngineer(),super.getEngineer().getEquippedWeapon());
     assertNotEquals(otherAxe,super.getEngineer().getEquippedWeapon());
   }
 
@@ -378,119 +283,119 @@ public class TestEquipWeapon extends AbstractSetUpTest {
   public void equipAxeAfterDeadEngineerNoInitialWeapon(){
     assertEquals(NullWeapon.getNullWeapon(),super.getEngineer().getEquippedWeapon());
     super.getEngineer().setHealthPoints(0);
-    super.getEngineer().equip(super.getAxe());
+    super.getEngineer().equip(super.getAxeEngineer());
     assertEquals(NullWeapon.getNullWeapon(),super.getEngineer().getEquippedWeapon());
-    assertNotEquals(super.getAxe(),super.getEngineer().getEquippedWeapon());
+    assertNotEquals(super.getAxeEngineer(),super.getEngineer().getEquippedWeapon());
   }
 
   @Test
   public void equipBowAfterDeadEngineerNoInitialWeapon(){
     assertEquals(NullWeapon.getNullWeapon(),super.getEngineer().getEquippedWeapon());
     super.getEngineer().setHealthPoints(0);
-    super.getEngineer().equip(super.getBow());
+    super.getEngineer().equip(super.getBowEngineer());
     assertEquals(NullWeapon.getNullWeapon(),super.getEngineer().getEquippedWeapon());
-    assertNotEquals(super.getBow(),super.getEngineer().getEquippedWeapon());
+    assertNotEquals(super.getBowEngineer(),super.getEngineer().getEquippedWeapon());
   }
 
   @Test
   public void equipAxeToDeadKnightHavingSwordEquipped(){
     assertEquals(NullWeapon.getNullWeapon(),super.getKnight().getEquippedWeapon());
-    super.getKnight().equip(super.getSword());
-    assertEquals(super.getSword(),super.getKnight().getEquippedWeapon());
+    super.getKnight().equip(super.getSwordKnight());
+    assertEquals(super.getSwordKnight(),super.getKnight().getEquippedWeapon());
     super.getKnight().setHealthPoints(0);
-    super.getKnight().equip(super.getAxe());
-    assertEquals(super.getSword(),super.getKnight().getEquippedWeapon());
-    assertNotEquals(super.getAxe(),super.getKnight().getEquippedWeapon());
+    super.getKnight().equip(super.getAxeKnight());
+    assertEquals(super.getSwordKnight(),super.getKnight().getEquippedWeapon());
+    assertNotEquals(super.getAxeKnight(),super.getKnight().getEquippedWeapon());
   }
 
   @Test
   public void equipKnifeToDeadKnightHavingSwordEquipped(){
     assertEquals(NullWeapon.getNullWeapon(),super.getKnight().getEquippedWeapon());
-    super.getKnight().equip(super.getSword());
-    assertEquals(super.getSword(),super.getKnight().getEquippedWeapon());
+    super.getKnight().equip(super.getSwordKnight());
+    assertEquals(super.getSwordKnight(),super.getKnight().getEquippedWeapon());
     super.getKnight().setHealthPoints(0);
-    super.getKnight().equip(super.getKnife());
-    assertEquals(super.getSword(),super.getKnight().getEquippedWeapon());
-    assertNotEquals(super.getKnife(),super.getKnight().getEquippedWeapon());
+    super.getKnight().equip(super.getKnifeKnight());
+    assertEquals(super.getSwordKnight(),super.getKnight().getEquippedWeapon());
+    assertNotEquals(super.getKnifeKnight(),super.getKnight().getEquippedWeapon());
   }
 
   @Test
   public void equipSwordToDeadKnightHavingSwordEquipped(){
     assertEquals(NullWeapon.getNullWeapon(),super.getKnight().getEquippedWeapon());
-    super.getKnight().equip(super.getSword());
-    assertEquals(super.getSword(),super.getKnight().getEquippedWeapon());
+    super.getKnight().equip(super.getSwordKnight());
+    assertEquals(super.getSwordKnight(),super.getKnight().getEquippedWeapon());
     super.getKnight().setHealthPoints(0);
     Sword otherSword = new Sword("otherNewSword",10,5);
     super.getKnight().equip(otherSword);
-    assertEquals(super.getSword(),super.getKnight().getEquippedWeapon());
+    assertEquals(super.getSwordKnight(),super.getKnight().getEquippedWeapon());
     assertNotEquals(otherSword,super.getKnight().getEquippedWeapon());
   }
 
   @Test
   public void equipSwordToDeadKnightHavingAxeEquipped(){
     assertEquals(NullWeapon.getNullWeapon(),super.getKnight().getEquippedWeapon());
-    super.getKnight().equip(super.getAxe());
-    assertEquals(super.getAxe(),super.getKnight().getEquippedWeapon());
+    super.getKnight().equip(super.getAxeKnight());
+    assertEquals(super.getAxeKnight(),super.getKnight().getEquippedWeapon());
     super.getKnight().setHealthPoints(0);
-    super.getKnight().equip(super.getSword());
-    assertEquals(super.getAxe(),super.getKnight().getEquippedWeapon());
-    assertNotEquals(super.getSword(),super.getKnight().getEquippedWeapon());
+    super.getKnight().equip(super.getSwordKnight());
+    assertEquals(super.getAxeKnight(),super.getKnight().getEquippedWeapon());
+    assertNotEquals(super.getSwordKnight(),super.getKnight().getEquippedWeapon());
   }
 
   @Test
   public void equipKnifeToDeadKnightHavingAxeEquipped(){
     assertEquals(NullWeapon.getNullWeapon(),super.getKnight().getEquippedWeapon());
-    super.getKnight().equip(super.getAxe());
-    assertEquals(super.getAxe(),super.getKnight().getEquippedWeapon());
+    super.getKnight().equip(super.getAxeKnight());
+    assertEquals(super.getAxeKnight(),super.getKnight().getEquippedWeapon());
     super.getKnight().setHealthPoints(0);
-    super.getKnight().equip(super.getKnife());
-    assertEquals(super.getAxe(),super.getKnight().getEquippedWeapon());
-    assertNotEquals(super.getKnife(),super.getKnight().getEquippedWeapon());
+    super.getKnight().equip(super.getKnifeKnight());
+    assertEquals(super.getAxeKnight(),super.getKnight().getEquippedWeapon());
+    assertNotEquals(super.getKnifeKnight(),super.getKnight().getEquippedWeapon());
   }
 
   @Test
   public void equipAxeToDeadKnightHavingAxeEquipped(){
     assertEquals(NullWeapon.getNullWeapon(),super.getKnight().getEquippedWeapon());
-    super.getKnight().equip(super.getAxe());
-    assertEquals(super.getAxe(),super.getKnight().getEquippedWeapon());
+    super.getKnight().equip(super.getAxeKnight());
+    assertEquals(super.getAxeKnight(),super.getKnight().getEquippedWeapon());
     super.getKnight().setHealthPoints(0);
     Axe otherAxe = new Axe("otherNewAxe",10,5);
     super.getKnight().equip(otherAxe);
-    assertEquals(super.getAxe(),super.getKnight().getEquippedWeapon());
+    assertEquals(super.getAxeKnight(),super.getKnight().getEquippedWeapon());
     assertNotEquals(otherAxe,super.getKnight().getEquippedWeapon());
   }
 
   @Test
   public void equipAxeToDeadKnightHavingKnifeEquipped(){
     assertEquals(NullWeapon.getNullWeapon(),super.getKnight().getEquippedWeapon());
-    super.getKnight().equip(super.getKnife());
-    assertEquals(super.getKnife(),super.getKnight().getEquippedWeapon());
+    super.getKnight().equip(super.getKnifeKnight());
+    assertEquals(super.getKnifeKnight(),super.getKnight().getEquippedWeapon());
     super.getKnight().setHealthPoints(0);
-    super.getKnight().equip(super.getAxe());
-    assertEquals(super.getKnife(),super.getKnight().getEquippedWeapon());
-    assertNotEquals(super.getAxe(),super.getKnight().getEquippedWeapon());
+    super.getKnight().equip(super.getAxeKnight());
+    assertEquals(super.getKnifeKnight(),super.getKnight().getEquippedWeapon());
+    assertNotEquals(super.getAxeKnight(),super.getKnight().getEquippedWeapon());
   }
 
   @Test
   public void equipSwordToDeadKnightHavingKnifeEquipped(){
     assertEquals(NullWeapon.getNullWeapon(),super.getKnight().getEquippedWeapon());
-    super.getKnight().equip(super.getKnife());
-    assertEquals(super.getKnife(),super.getKnight().getEquippedWeapon());
+    super.getKnight().equip(super.getKnifeKnight());
+    assertEquals(super.getKnifeKnight(),super.getKnight().getEquippedWeapon());
     super.getKnight().setHealthPoints(0);
-    super.getKnight().equip(super.getSword());
-    assertEquals(super.getKnife(),super.getKnight().getEquippedWeapon());
-    assertNotEquals(super.getSword(),super.getKnight().getEquippedWeapon());
+    super.getKnight().equip(super.getSwordKnight());
+    assertEquals(super.getKnifeKnight(),super.getKnight().getEquippedWeapon());
+    assertNotEquals(super.getSwordKnight(),super.getKnight().getEquippedWeapon());
   }
 
   @Test
   public void equipKnifeToDeadKnightHavingKnifeEquipped(){
     assertEquals(NullWeapon.getNullWeapon(),super.getKnight().getEquippedWeapon());
-    super.getKnight().equip(super.getKnife());
-    assertEquals(super.getKnife(),super.getKnight().getEquippedWeapon());
+    super.getKnight().equip(super.getKnifeKnight());
+    assertEquals(super.getKnifeKnight(),super.getKnight().getEquippedWeapon());
     super.getKnight().setHealthPoints(0);
     Knife otherKnife = new Knife("otherNewKnife",10,8);
     super.getKnight().equip(otherKnife);
-    assertEquals(super.getKnife(),super.getKnight().getEquippedWeapon());
+    assertEquals(super.getKnifeKnight(),super.getKnight().getEquippedWeapon());
     assertNotEquals(otherKnife,super.getKnight().getEquippedWeapon());
   }
 
@@ -498,128 +403,128 @@ public class TestEquipWeapon extends AbstractSetUpTest {
   public void equipAxeToDeadKnightNoWeaponEquipped(){
     assertEquals(NullWeapon.getNullWeapon(),super.getKnight().getEquippedWeapon());
     super.getKnight().setHealthPoints(0);
-    super.getKnight().equip(super.getAxe());
+    super.getKnight().equip(super.getAxeKnight());
     assertEquals(NullWeapon.getNullWeapon(),super.getKnight().getEquippedWeapon());
-    assertNotEquals(super.getAxe(),super.getKnight().getEquippedWeapon());
+    assertNotEquals(super.getAxeKnight(),super.getKnight().getEquippedWeapon());
   }
 
   @Test
   public void equipKnifeToDeadKnightNoWeaponEquipped(){
     assertEquals(NullWeapon.getNullWeapon(),super.getKnight().getEquippedWeapon());
     super.getKnight().setHealthPoints(0);
-    super.getKnight().equip(super.getKnife());
+    super.getKnight().equip(super.getKnifeKnight());
     assertEquals(NullWeapon.getNullWeapon(),super.getKnight().getEquippedWeapon());
-    assertNotEquals(super.getKnife(),super.getKnight().getEquippedWeapon());
+    assertNotEquals(super.getKnifeKnight(),super.getKnight().getEquippedWeapon());
   }
 
   @Test
   public void equipSwordToDeadKnightNoWeaponEquipped(){
     assertEquals(NullWeapon.getNullWeapon(),super.getKnight().getEquippedWeapon());
     super.getKnight().setHealthPoints(0);
-    super.getKnight().equip(super.getSword());
+    super.getKnight().equip(super.getSwordKnight());
     assertEquals(NullWeapon.getNullWeapon(),super.getKnight().getEquippedWeapon());
-    assertNotEquals(super.getSword(),super.getKnight().getEquippedWeapon());
+    assertNotEquals(super.getSwordKnight(),super.getKnight().getEquippedWeapon());
   }
 
   @Test
   public void equipBowToDeadThiefHavingSwordEquipped(){
     assertEquals(NullWeapon.getNullWeapon(),super.getThief().getEquippedWeapon());
-    super.getThief().equip(super.getSword());
-    assertEquals(super.getSword(),super.getThief().getEquippedWeapon());
+    super.getThief().equip(super.getSwordThief());
+    assertEquals(super.getSwordThief(),super.getThief().getEquippedWeapon());
     super.getThief().setHealthPoints(0);
-    super.getThief().equip(super.getBow());
-    assertEquals(super.getSword(),super.getThief().getEquippedWeapon());
-    assertNotEquals(super.getBow(),super.getThief().getEquippedWeapon());
+    super.getThief().equip(super.getBowThief());
+    assertEquals(super.getSwordThief(),super.getThief().getEquippedWeapon());
+    assertNotEquals(super.getBowThief(),super.getThief().getEquippedWeapon());
   }
 
   @Test
   public void equipStaffToDeadThiefHavingSwordEquipped(){
     assertEquals(NullWeapon.getNullWeapon(),super.getThief().getEquippedWeapon());
-    super.getThief().equip(super.getSword());
-    assertEquals(super.getSword(),super.getThief().getEquippedWeapon());
+    super.getThief().equip(super.getSwordThief());
+    assertEquals(super.getSwordThief(),super.getThief().getEquippedWeapon());
     super.getThief().setHealthPoints(0);
-    super.getThief().equip(super.getStaff());
-    assertEquals(super.getSword(),super.getThief().getEquippedWeapon());
-    assertNotEquals(super.getStaff(),super.getThief().getEquippedWeapon());
+    super.getThief().equip(super.getStaffThief());
+    assertEquals(super.getSwordThief(),super.getThief().getEquippedWeapon());
+    assertNotEquals(super.getStaffThief(),super.getThief().getEquippedWeapon());
   }
 
   @Test
   public void equipSwordToDeadThiefHavingSwordEquipped(){
     assertEquals(NullWeapon.getNullWeapon(),super.getThief().getEquippedWeapon());
-    super.getThief().equip(super.getSword());
-    assertEquals(super.getSword(),super.getThief().getEquippedWeapon());
+    super.getThief().equip(super.getSwordThief());
+    assertEquals(super.getSwordThief(),super.getThief().getEquippedWeapon());
     super.getThief().setHealthPoints(0);
     Sword otherSword = new Sword("otherNewSword",10,8);
     super.getThief().equip(otherSword);
-    assertEquals(super.getSword(),super.getThief().getEquippedWeapon());
+    assertEquals(super.getSwordThief(),super.getThief().getEquippedWeapon());
     assertNotEquals(otherSword,super.getThief().getEquippedWeapon());
   }
 
   @Test
   public void equipStaffToDeadThiefHavingBowEquipped(){
     assertEquals(NullWeapon.getNullWeapon(),super.getThief().getEquippedWeapon());
-    super.getThief().equip(super.getBow());
-    assertEquals(super.getBow(),super.getThief().getEquippedWeapon());
+    super.getThief().equip(super.getBowThief());
+    assertEquals(super.getBowThief(),super.getThief().getEquippedWeapon());
     super.getThief().setHealthPoints(0);
-    super.getThief().equip(super.getStaff());
-    assertEquals(super.getBow(),super.getThief().getEquippedWeapon());
-    assertNotEquals(super.getStaff(),super.getThief().getEquippedWeapon());
+    super.getThief().equip(super.getStaffThief());
+    assertEquals(super.getBowThief(),super.getThief().getEquippedWeapon());
+    assertNotEquals(super.getStaffThief(),super.getThief().getEquippedWeapon());
   }
 
   @Test
   public void equipSwordToDeadThiefHavingBowEquipped(){
     assertEquals(NullWeapon.getNullWeapon(),super.getThief().getEquippedWeapon());
-    super.getThief().equip(super.getBow());
-    assertEquals(super.getBow(),super.getThief().getEquippedWeapon());
+    super.getThief().equip(super.getBowThief());
+    assertEquals(super.getBowThief(),super.getThief().getEquippedWeapon());
     super.getThief().setHealthPoints(0);
-    super.getThief().equip(super.getSword());
-    assertEquals(super.getBow(),super.getThief().getEquippedWeapon());
-    assertNotEquals(super.getSword(),super.getThief().getEquippedWeapon());
+    super.getThief().equip(super.getSwordThief());
+    assertEquals(super.getBowThief(),super.getThief().getEquippedWeapon());
+    assertNotEquals(super.getSwordThief(),super.getThief().getEquippedWeapon());
   }
 
   @Test
   public void equipBowToDeadThiefHavingBowEquipped(){
     assertEquals(NullWeapon.getNullWeapon(),super.getThief().getEquippedWeapon());
-    super.getThief().equip(super.getBow());
-    assertEquals(super.getBow(),super.getThief().getEquippedWeapon());
+    super.getThief().equip(super.getBowThief());
+    assertEquals(super.getBowThief(),super.getThief().getEquippedWeapon());
     super.getThief().setHealthPoints(0);
     Bow otherBow = new Bow("newOtherBow",10,5);
     super.getThief().equip(otherBow);
-    assertEquals(super.getBow(),super.getThief().getEquippedWeapon());
+    assertEquals(super.getBowThief(),super.getThief().getEquippedWeapon());
     assertNotEquals(otherBow,super.getThief().getEquippedWeapon());
   }
 
   @Test
   public void equipBowToDeadThiefHavingStaffEquipped(){
     assertEquals(NullWeapon.getNullWeapon(),super.getThief().getEquippedWeapon());
-    super.getThief().equip(super.getStaff());
-    assertEquals(super.getStaff(),super.getThief().getEquippedWeapon());
+    super.getThief().equip(super.getStaffThief());
+    assertEquals(super.getStaffThief(),super.getThief().getEquippedWeapon());
     super.getThief().setHealthPoints(0);
-    super.getThief().equip(super.getBow());
-    assertEquals(super.getStaff(),super.getThief().getEquippedWeapon());
-    assertNotEquals(super.getBow(),super.getThief().getEquippedWeapon());
+    super.getThief().equip(super.getBowThief());
+    assertEquals(super.getStaffThief(),super.getThief().getEquippedWeapon());
+    assertNotEquals(super.getBowThief(),super.getThief().getEquippedWeapon());
   }
 
   @Test
   public void equipSwordToDeadThiefHavingStaffEquipped(){
     assertEquals(NullWeapon.getNullWeapon(),super.getThief().getEquippedWeapon());
-    super.getThief().equip(super.getStaff());
-    assertEquals(super.getStaff(),super.getThief().getEquippedWeapon());
+    super.getThief().equip(super.getStaffThief());
+    assertEquals(super.getStaffThief(),super.getThief().getEquippedWeapon());
     super.getThief().setHealthPoints(0);
-    super.getThief().equip(super.getSword());
-    assertEquals(super.getStaff(),super.getThief().getEquippedWeapon());
-    assertNotEquals(super.getSword(),super.getThief().getEquippedWeapon());
+    super.getThief().equip(super.getSwordThief());
+    assertEquals(super.getStaffThief(),super.getThief().getEquippedWeapon());
+    assertNotEquals(super.getSwordThief(),super.getThief().getEquippedWeapon());
   }
 
   @Test
   public void equipStaffToDeadThiefHavingStaffEquipped(){
     assertEquals(NullWeapon.getNullWeapon(),super.getThief().getEquippedWeapon());
-    super.getThief().equip(super.getStaff());
-    assertEquals(super.getStaff(),super.getThief().getEquippedWeapon());
+    super.getThief().equip(super.getStaffThief());
+    assertEquals(super.getStaffThief(),super.getThief().getEquippedWeapon());
     super.getThief().setHealthPoints(0);
     Staff otherStaff = new Staff("otherNewStaff", 10,8);
     super.getThief().equip(otherStaff);
-    assertEquals(super.getStaff(),super.getThief().getEquippedWeapon());
+    assertEquals(super.getStaffThief(),super.getThief().getEquippedWeapon());
     assertNotEquals(otherStaff,super.getThief().getEquippedWeapon());
   }
 
@@ -627,36 +532,36 @@ public class TestEquipWeapon extends AbstractSetUpTest {
   public void equipBowToDeadThiefNoInitialWeapon(){
     assertEquals(NullWeapon.getNullWeapon(),super.getThief().getEquippedWeapon());
     super.getThief().setHealthPoints(0);
-    super.getThief().equip(super.getBow());
+    super.getThief().equip(super.getBowThief());
     assertEquals(NullWeapon.getNullWeapon(),super.getThief().getEquippedWeapon());
-    assertNotEquals(super.getBow(),super.getThief().getEquippedWeapon());
+    assertNotEquals(super.getBowThief(),super.getThief().getEquippedWeapon());
   }
 
   @Test
   public void equipStaffToDeadThiefNoInitialWeapon(){
     assertEquals(NullWeapon.getNullWeapon(),super.getThief().getEquippedWeapon());
     super.getThief().setHealthPoints(0);
-    super.getThief().equip(super.getStaff());
+    super.getThief().equip(super.getStaffThief());
     assertEquals(NullWeapon.getNullWeapon(),super.getThief().getEquippedWeapon());
-    assertNotEquals(super.getStaff(),super.getThief().getEquippedWeapon());
+    assertNotEquals(super.getStaffThief(),super.getThief().getEquippedWeapon());
   }
 
   @Test
   public void equipSwordToDeadThiefNoInitialWeapon(){
     assertEquals(NullWeapon.getNullWeapon(),super.getThief().getEquippedWeapon());
     super.getThief().setHealthPoints(0);
-    super.getThief().equip(super.getSword());
+    super.getThief().equip(super.getSwordThief());
     assertEquals(NullWeapon.getNullWeapon(),super.getThief().getEquippedWeapon());
-    assertNotEquals(super.getSword(),super.getThief().getEquippedWeapon());
+    assertNotEquals(super.getSwordThief(),super.getThief().getEquippedWeapon());
   }
 
   @Test
   public void equipStaffToDeadWhiteMagHavingStaff(){
-    super.getWhiteMagician().equip(super.getStaff());
+    super.getWhiteMagician().equip(super.getStaffWhite());
     Staff otherStaff = new Staff("otherStaff",10,3);
     super.getWhiteMagician().setHealthPoints(0);
     super.getWhiteMagician().equip(otherStaff);
-    assertEquals(super.getStaff(),super.getWhiteMagician().getEquippedWeapon());
+    assertEquals(super.getStaffWhite(),super.getWhiteMagician().getEquippedWeapon());
     assertNotEquals(otherStaff,super.getWhiteMagician().getEquippedWeapon());
   }
 
@@ -664,8 +569,8 @@ public class TestEquipWeapon extends AbstractSetUpTest {
   public void equipStaffToDeadWhiteMagicianNoInitialWeapon(){
     assertEquals(NullWeapon.getNullWeapon(),super.getWhiteMagician().getEquippedWeapon());
     super.getWhiteMagician().setHealthPoints(0);
-    super.getWhiteMagician().equip(super.getStaff());
-    assertNotEquals(super.getStaff(),super.getWhiteMagician().getEquippedWeapon());
+    super.getWhiteMagician().equip(super.getStaffWhite());
+    assertNotEquals(super.getStaffWhite(),super.getWhiteMagician().getEquippedWeapon());
     assertEquals(NullWeapon.getNullWeapon(),super.getWhiteMagician().getEquippedWeapon());
   }
 }

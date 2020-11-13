@@ -1,5 +1,7 @@
 package com.github.cc3002.finalreality.model.weapon;
 
+import com.github.cc3002.finalreality.model.character.ICharacter;
+
 import java.util.Objects;
 
 /**
@@ -90,4 +92,5 @@ public abstract class  AbstractWeapon implements IWeapon {
   public int hashCode() {
     return Objects.hash(getName(), getDamage(), getWeight(), getType());
   }
+
 }
