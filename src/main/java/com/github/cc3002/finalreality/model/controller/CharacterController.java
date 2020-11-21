@@ -3,9 +3,7 @@ package com.github.cc3002.finalreality.model.controller;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.IUnit;
 import com.github.cc3002.finalreality.model.character.player.*;
-import com.github.cc3002.finalreality.model.weapon.IWeapon;
-import com.github.cc3002.finalreality.model.weapon.IWeaponBlack;
-import com.github.cc3002.finalreality.model.weapon.IWeaponEngineer;
+import com.github.cc3002.finalreality.model.weapon.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -66,5 +64,13 @@ public class CharacterController {
 
   public IWeaponEngineer getEngineerWeapon(String name) {
     return ((IEngineerAllowedWeapons) characters.get(name)).getEquippedWeapon();
+  }
+
+  public IWeaponThief getThiefWeapon(String name) {
+    return ((IThiefAllowedWeapons) characters.get(name)).getEquippedWeapon();
+  }
+
+  public IWeaponWhite getWhiteWeapon(String name) {
+    return ((IWhiteAllowedWeapons) characters.get(name)).getEquippedWeapon();
   }
 }

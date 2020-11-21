@@ -11,11 +11,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class EngineerDataControllerTest extends AbstractSetUpTest {
   private Engineer engineer;
 
-  CharacterController characterController;
+  private CharacterController characterController;
 
   @BeforeEach
   public void setUp(){
-    characterController = new CharacterController();
+    super.setUp();
+    characterController = super.getCharacterController();
     engineer = characterController.createEngineer(super.getEngineerName(),
             super.getTurnsQueue(),
             super.getHealthPoints(),

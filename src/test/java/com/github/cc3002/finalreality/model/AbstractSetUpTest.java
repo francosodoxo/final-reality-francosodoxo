@@ -3,10 +3,12 @@ package com.github.cc3002.finalreality.model;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.IUnit;
 import com.github.cc3002.finalreality.model.character.player.*;
+import com.github.cc3002.finalreality.model.controller.CharacterController;
 import com.github.cc3002.finalreality.model.weapon.*;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class AbstractSetUpTest {
   private BlackMagician blackMagician;
@@ -21,7 +23,6 @@ public class AbstractSetUpTest {
   private IWeaponEngineer bowEngineer;
   private IWeaponThief bowThief;
   private IWeaponKnight knifeKnight;
-  private IWeaponThief knifeThief;
   private IWeaponBlack knifeBlack;
   private IWeaponThief staffThief;
   private IWeaponBlack staffBlack;
@@ -47,6 +48,53 @@ public class AbstractSetUpTest {
   private int WEIGHT;
 
   private BlockingQueue<IUnit> turnsQueue;
+
+  private CharacterController characterController;
+
+
+
+  @BeforeEach
+  public void setUp(){
+    BLACK_MAGICIAN_NAME = "Javier";
+    WHITE_MAGICIAN_NAME = "Rodrigo";
+    ENGINEER_NAME = "Malu";
+    KNIGHT_NAME = "Quijote";
+    THIEF_NAME = "Andrea";
+
+    AXE_NAME = "Basic Axe";
+    BOW_NAME = "Basic Bow";
+    KNIFE_NAME = "Basic knife";
+    STAFF_NAME = "Basic Staff";
+    SWORD_NAME = "Basic Sword";
+
+    HEALTH_POINTS = 10;
+    DEFENSE_POINTS = 4;
+    DAMAGE = 5;
+    WEIGHT = 2;
+
+    turnsQueue = new LinkedBlockingQueue<>();
+
+    blackMagician = new BlackMagician(BLACK_MAGICIAN_NAME, turnsQueue, HEALTH_POINTS, DEFENSE_POINTS);
+    whiteMagician = new WhiteMagician(WHITE_MAGICIAN_NAME, turnsQueue, HEALTH_POINTS, DEFENSE_POINTS);
+    engineer = new Engineer(ENGINEER_NAME, turnsQueue, HEALTH_POINTS, DEFENSE_POINTS);
+    knight = new Knight(KNIGHT_NAME, turnsQueue, HEALTH_POINTS, DEFENSE_POINTS);
+    thief = new Thief(THIEF_NAME, turnsQueue, HEALTH_POINTS, DEFENSE_POINTS);
+    enemy = new Enemy("enemy1",10,getTurnsQueue(),10,7,6);
+
+    axeKnight = new Axe(AXE_NAME, DAMAGE, WEIGHT);
+    axeEngineer = new Axe(AXE_NAME, DAMAGE, WEIGHT);
+    bowEngineer = new Bow(BOW_NAME, DAMAGE, WEIGHT);
+    bowThief = new Bow(BOW_NAME, DAMAGE, WEIGHT);
+    knifeKnight = new Knife(KNIFE_NAME, DAMAGE, WEIGHT);
+    knifeBlack = new Knife(KNIFE_NAME, DAMAGE, WEIGHT);
+    staffThief = new Staff(STAFF_NAME, DAMAGE, WEIGHT);
+    staffBlack = new Staff(STAFF_NAME, DAMAGE, WEIGHT);
+    staffWhite = new Staff(STAFF_NAME, DAMAGE, WEIGHT);
+    swordKnight = new Sword(SWORD_NAME, DAMAGE, WEIGHT);
+    swordThief = new Sword(SWORD_NAME, DAMAGE, WEIGHT);
+
+    characterController = new CharacterController();
+  }
 
   public String getBlackName() {
     return BLACK_MAGICIAN_NAME;
@@ -146,44 +194,7 @@ public class AbstractSetUpTest {
     return WEIGHT;
   }
 
-  @BeforeEach
-  public void setUp(){
-    BLACK_MAGICIAN_NAME = "Javier";
-    WHITE_MAGICIAN_NAME = "Rodrigo";
-    ENGINEER_NAME = "Malu";
-    KNIGHT_NAME = "Quijote";
-    THIEF_NAME = "Andrea";
 
-    AXE_NAME = "Basic Axe";
-    BOW_NAME = "Basic Bow";
-    KNIFE_NAME = "Basic knife";
-    STAFF_NAME = "Basic Staff";
-    SWORD_NAME = "Basic Sword";
-
-    HEALTH_POINTS = 10;
-    DEFENSE_POINTS = 4;
-    DAMAGE = 5;
-    WEIGHT = 2;
-
-    blackMagician = new BlackMagician(BLACK_MAGICIAN_NAME, turnsQueue, HEALTH_POINTS, DEFENSE_POINTS);
-    whiteMagician = new WhiteMagician(WHITE_MAGICIAN_NAME, turnsQueue, HEALTH_POINTS, DEFENSE_POINTS);
-    engineer = new Engineer(ENGINEER_NAME, turnsQueue, HEALTH_POINTS, DEFENSE_POINTS);
-    knight = new Knight(KNIGHT_NAME, turnsQueue, HEALTH_POINTS, DEFENSE_POINTS);
-    thief = new Thief(THIEF_NAME, turnsQueue, HEALTH_POINTS, DEFENSE_POINTS);
-    enemy = new Enemy("enemy1",10,getTurnsQueue(),10,7,6);
-
-    axeKnight = new Axe(AXE_NAME, DAMAGE, WEIGHT);
-    axeEngineer = new Axe(AXE_NAME, DAMAGE, WEIGHT);
-    bowEngineer = new Bow(BOW_NAME, DAMAGE, WEIGHT);
-    bowThief = new Bow(BOW_NAME, DAMAGE, WEIGHT);
-    knifeKnight = new Knife(KNIFE_NAME, DAMAGE, WEIGHT);
-    knifeBlack = new Knife(KNIFE_NAME, DAMAGE, WEIGHT);
-    staffThief = new Staff(STAFF_NAME, DAMAGE, WEIGHT);
-    staffBlack = new Staff(STAFF_NAME, DAMAGE, WEIGHT);
-    staffWhite = new Staff(STAFF_NAME, DAMAGE, WEIGHT);
-    swordKnight = new Sword(SWORD_NAME, DAMAGE, WEIGHT);
-    swordThief = new Sword(SWORD_NAME, DAMAGE, WEIGHT);
-  }
 
   public BlackMagician getBlackMagician(){
     return blackMagician;
@@ -248,6 +259,10 @@ public class AbstractSetUpTest {
   }
   public IWeaponThief getSwordThief(){
     return swordThief;
+  }
+
+  public CharacterController getCharacterController() {
+    return characterController;
   }
 
   public void setHealthPoints(int HEALTH_POINTS) {

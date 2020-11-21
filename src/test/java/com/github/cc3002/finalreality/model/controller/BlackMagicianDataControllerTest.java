@@ -16,10 +16,12 @@ public class BlackMagicianDataControllerTest extends AbstractSetUpTest {
 
   private BlackMagician blackMagician;
 
-  CharacterController characterController;
+  private CharacterController characterController;
+
   @BeforeEach
   public void setUp(){
-    characterController = new CharacterController();
+    super.setUp();
+    characterController = super.getCharacterController();
     blackMagician = characterController.createBlack(super.getBlackName(),
             super.getTurnsQueue(),
             super.getHealthPoints(),
@@ -50,4 +52,5 @@ public class BlackMagicianDataControllerTest extends AbstractSetUpTest {
     IWeaponBlack weapon = characterController.getBlackWeapon(super.getBlackName());
     assertEquals(super.getKnifeBlack(),weapon);
   }
+
 }

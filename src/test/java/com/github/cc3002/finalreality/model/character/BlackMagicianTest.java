@@ -57,7 +57,7 @@ public class BlackMagicianTest extends AbstractCharacterTest {
     blackMagician1.equip(super.getTestWeaponBlack());
     BlackMagician blackMagician2 = new BlackMagician("black1",turns,super.getHealthPoints(),2);
     blackMagician2.equip(super.getTestWeaponBlack());
-    assertEquals(blackMagician1,blackMagician2);
+    assertNotEquals(blackMagician1,blackMagician2);
   }
   @Test
   public void carryWeapon() {

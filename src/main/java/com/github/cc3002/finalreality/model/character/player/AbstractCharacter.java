@@ -18,7 +18,6 @@ import java.util.concurrent.TimeUnit;
  * Class that manages the player's characters
  * */
 public abstract class AbstractCharacter extends AbstractUnit implements ICharacter, IUnit {
-  private int defense;
   private UnitClass unitClass;
 
   /**
@@ -43,20 +42,7 @@ public abstract class AbstractCharacter extends AbstractUnit implements ICharact
     super(turnsQueue,name,healthPoints,unitClass,defense);
   }
 
-  /**
-   * Get the Character defense points
-   * */
-  public int getDefense(){
-    return defense;
-  }
 
-  /**
-   * Set this character defense
-   * */
-  @Override
-  public void setDefense(int newDefense){
-    defense = newDefense;
-  }
 
 
   /**
@@ -74,7 +60,7 @@ public abstract class AbstractCharacter extends AbstractUnit implements ICharact
    * */
   @Override
   public int hashCode(){
-    return Objects.hash(defense);
+    return Objects.hash(super.getDefense());
   }
 
   /**
