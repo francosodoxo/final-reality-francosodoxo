@@ -48,6 +48,104 @@ public class AbstractSetUpTest {
 
   private BlockingQueue<IUnit> turnsQueue;
 
+  public String getBlackName() {
+    return BLACK_MAGICIAN_NAME;
+  }
+
+  public void setBlackMagicianName(String BLACK_MAGICIAN_NAME) {
+    this.BLACK_MAGICIAN_NAME = BLACK_MAGICIAN_NAME;
+  }
+
+  public String getWhiteMagicianName() {
+    return WHITE_MAGICIAN_NAME;
+  }
+
+  public void setWhiteMagicianName(String WHITE_MAGICIAN_NAME) {
+    this.WHITE_MAGICIAN_NAME = WHITE_MAGICIAN_NAME;
+  }
+
+  public String getEngineerName() {
+    return ENGINEER_NAME;
+  }
+
+  public void setEngineerName(String ENGINEER_NAME) {
+    this.ENGINEER_NAME = ENGINEER_NAME;
+  }
+
+  public String getKnightName() {
+    return KNIGHT_NAME;
+  }
+
+  public void setKnightName(String KNIGHT_NAME) {
+    this.KNIGHT_NAME = KNIGHT_NAME;
+  }
+
+  public String getThiefName() {
+    return THIEF_NAME;
+  }
+
+  public void setThiefName(String THIEF_NAME) {
+    this.THIEF_NAME = THIEF_NAME;
+  }
+
+  public String getAxeName() {
+    return AXE_NAME;
+  }
+
+  public void setAxeName(String AXE_NAME) {
+    this.AXE_NAME = AXE_NAME;
+  }
+
+  public String getBowName() {
+    return BOW_NAME;
+  }
+
+  public void setBowName(String BOW_NAME) {
+    this.BOW_NAME = BOW_NAME;
+  }
+
+  public String getKnifeName() {
+    return KNIFE_NAME;
+  }
+
+  public void setKnifeName(String KNIFE_NAME) {
+    this.KNIFE_NAME = KNIFE_NAME;
+  }
+
+  public String getStaffName() {
+    return STAFF_NAME;
+  }
+
+  public void setStaffName(String STAFF_NAME) {
+    this.STAFF_NAME = STAFF_NAME;
+  }
+
+  public String getSwordName() {
+    return SWORD_NAME;
+  }
+
+  public void setSwordName(String SWORD_NAME) {
+    this.SWORD_NAME = SWORD_NAME;
+  }
+
+  public int getHealthPoints() {
+    return HEALTH_POINTS;
+  }
+
+  public int getDefensePoints() {
+    return DEFENSE_POINTS;
+  }
+
+
+  public int getDamage() {
+    return DAMAGE;
+  }
+
+
+  public int getWeight() {
+    return WEIGHT;
+  }
+
   @BeforeEach
   public void setUp(){
     BLACK_MAGICIAN_NAME = "Javier";

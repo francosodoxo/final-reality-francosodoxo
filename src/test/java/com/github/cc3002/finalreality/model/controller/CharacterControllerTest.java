@@ -55,8 +55,6 @@ public class CharacterControllerTest {
     thief = new Thief(THIEF_NAME, turns, HEALTH_POINTS,DEFENSE);
     whiteMagician = new WhiteMagician(WHITE_NAME, turns,HEALTH_POINTS,DEFENSE);
 
-
-
     characterController = new CharacterController();
   }
 
@@ -89,4 +87,5 @@ public class CharacterControllerTest {
     WhiteMagician newWhite = characterController.createWhite(WHITE_NAME,turns,HEALTH_POINTS,DEFENSE);
     assertEquals(whiteMagician,newWhite);
   }
+
 }

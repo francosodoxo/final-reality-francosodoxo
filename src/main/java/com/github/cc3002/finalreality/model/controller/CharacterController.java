@@ -1,51 +1,70 @@
 package com.github.cc3002.finalreality.model.controller;
 
+import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.IUnit;
 import com.github.cc3002.finalreality.model.character.player.*;
+import com.github.cc3002.finalreality.model.weapon.IWeapon;
+import com.github.cc3002.finalreality.model.weapon.IWeaponBlack;
+import com.github.cc3002.finalreality.model.weapon.IWeaponEngineer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.BlockingQueue;
 
 public class CharacterController {
-  ArrayList<BlackMagician> blackMagicians;
-  ArrayList<Engineer> engineers;
-  ArrayList<Knight> knights;
-  ArrayList<Thief> thieves;
-  ArrayList<WhiteMagician> whiteMagicians;
+  HashMap<String, ICharacter> characters;
+
   public CharacterController(){
-    blackMagicians = new ArrayList<BlackMagician>();
-    engineers = new ArrayList<Engineer>();
-    knights = new ArrayList<Knight>();
-    thieves = new ArrayList<Thief>();
-    whiteMagicians = new ArrayList<WhiteMagician>();
+    characters = new HashMap<String,ICharacter>();
+
   }
   public BlackMagician createBlack(String name, BlockingQueue<IUnit> turns, int healthPoints, int defense) {
     BlackMagician blackMagician = new BlackMagician(name,turns,healthPoints,defense);
-    blackMagicians.add(blackMagician);
+    characters.put(name,blackMagician);
     return blackMagician;
   }
 
   public Engineer createEngineer(String name, BlockingQueue<IUnit> turns, int healthPoints, int defense) {
     Engineer engineer = new Engineer(name,turns,healthPoints,defense);
-    engineers.add(engineer);
+    characters.put(name,engineer);
     return engineer;
   }
 
   public Knight createKnight(String name, BlockingQueue<IUnit> turns, int healthPoints, int defense) {
     Knight knight = new Knight(name,turns,healthPoints,defense);
-    knights.add(knight);
+    characters.put(name,knight);
     return knight;
   }
 
   public Thief createThief(String name, BlockingQueue<IUnit> turns, int healthPoints, int defense) {
     Thief thief = new Thief(name,turns,healthPoints,defense);
-    thieves.add(thief);
+    characters.put(name,thief);
     return thief;
   }
 
   public WhiteMagician createWhite(String name, BlockingQueue<IUnit> turns, int healthPoints, int defense) {
     WhiteMagician whiteMagician = new WhiteMagician(name,turns,healthPoints,defense);
-    whiteMagicians.add(whiteMagician);
+    characters.put(name,whiteMagician);
     return whiteMagician;
+  }
+
+  public String getName(IUnit unit) {
+    return unit.getName();
+  }
+
+  public int getHealthPoints(String name) {
+    return ((IUnit) characters.get(name)).getHealthPoints();
+  }
+
+  public int getDefense(String name) {
+    return characters.get(name).getDefense();
+  }
+
+  public IWeaponBlack getBlackWeapon(String name) {
+    return ((IBlackAllowedWeapons) characters.get(name)).getEquippedWeapon();
+  }
+
+  public IWeaponEngineer getEngineerWeapon(String name) {
+    return ((IEngineerAllowedWeapons) characters.get(name)).getEquippedWeapon();
   }
 }
