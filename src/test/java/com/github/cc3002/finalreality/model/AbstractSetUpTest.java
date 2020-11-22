@@ -3,8 +3,7 @@ package com.github.cc3002.finalreality.model;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.IUnit;
 import com.github.cc3002.finalreality.model.character.player.*;
-import com.github.cc3002.finalreality.model.controller.CharacterController;
-import com.github.cc3002.finalreality.model.controller.PlayerController;
+import com.github.cc3002.finalreality.model.controller.*;
 import com.github.cc3002.finalreality.model.weapon.*;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -55,7 +54,10 @@ public class AbstractSetUpTest {
   private BlockingQueue<IUnit> turnsQueue;
 
   private CharacterController characterController;
+  private EnemyController enemyController;
   private PlayerController playerController;
+  private WeaponController weaponController;
+  private FightController fightController;
 
 
   @BeforeEach
@@ -103,7 +105,11 @@ public class AbstractSetUpTest {
     swordThief = new Sword(SWORD_NAME, DAMAGE, WEIGHT);
 
     characterController = new CharacterController();
+    enemyController = new EnemyController();
     playerController = new PlayerController();
+    weaponController = new WeaponController();
+    fightController = new FightController();
+
   }
 
   public String getBlackName() {
@@ -307,5 +313,17 @@ public class AbstractSetUpTest {
 
   protected PlayerController getPlayerController() {
     return playerController;
+  }
+
+  protected WeaponController getWeaponController() {
+    return weaponController;
+  }
+
+  protected EnemyController getEnemyController() {
+    return enemyController;
+  }
+
+  protected FightController getFightController() {
+    return fightController;
   }
 }

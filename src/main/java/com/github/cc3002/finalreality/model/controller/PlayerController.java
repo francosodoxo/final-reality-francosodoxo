@@ -9,9 +9,11 @@ import java.util.HashMap;
 
 public class PlayerController {
   private HashMap<String, ICharacter> playerCharacters;
+  private HashMap<String, IWeapon> weapons;
 
   public PlayerController(){
     playerCharacters = new HashMap<String,ICharacter>();
+    weapons = new HashMap<String,IWeapon>();
   }
 
   public void add(ICharacter character) {
@@ -72,5 +74,13 @@ public class PlayerController {
 
   public IWeaponWhite getWhiteWeapon(String whiteMagicianName) {
     return  ((IWhiteAllowedWeapons) playerCharacters.get(whiteMagicianName)).getEquippedWeapon();
+  }
+
+  public void addToInventory(IWeapon weapon) {
+    weapons.put(weapon.getName(),weapon);
+  }
+
+  public IWeapon getFromInventory(String name) {
+    return weapons.get(name);
   }
 }

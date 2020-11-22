@@ -12,16 +12,24 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class PlayerControllerTest extends AbstractSetUpTest {
   private CharacterController characterController;
   private PlayerController playerController;
+  private WeaponController weaponController;
+
   private BlackMagician blackMagician;
   private Engineer engineer;
   private Knight knight;
   private Thief thief;
   private WhiteMagician whiteMagician;
+  private Axe axe;
+  private Bow bow;
+  private Knife knife;
+  private Staff staff;
+  private Sword sword;
   @BeforeEach
   public void setUp(){
     super.setUp();
-    characterController = new CharacterController();
-    playerController = new PlayerController();
+    characterController = super.getCharacterController();
+    playerController = super.getPlayerController();
+    weaponController = super.getWeaponController();
     blackMagician = characterController.createBlack(super.getBlackName(),
             super.getTurnsQueue(),
             super.getHealthPoints(),
@@ -104,5 +112,50 @@ public class PlayerControllerTest extends AbstractSetUpTest {
     playerController.equipWhite(super.getWhiteMagicianName(),super.getStaffWhite());
     IWeaponWhite weapon = playerController.getWhiteWeapon(super.getWhiteMagicianName());
     assertEquals(super.getStaffWhite(),weapon);
+  }
+
+  @Test
+  public void addAxeToInventory(){
+    axe = weaponController.createAxe(super.getAxeName(),
+            super.getDamage(),
+            super.getWeight());
+    playerController.addToInventory(axe);
+    assertEquals(axe,playerController.getFromInventory(axe.getName()));
+  }
+
+  @Test
+  public void addBowToInventory(){
+    bow = weaponController.createBow(super.getBowName(),
+            super.getDamage(),
+            super.getWeight());
+    playerController.addToInventory(bow);
+    assertEquals(bow,playerController.getFromInventory(bow.getName()));
+  }
+
+  @Test
+  public void addKnifeToInventory(){
+    knife = weaponController.createKnife(super.getKnifeName(),
+            super.getDamage(),
+            super.getWeight());
+    playerController.addToInventory(knife);
+    assertEquals(knife, playerController.getFromInventory(knife.getName()));
+  }
+
+  @Test
+  public void addStaffInventory(){
+    staff = weaponController.createStaff(super.getStaffName(),
+            super.getDamage(),
+            super.getWeight());
+    playerController.addToInventory(staff);
+    assertEquals(staff,playerController.getFromInventory(staff.getName()));
+  }
+
+  @Test
+  public void addSwordToInventory(){
+    sword = weaponController.createSword(super.getSwordName(),
+            super.getDamage(),
+            super.getWeight());
+    playerController.addToInventory(sword);
+    assertEquals(sword,playerController.getFromInventory(sword.getName()));
   }
 }
