@@ -1,5 +1,6 @@
 package com.github.cc3002.finalreality.model.controller;
 
+import com.github.cc3002.finalreality.model.AbstractSetUpTest;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.IUnit;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,33 +10,61 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class EnemyControllerTest {
+public class EnemyControllerTest extends AbstractSetUpTest {
+
+  private EnemyController enemyController;
   private Enemy enemy;
-  private String NAME;
-  private int HEALTH_POINTS;
-  private int ATTACK;
-  private int DEFENSE;
-  private int WEIGHT;
-
-  EnemyController enemyController;
-
-  private BlockingQueue<IUnit> turns;
   @BeforeEach
   public void  setUp(){
-    NAME = "enemy1";
-    HEALTH_POINTS = 10;
-    ATTACK = 7;
-    DEFENSE = 5;
-    WEIGHT = 8;
-    turns = new LinkedBlockingQueue<IUnit>();
-    enemy = new Enemy(NAME,WEIGHT,turns,HEALTH_POINTS,ATTACK,DEFENSE);
+    super.setUp();
     enemyController = new EnemyController();
+    enemy = enemyController.createEnemy(super.getEnemyName(),
+            super.getWeight(),
+            super.getTurnsQueue(),
+            super.getHealthPoints(),
+            super.getEnemyAttack(),
+            super.getDefensePoints());
   }
 
   @Test
   public void createEnemy(){
-    Enemy newEnemy = enemyController.createEnemy(NAME,WEIGHT,turns,HEALTH_POINTS,ATTACK,DEFENSE);
-    assertEquals(enemy,newEnemy);
+    Enemy newEnemy = enemyController.createEnemy(super.getEnemyName(),
+            super.getEnemyWeight(),
+            super.getTurnsQueue(),
+            super.getHealthPoints(),
+            super.getEnemyAttack(),
+            super.getDefensePoints());
+    assertEquals(super.getEnemy(),newEnemy);
+  }
+
+  @Test
+  public void addEnemy(){
+    assertTrue(enemyController.contains(super.getEnemyName()));
+  }
+
+  @Test
+  public void getEnemyNameByController(){
+    String name = enemyController.getName(enemy);
+    assertEquals(super.getEnemyName(),name);
+  }
+
+  @Test
+  public void getEnemyHealthPoints(){
+    int hp = enemyController.getHealthPoints(super.getEnemyName());
+    assertEquals(super.getHealthPoints(),hp);
+  }
+
+  @Test
+  public void getEnemyAttackByController(){
+    int atk = enemyController.getAttack(super.getEnemyName());
+    assertEquals(super.getEnemyAttack(),atk);
+  }
+
+  @Test
+  public void getEnemyDefenseByController(){
+    int def = enemyController.getDefense(super.getEnemyName());
+    assertEquals(super.getDefensePoints(),def);
   }
 }

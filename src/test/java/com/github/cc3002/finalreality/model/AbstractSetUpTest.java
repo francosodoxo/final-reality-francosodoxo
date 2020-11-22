@@ -4,6 +4,7 @@ import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.IUnit;
 import com.github.cc3002.finalreality.model.character.player.*;
 import com.github.cc3002.finalreality.model.controller.CharacterController;
+import com.github.cc3002.finalreality.model.controller.PlayerController;
 import com.github.cc3002.finalreality.model.weapon.*;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -35,6 +36,7 @@ public class AbstractSetUpTest {
   private String ENGINEER_NAME;
   private String KNIGHT_NAME;
   private String THIEF_NAME;
+  private String ENEMY_NAME;
 
   private String AXE_NAME;
   private String BOW_NAME;
@@ -47,10 +49,13 @@ public class AbstractSetUpTest {
   private int DAMAGE;
   private int WEIGHT;
 
+  private int ENEMY_WEIGHT;
+  private int ENEMY_ATTACK;
+
   private BlockingQueue<IUnit> turnsQueue;
 
   private CharacterController characterController;
-
+  private PlayerController playerController;
 
 
   @BeforeEach
@@ -60,6 +65,7 @@ public class AbstractSetUpTest {
     ENGINEER_NAME = "Malu";
     KNIGHT_NAME = "Quijote";
     THIEF_NAME = "Andrea";
+    ENEMY_NAME = "enemy1";
 
     AXE_NAME = "Basic Axe";
     BOW_NAME = "Basic Bow";
@@ -72,6 +78,9 @@ public class AbstractSetUpTest {
     DAMAGE = 5;
     WEIGHT = 2;
 
+    ENEMY_WEIGHT = 10;
+    ENEMY_ATTACK = 7;
+
     turnsQueue = new LinkedBlockingQueue<>();
 
     blackMagician = new BlackMagician(BLACK_MAGICIAN_NAME, turnsQueue, HEALTH_POINTS, DEFENSE_POINTS);
@@ -79,7 +88,7 @@ public class AbstractSetUpTest {
     engineer = new Engineer(ENGINEER_NAME, turnsQueue, HEALTH_POINTS, DEFENSE_POINTS);
     knight = new Knight(KNIGHT_NAME, turnsQueue, HEALTH_POINTS, DEFENSE_POINTS);
     thief = new Thief(THIEF_NAME, turnsQueue, HEALTH_POINTS, DEFENSE_POINTS);
-    enemy = new Enemy("enemy1",10,getTurnsQueue(),10,7,6);
+    enemy = new Enemy(ENEMY_NAME,ENEMY_WEIGHT,turnsQueue,HEALTH_POINTS,ENEMY_ATTACK,DEFENSE_POINTS);
 
     axeKnight = new Axe(AXE_NAME, DAMAGE, WEIGHT);
     axeEngineer = new Axe(AXE_NAME, DAMAGE, WEIGHT);
@@ -94,6 +103,7 @@ public class AbstractSetUpTest {
     swordThief = new Sword(SWORD_NAME, DAMAGE, WEIGHT);
 
     characterController = new CharacterController();
+    playerController = new PlayerController();
   }
 
   public String getBlackName() {
@@ -136,6 +146,13 @@ public class AbstractSetUpTest {
     this.THIEF_NAME = THIEF_NAME;
   }
 
+  public String getEnemyName(){
+    return ENEMY_NAME;
+  }
+
+  public int getEnemyWeight(){
+    return ENEMY_WEIGHT;
+  }
   public String getAxeName() {
     return AXE_NAME;
   }
@@ -194,6 +211,9 @@ public class AbstractSetUpTest {
     return WEIGHT;
   }
 
+  public int getEnemyAttack(){
+    return ENEMY_ATTACK;
+  }
 
 
   public BlackMagician getBlackMagician(){
@@ -283,5 +303,9 @@ public class AbstractSetUpTest {
 
   public BlockingQueue<IUnit> getTurnsQueue(){
     return turnsQueue;
+  }
+
+  protected PlayerController getPlayerController() {
+    return playerController;
   }
 }
