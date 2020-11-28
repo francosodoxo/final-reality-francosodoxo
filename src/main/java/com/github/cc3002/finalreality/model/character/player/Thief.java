@@ -68,6 +68,10 @@ public class Thief extends AbstractCharacter implements IThiefAllowedWeapons {
     }
   }
 
+  /**
+   * Equip a weapon
+   * @param weapon
+   */
   @Override
   public void equip(IWeaponThief weapon){
     if(getHealthPoints() > 0) {
@@ -75,16 +79,28 @@ public class Thief extends AbstractCharacter implements IThiefAllowedWeapons {
     }
   }
 
+  /**
+   * Get the equipped weapon
+   * @return
+   */
   @Override
   public IWeaponThief getEquippedWeapon() {
     return weapon;
   }
 
+  /**
+   * Sets the equipped weapon
+   * @param weapon
+   */
   @Override
   public void setEquippedWeapon(IWeaponThief weapon) {
     this.weapon = weapon;
   }
 
+  /**
+   * Attacks to an enemy
+   * @param enemy
+   */
   @Override
   public void attackTo(IUnit enemy) {
     if(enemy.getHealthPoints()>0 && !enemy.equals(this)){
@@ -92,6 +108,9 @@ public class Thief extends AbstractCharacter implements IThiefAllowedWeapons {
     }
   }
 
+  /**
+   * Wait their turn
+   */
   @Override
   public void waitTurn() {
     super.getScheduledExecutor()

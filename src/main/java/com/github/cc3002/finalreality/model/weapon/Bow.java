@@ -47,11 +47,19 @@ public class Bow extends AbstractWeapon implements IWeaponEngineer, IWeaponThief
             getWeight() == bow.getWeight();
   }
 
+  /**
+   * Tells the engineer to equip this weapon
+   * @param engineer
+   */
   @Override
   public void equippedByEngineer(Engineer engineer) {
     engineer.setEquippedWeapon(this);
   }
 
+  /**
+   * Tells the thief to equip this weapon
+   * @param thief
+   */
   @Override
   public void equippedByThief(Thief thief) {
     thief.setEquippedWeapon((IWeaponThief) this);

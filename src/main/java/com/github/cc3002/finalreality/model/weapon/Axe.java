@@ -47,11 +47,19 @@ public class Axe extends AbstractWeapon implements IWeaponEngineer,IWeaponKnight
             getWeight() == axe.getWeight();
   }
 
+  /**
+   * Tells the engineer to equip this weapon
+   * @param engineer
+   */
   @Override
   public void equippedByEngineer(Engineer engineer) {
     engineer.setEquippedWeapon(this);
   }
 
+  /**
+   * Tells the knight to equip this weapon
+   * @param knight
+   */
   @Override
   public void equippedByKnight(Knight knight) {
     knight.setEquippedWeapon(this);

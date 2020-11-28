@@ -76,6 +76,10 @@ public class BlackMagician extends AbstractMagician implements IBlackAllowedWeap
     }
   }
 
+  /**
+   * Equip an allowed weapon to this character
+   * @param weapon
+   */
   @Override
   public void equip(IWeaponBlack weapon) {
     if(getHealthPoints() > 0) {
@@ -83,16 +87,28 @@ public class BlackMagician extends AbstractMagician implements IBlackAllowedWeap
     }
   }
 
+  /**
+   * Get the equipped weapon
+   * @return
+   */
   @Override
   public IWeaponBlack getEquippedWeapon() {
     return weapon;
   }
 
+  /**
+   * Sets the equipped weapon
+   * @param weapon
+   */
   @Override
   public void setEquippedWeapon(IWeaponBlack weapon) {
     this.weapon = weapon;
   }
 
+  /**
+   * Attacks to an enemy
+   * @param enemy
+   */
   @Override
   public void attackTo(IUnit enemy) {
     if(enemy.getHealthPoints()>0 && !enemy.equals(this)){
@@ -100,6 +116,9 @@ public class BlackMagician extends AbstractMagician implements IBlackAllowedWeap
     }
   }
 
+  /***
+   * Wait their turn
+   */
   @Override
   public void waitTurn() {
     super.getScheduledExecutor()

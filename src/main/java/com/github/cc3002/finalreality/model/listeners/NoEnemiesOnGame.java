@@ -7,10 +7,20 @@ import java.beans.PropertyChangeListener;
 
 public class NoEnemiesOnGame implements PropertyChangeListener {
   private FlowController flowController;
+
+  /**
+   * Class that listens when a player wins the game,
+   * through all enemies deaths.
+   * @param flowController
+   */
   public NoEnemiesOnGame(FlowController flowController) {
     this.flowController = flowController;
   }
 
+  /**
+   * Fired when a player wins the game
+   * @param evt
+   */
   @Override
   public void propertyChange(PropertyChangeEvent evt) {
     flowController.goToPlayerWins();

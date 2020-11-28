@@ -75,6 +75,10 @@ public class WhiteMagician extends AbstractMagician implements IWhiteAllowedWeap
     }
   }
 
+  /**
+   * Equip a weapon
+   * @param weapon
+   */
   @Override
   public void equip(IWeaponWhite weapon) {
     if(getHealthPoints() > 0) {
@@ -82,16 +86,29 @@ public class WhiteMagician extends AbstractMagician implements IWhiteAllowedWeap
     }
   }
 
+  /**
+   * Get the equipped weapon
+   * @return
+   */
   @Override
   public IWeaponWhite getEquippedWeapon() {
     return weapon;
   }
 
+
+  /**
+   * Sets the equipped weapon
+   * @param weapon
+   */
   @Override
   public void setEquippedWeapon(IWeaponWhite weapon) {
     this.weapon = weapon;
   }
 
+  /**
+   * Attacks to an enemy
+   * @param enemy
+   */
   @Override
   public void attackTo(IUnit enemy) {
     if(enemy.getHealthPoints()>0 && !enemy.equals(this)){
@@ -99,6 +116,9 @@ public class WhiteMagician extends AbstractMagician implements IWhiteAllowedWeap
     }
   }
 
+  /**
+   * Wait their turn
+   */
   @Override
   public void waitTurn() {
 

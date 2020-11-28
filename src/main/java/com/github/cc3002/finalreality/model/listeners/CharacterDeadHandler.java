@@ -8,10 +8,19 @@ import java.beans.PropertyChangeListener;
 
 public class CharacterDeadHandler implements PropertyChangeListener {
   private PlayerController playerController;
+
+  /**
+   * Class that listens a character's death event
+   * @param playerController
+   */
   public CharacterDeadHandler(PlayerController playerController) {
     this.playerController = playerController;
   }
 
+  /**
+   * Fired when a character is dead
+   * @param evt
+   */
   @Override
   public void propertyChange(PropertyChangeEvent evt) {
     playerController.characterDead();
