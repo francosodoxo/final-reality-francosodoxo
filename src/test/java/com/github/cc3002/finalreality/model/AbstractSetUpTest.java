@@ -30,6 +30,12 @@ public class AbstractSetUpTest {
   private IWeaponKnight swordKnight;
   private IWeaponThief swordThief;
 
+  private Axe axe;
+  private Bow bow;
+  private Knife knife;
+  private Staff staff;
+  private Sword sword;
+
   private String BLACK_MAGICIAN_NAME;
   private String WHITE_MAGICIAN_NAME;
   private String ENGINEER_NAME;
@@ -58,7 +64,8 @@ public class AbstractSetUpTest {
   private PlayerController playerController;
   private WeaponController weaponController;
   private FightController fightController;
-
+  private TurnController turnController;
+  private FlowController flowController;
 
   @BeforeEach
   public void setUp(){
@@ -104,12 +111,19 @@ public class AbstractSetUpTest {
     swordKnight = new Sword(SWORD_NAME, DAMAGE, WEIGHT);
     swordThief = new Sword(SWORD_NAME, DAMAGE, WEIGHT);
 
+    axe = new Axe(AXE_NAME,DAMAGE,WEIGHT);
+    bow = new Bow(BOW_NAME,DAMAGE,WEIGHT);
+    knife = new Knife(KNIFE_NAME,DAMAGE,WEIGHT);
+    staff = new Staff(STAFF_NAME,DAMAGE,WEIGHT);
+    sword = new Sword(SWORD_NAME,DAMAGE,WEIGHT);
+
     characterController = new CharacterController();
     enemyController = new EnemyController();
     playerController = new PlayerController();
     weaponController = new WeaponController();
     fightController = new FightController();
-
+    turnController = new TurnController();
+    flowController = new FlowController(enemyController, playerController);
   }
 
   public String getBlackName() {
@@ -325,5 +339,32 @@ public class AbstractSetUpTest {
 
   protected FightController getFightController() {
     return fightController;
+  }
+
+  protected TurnController getTurnController() {
+    return turnController;
+  }
+
+  protected Axe getAxe() {
+    return axe;
+  }
+  protected Bow getBow(){
+    return bow;
+  }
+
+  protected Knife getKnife(){
+    return knife;
+  }
+
+  protected Staff getStaff(){
+    return staff;
+  }
+
+  protected Sword getSword(){
+    return sword;
+  }
+
+  protected FlowController getFlowController() {
+    return flowController;
   }
 }

@@ -2,6 +2,8 @@ package com.github.cc3002.finalreality.model.character;
 
 import com.github.cc3002.finalreality.model.character.player.UnitClass;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -21,6 +23,7 @@ public abstract class AbstractUnit implements IUnit{
   private int healthPoints;
   private int defense;
   private UnitClass unitClass;
+  private PropertyChangeSupport unitDead = new PropertyChangeSupport(this);
 
   private ScheduledExecutorService scheduledExecutor;
 
@@ -45,6 +48,9 @@ public abstract class AbstractUnit implements IUnit{
     this.unitClass = unitClass;
     this.defense = defense;
     scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
+  }
+  public void addUnitDeadListener(PropertyChangeListener listener){
+    unitDead.addPropertyChangeListener(listener);
   }
   /**
    * Sets a scheduled executor to make this character (thread) wait for {@code speed / 10}
@@ -120,7 +126,11 @@ public abstract class AbstractUnit implements IUnit{
    * Set the health points
    * */
   public void setHealthPoints(int newValue){
+    int oldHealthPoints = healthPoints;
     healthPoints = Math.max(0,newValue);
+    if(healthPoints == 0){
+      unitDead.firePropertyChange("unitDead",oldHealthPoints,healthPoints);
+    }
   }
 
   /**

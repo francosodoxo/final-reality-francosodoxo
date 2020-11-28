@@ -1,5 +1,7 @@
 package com.github.cc3002.finalreality.model.character;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
@@ -52,7 +54,7 @@ public class Enemy extends AbstractUnit{
   }
 
   /**
-   * Compare this unit with another or iteself
+   * Compare this unit with another or itself
    * */
   @Override
   public boolean equals(final Object o) {
