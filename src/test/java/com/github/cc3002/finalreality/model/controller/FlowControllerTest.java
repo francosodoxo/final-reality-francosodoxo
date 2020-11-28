@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class FlowControllerTest extends AbstractSetUpTest {
   private FlowController flowController;
@@ -63,5 +64,33 @@ public class FlowControllerTest extends AbstractSetUpTest {
     thief.setHealthPoints(0);
     assertEquals(totalCharacters-3,playerController.getCharactersAlive());
     assertEquals(new PlayerLosesState(), flowController.getCurrentState());
+  }
+
+  @Test
+  public void goToPlayerWinsWhenAlreadyWon(){
+    flowController.goToPlayerWins();
+    flowController.goToPlayerWins();
+    assertNull(flowController.getCurrentState());
+  }
+
+  @Test
+  public void goToPlayerLoseWhenAlreadyLoses(){
+    flowController.goToPlayerLoses();
+    flowController.goToPlayerLoses();
+    assertNull(flowController.getCurrentState());
+  }
+
+  @Test
+  public void goToPlayerWinsWhenPlayerLoses(){
+    flowController.goToPlayerLoses();
+    flowController.goToPlayerWins();
+    assertNull(flowController.getCurrentState());
+  }
+
+  @Test
+  public void goToPlayerLosesWhenPlayerWins(){
+    flowController.goToPlayerWins();
+    flowController.goToPlayerLoses();
+    assertNull(flowController.getCurrentState());
   }
 }
