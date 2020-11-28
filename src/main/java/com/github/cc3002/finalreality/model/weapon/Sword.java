@@ -46,11 +46,19 @@ public class Sword extends AbstractWeapon implements IWeaponKnight, IWeaponThief
             getWeight() == sword.getWeight();
   }
 
+  /**
+   * Tells the knight to equip this weapon
+   * @param knight
+   */
   @Override
   public void equippedByKnight(Knight knight) {
     knight.setEquippedWeapon(this);
   }
 
+  /**
+   * Tells the thief to equip this weapon
+   * @param thief
+   */
   @Override
   public void equippedByThief(Thief thief) {
     thief.setEquippedWeapon(this);

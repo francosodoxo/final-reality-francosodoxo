@@ -47,11 +47,19 @@ public class Knife extends AbstractWeapon implements IWeaponBlack, IWeaponKnight
             getWeight() == knife.getWeight();
   }
 
+  /**
+   * Tells the black magician to equip this weapon
+   * @param blackMagician
+   */
   @Override
   public void equippedByBlackMagician(BlackMagician blackMagician) {
     blackMagician.setEquippedWeapon(this);
   }
 
+  /**
+   * Tells the knight to equip this weapon
+   * @param knight
+   */
   @Override
   public void equippedByKnight(Knight knight) {
     knight.setEquippedWeapon(this);

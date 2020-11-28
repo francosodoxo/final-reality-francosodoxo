@@ -45,16 +45,28 @@ public class Staff extends AbstractWeapon implements IWeaponThief,IWeaponWhite, 
             getWeight() == staff.getWeight();
   }
 
+  /**
+   * Tells the thief to equip this weapon
+   * @param thief
+   */
   @Override
   public void equippedByThief(Thief thief) {
     thief.setEquippedWeapon(this);
   }
 
+  /**
+   * Tells the white magician to equip this weapon
+   * @param whiteMagician
+   */
   @Override
   public void equippedByWhite(WhiteMagician whiteMagician) {
     whiteMagician.setEquippedWeapon(this);
   }
 
+  /**
+   * Tells the black magician to equip this weapon
+   * @param blackMagician
+   */
   @Override
   public void equippedByBlackMagician(BlackMagician blackMagician) {
     blackMagician.setEquippedWeapon(this);

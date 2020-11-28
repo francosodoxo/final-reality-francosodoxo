@@ -3,6 +3,8 @@ package com.github.cc3002.finalreality.model.character;
 import com.github.cc3002.finalreality.model.character.player.UnitClass;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
 
+import java.beans.PropertyChangeListener;
+
 /**
  * This represents a unit from the game. That is to say, the player's characters
  * and the enemies
@@ -58,4 +60,8 @@ public interface IUnit {
      * Receive the corresponding attack
      * */
     void receiveAtk(int atk);
+
+    void attackTo(IUnit character);
+
+    void addUnitDeadListener(PropertyChangeListener listener);
 }

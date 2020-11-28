@@ -27,6 +27,14 @@ public class WhiteMagicianTest extends AbstractCharacterTest{
   }
 
   @Test
+  public void testNameDiffNotEquals(){
+    WhiteMagician w1 = new WhiteMagician("w2",super.getTurns(),super.getHealthPoints(),super.getDefense());
+    WhiteMagician w2 = new WhiteMagician("w3",super.getTurns(),super.getHealthPoints(),super.getDefense());
+    w1.equip(super.getTestWeaponWhite());
+    w2.equip(super.getTestWeaponWhite());
+    assertNotEquals(w1,w2);
+  }
+  @Test
   public void testCopyWithWeapon(){
     whiteMagician.equip(super.getTestWeaponWhite());
     assertEquals(whiteMagician,whiteMagician.copy());
