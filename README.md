@@ -16,7 +16,7 @@ enemies controlled by the computer.
 
 ---
 
-This project run with Java 14.
+This project runs with Java 14.
 
 Compile
 ---
@@ -41,3 +41,41 @@ the public interface ICharacter. On the other hand, the weapons are abstracted t
 AbstractWeapon class that implements the IWeapon interface.
 
 The characters are compared in all its properties, but the turns queue.
+
+Features to consider
+--------------------
+The feature of equipping a weapon is done by a double dispatch, usign 
+interfaces, for example, IWeaponBlack that is implemented by weapons that can be
+equipped by a black magician, and IBlackAllowedWeapons that is implemented by 
+a black magician that lets it equip a IWeaponBlack weapon.
+
+Game Flow
+---------
+The game has 3 states, the first is when the units are fighting, the second is 
+when the player loses the game, and the last is when they win the game.
+
+Controllers
+-----------
+There is many controller classes. 
+
+The character controller manages the creation of characters and 
+getting its data. They are created and managed outside the
+player responsability
+
+The enemy controller performs the same features like the point before, 
+but for enemies.
+
+The fight controller performs the attacks between enemies and characters.
+
+The flow controller manages the game's states, fighting, player wins and
+player loses.
+
+The player controller is created to manage the player's allowed actions, 
+like equipping weapons, adding characters to its ownership and the character's data
+that are under their ownership.
+
+The turn controller manages the character's turn, allowing to perform their actions
+and finishing their turn, making they to wait is turn again.
+
+The weapon controller lets create weapons, add to the game and equip them to
+a character.
