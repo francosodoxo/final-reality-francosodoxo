@@ -5,6 +5,7 @@ package com.github.cc3002.finalreality.model.states;
  */
 public class FightState implements IGameState{
 
+
   /**
    * Fired when a player wins the game
    * @return

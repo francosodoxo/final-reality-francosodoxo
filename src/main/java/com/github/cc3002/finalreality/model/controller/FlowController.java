@@ -1,6 +1,7 @@
 package com.github.cc3002.finalreality.model.controller;
 
 import com.github.cc3002.finalreality.model.character.Enemy;
+import com.github.cc3002.finalreality.model.character.IUnit;
 import com.github.cc3002.finalreality.model.listeners.NoCharactersOnGame;
 import com.github.cc3002.finalreality.model.listeners.NoEnemiesOnGame;
 import com.github.cc3002.finalreality.model.states.FightState;
@@ -11,6 +12,7 @@ public class FlowController {
   private IGameState currentState;
   private PlayerController playerController;
   private EnemyController enemyController;
+  private TurnController turnController;
   private NoCharactersOnGame noCharactersOnGame = new NoCharactersOnGame(this);
   private NoEnemiesOnGame noEnemiesOnGame = new NoEnemiesOnGame(this);
 
@@ -19,10 +21,11 @@ public class FlowController {
    * @param enemyController
    * @param playerController
    */
-  public FlowController(EnemyController enemyController, PlayerController playerController){
+  public FlowController(EnemyController enemyController, PlayerController playerController, TurnController turnController){
     currentState = new FightState();
     this.playerController = playerController;
     this.enemyController = enemyController;
+    this.turnController = turnController;
     playerController.addNoPlayersOnGameListener(noCharactersOnGame);
     enemyController.addNoEnemiesOnGameListener(noEnemiesOnGame);
   }
@@ -48,4 +51,11 @@ public class FlowController {
   public IGameState getCurrentState() {
     return currentState;
   }
+
+  public void runFightState(){
+    IUnit unit = turnController.getUnit();
+    currentState.setCurrentUnit(unit);
+    currentState.run();
+  }
+
 }

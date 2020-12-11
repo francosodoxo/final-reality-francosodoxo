@@ -123,7 +123,7 @@ public class AbstractSetUpTest {
     weaponController = new WeaponController();
     fightController = new FightController();
     turnController = new TurnController();
-    flowController = new FlowController(enemyController, playerController);
+    flowController = new FlowController(enemyController, playerController, turnController);
   }
 
   public String getBlackName() {
