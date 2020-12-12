@@ -38,8 +38,9 @@ public class TurnController {
    * @param fromQueue
    * @return
    */
-  public boolean waitInput(IUnit fromQueue) {
-    return true;
+  public boolean waitInput(IUnit fromQueue){
+    return true; //here the unit attacks or makes an spell through an interaction that is pending to
+    //implement
   }
 
   /**
@@ -48,5 +49,10 @@ public class TurnController {
    */
   public BlockingQueue<IUnit> getTurnQueue() {
     return turns;
+  }
+
+  public void add(IUnit unit) {
+    turns.add(unit);
+    unit.setTurnsQueue(this.turns);
   }
 }
