@@ -21,11 +21,13 @@ public class FlowController {
    * @param enemyController
    * @param playerController
    */
-  public FlowController(EnemyController enemyController, PlayerController playerController, TurnController turnController){
-    currentState = new FightState();
+  public FlowController(EnemyController enemyController,
+                        PlayerController playerController,
+                        TurnController turnController){
+    this.turnController = turnController;
+    currentState = new FightState(this.turnController);
     this.playerController = playerController;
     this.enemyController = enemyController;
-    this.turnController = turnController;
     playerController.addNoPlayersOnGameListener(noCharactersOnGame);
     enemyController.addNoEnemiesOnGameListener(noEnemiesOnGame);
   }
@@ -52,10 +54,9 @@ public class FlowController {
     return currentState;
   }
 
-  public void runFightState(){
-    IUnit unit = turnController.getUnit();
-    currentState.setCurrentUnit(unit);
+  public void runState(){
     currentState.run();
+    currentState = new FightState(turnController);
   }
 
 }

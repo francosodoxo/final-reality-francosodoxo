@@ -26,4 +26,9 @@ public class PlayerLosesState implements IGameState {
   public IGameState goToPlayerLoses() {
     return null;
   }
+
+  @Override
+  public void run() {
+    //here the animation is fired
+  }
 }

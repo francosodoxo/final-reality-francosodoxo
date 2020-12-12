@@ -12,4 +12,6 @@ public interface IGameState {
    * @return
    */
   IGameState goToPlayerLoses();
+
+  void run();
 }

@@ -6,6 +6,7 @@ import com.github.cc3002.finalreality.model.character.IUnit;
 import com.github.cc3002.finalreality.model.character.player.BlackMagician;
 import com.github.cc3002.finalreality.model.character.player.Thief;
 import com.github.cc3002.finalreality.model.character.player.WhiteMagician;
+import com.github.cc3002.finalreality.model.states.FightState;
 import com.github.cc3002.finalreality.model.states.PlayerLosesState;
 import com.github.cc3002.finalreality.model.states.PlayerWinsState;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,6 +19,7 @@ public class FlowControllerTest extends AbstractSetUpTest {
   private FlowController flowController;
   private PlayerController playerController;
   private EnemyController enemyController;
+  private TurnController turnController;
   private BlackMagician blackMagician;
   private WhiteMagician whiteMagician;
   private Thief thief;
@@ -30,6 +32,7 @@ public class FlowControllerTest extends AbstractSetUpTest {
     flowController = super.getFlowController();
     playerController = super.getPlayerController();
     enemyController = super.getEnemyController();
+    turnController = super.getTurnController();
 
     blackMagician = super.getBlackMagician();
     whiteMagician = super.getWhiteMagician();
@@ -40,6 +43,9 @@ public class FlowControllerTest extends AbstractSetUpTest {
     playerController.add(blackMagician);
     playerController.add(whiteMagician);
     playerController.add(thief);
+    turnController.add(blackMagician);
+    turnController.add(whiteMagician);
+    turnController.add(thief);
   }
 
   @Test
@@ -92,5 +98,11 @@ public class FlowControllerTest extends AbstractSetUpTest {
     flowController.goToPlayerWins();
     flowController.goToPlayerLoses();
     assertNull(flowController.getCurrentState());
+  }
+
+  @Test
+  public void runCurrentState(){
+    flowController.runState();
+    assertEquals(new FightState(turnController), flowController.getCurrentState());
   }
 }

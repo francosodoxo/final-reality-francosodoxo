@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class AbstractUnit implements IUnit{
 
-  protected final BlockingQueue<IUnit> turnsQueue;
+  protected BlockingQueue<IUnit> turnsQueue;
   protected final String name;
   private int healthPoints;
   private int defense;
@@ -82,6 +82,13 @@ public abstract class AbstractUnit implements IUnit{
    * */
   public BlockingQueue<IUnit> getTurnsQueue(){
     return turnsQueue;
+  }
+
+  /**
+   * Set turnsQueue
+   */
+  public void setTurnsQueue(BlockingQueue<IUnit> turnsQueue){
+    this.turnsQueue = turnsQueue;
   }
 
   /**
@@ -161,4 +168,5 @@ public abstract class AbstractUnit implements IUnit{
   public ScheduledExecutorService getScheduledExecutor(){
     return scheduledExecutor;
   }
+
 }
