@@ -1,12 +1,17 @@
 package com.github.cc3002.finalreality.model.controller;
 
+import com.github.cc3002.finalreality.gui.actions.IAction;
 import com.github.cc3002.finalreality.model.character.Enemy;
+import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.IUnit;
+import com.github.cc3002.finalreality.model.character.player.BlackMagician;
 import com.github.cc3002.finalreality.model.listeners.NoCharactersOnGame;
 import com.github.cc3002.finalreality.model.listeners.NoEnemiesOnGame;
 import com.github.cc3002.finalreality.model.states.FightState;
+import com.github.cc3002.finalreality.model.states.IFightState;
 import com.github.cc3002.finalreality.model.states.IGameState;
 import com.github.cc3002.finalreality.model.states.PlayerWinsState;
+import com.github.cc3002.finalreality.model.weapon.IWeapon;
 
 public class FlowController {
   private IGameState currentState;
@@ -15,6 +20,7 @@ public class FlowController {
   private TurnController turnController;
   private NoCharactersOnGame noCharactersOnGame = new NoCharactersOnGame(this);
   private NoEnemiesOnGame noEnemiesOnGame = new NoEnemiesOnGame(this);
+  private IAction action;
 
   /**
    * Class for manage the game's flow, it has 3 states: fight, player wins and player loses
@@ -25,11 +31,11 @@ public class FlowController {
                         PlayerController playerController,
                         TurnController turnController){
     this.turnController = turnController;
-    currentState = new FightState(this.turnController);
     this.playerController = playerController;
     this.enemyController = enemyController;
     playerController.addNoPlayersOnGameListener(noCharactersOnGame);
     enemyController.addNoEnemiesOnGameListener(noEnemiesOnGame);
+    currentState = new FightState(this.turnController);
   }
 
   /**
@@ -54,9 +60,25 @@ public class FlowController {
     return currentState;
   }
 
-  public void runState(){
-    currentState.run();
-    currentState = new FightState(turnController);
+  /*public void setSelected() {
+    ((IFightState)currentState).setSelected(turnController.getUnit());
+  }*/
+
+  public void setSelectedWeapon(IWeapon weapon){
+    ((IFightState)currentState).setSelectedWeapon(weapon);
   }
 
+  public void setTarget(Enemy unit) {
+    ((IFightState)currentState).setTarget(unit);
+  }
+
+  public void setAction(IAction action){
+    ((IFightState) currentState).setAction(action);
+  }
+
+  public void doAction() {
+    ((IFightState) currentState).doAction();
+    turnController.waitTurn(turnController.getUnit());
+    currentState = new FightState(turnController);
+  }
 }

@@ -22,17 +22,17 @@ public class FightControllerBlackMagicianAttack extends AbstractSetUpTest {
 
   @Test
   public void BlackMagicianAttackWithKnife(){
-    blackMagician.equip(super.getKnifeBlack());
+    blackMagician.tryToEquip(super.getKnifeBlack());
     int expectedHp = enemy.getHealthPoints()-blackMagician.getEquippedWeapon().getDamage()+enemy.getDefense();
-    fightController.blackMagicianAttacksTo(blackMagician,enemy);
+    fightController.attacksTo(blackMagician,enemy);
     assertEquals(expectedHp,enemy.getHealthPoints());
   }
 
   @Test
   public void BlackMagicianAttackWithStaff(){
-    blackMagician.equip(super.getStaffBlack());
+    blackMagician.tryToEquip(super.getStaffBlack());
     int expectedHp = enemy.getHealthPoints() + enemy.getDefense() - blackMagician.getEquippedWeapon().getDamage();
-    fightController.blackMagicianAttacksTo(blackMagician,enemy);
+    fightController.attacksTo(blackMagician,enemy);
     assertEquals(expectedHp,enemy.getHealthPoints());
   }
 

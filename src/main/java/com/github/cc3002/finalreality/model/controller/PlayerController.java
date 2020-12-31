@@ -92,14 +92,10 @@ public class PlayerController {
     return playerCharacters.get(name).getDefense();
   }
 
-  /**
-   * Equip a weapon to a black magician identified by their name
-   * @param name
-   * @param weapon
-   */
-  public void equipBlack(String name, IWeaponBlack weapon) {
-    ((IBlackAllowedWeapons) playerCharacters.get(name)).equip(weapon);
+  public void tryToEquip(String name, IWeapon weapon){
+    playerCharacters.get(name).tryToEquip(weapon);
   }
+
 
   /**
    * Get a black magician's weapon identified by their name
@@ -110,14 +106,6 @@ public class PlayerController {
     return ((IBlackAllowedWeapons) playerCharacters.get(name)).getEquippedWeapon();
   }
 
-  /**
-   * Equip a weapon to an engineer identified by their name
-   * @param engineerName
-   * @param weapon
-   */
-  public void equipEngineer(String engineerName, IWeaponEngineer weapon) {
-    ((IEngineerAllowedWeapons) playerCharacters.get(engineerName)).equip(weapon);
-  }
 
   /**
    * Get a engineer's weapon identified by their name
@@ -128,14 +116,7 @@ public class PlayerController {
     return ((IEngineerAllowedWeapons) playerCharacters.get(engineerName)).getEquippedWeapon();
   }
 
-  /**
-   * Equip a weapon to a knight identified by their name
-   * @param knightName
-   * @param weapon
-   */
-  public void equipKnight(String knightName, IWeaponKnight weapon) {
-    ((IKnightAllowedWeapons) playerCharacters.get(knightName)).equip(weapon);
-  }
+
 
   /**
    * Get a knight's weapon identified by their name
@@ -146,14 +127,7 @@ public class PlayerController {
     return ((IKnightAllowedWeapons) playerCharacters.get(knightName)).getEquippedWeapon();
   }
 
-  /**
-   * Equip a weapon to a thief identified by their name
-   * @param thiefName
-   * @param weapon
-   */
-  public void equipThief(String thiefName, IWeaponThief weapon) {
-    ((IThiefAllowedWeapons) playerCharacters.get(thiefName)).equip(weapon);
-  }
+
 
   /**
    * Get a thief's weapon identified by their name
@@ -164,14 +138,8 @@ public class PlayerController {
     return ((IThiefAllowedWeapons) playerCharacters.get(thiefName)).getEquippedWeapon();
   }
 
-  /**
-   * Equip a weapon to a white magician identified by their name
-   * @param whiteMagicianName
-   * @param weapon
-   */
-  public void equipWhite(String whiteMagicianName, IWeaponWhite weapon) {
-    ((IWhiteAllowedWeapons) playerCharacters.get(whiteMagicianName)).equip(weapon);
-  }
+
+
 
   /**
    * Get a white magician's weapon identified by their name

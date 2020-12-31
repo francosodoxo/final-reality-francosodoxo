@@ -125,4 +125,13 @@ public class WhiteMagician extends AbstractMagician implements IWhiteAllowedWeap
     super.getScheduledExecutor()
             .schedule(this::addToQueue, this.getEquippedWeapon().getWeight() / 10, TimeUnit.SECONDS);
   }
+
+  @Override
+  public void tryToEquip(IWeapon weapon) {
+    try{
+      this.equip((IWeaponWhite) weapon);
+    }catch(Exception e){
+      e.printStackTrace();
+    }
+  }
 }

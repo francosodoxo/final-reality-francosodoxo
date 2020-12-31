@@ -23,7 +23,7 @@ public class FightControllerWhiteMagicianAttack extends AbstractSetUpTest {
 
   @Test
   public void whiteAttacksWithStaff(){
-    whiteMagician.equip(super.getStaffWhite());
+    whiteMagician.tryToEquip(super.getStaffWhite());
     int expectedHp = enemy.getHealthPoints() +
             enemy.getDefense() -
             whiteMagician.getEquippedWeapon().getDamage();

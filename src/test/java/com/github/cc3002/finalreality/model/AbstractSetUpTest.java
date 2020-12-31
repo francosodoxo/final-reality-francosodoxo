@@ -18,17 +18,17 @@ public class AbstractSetUpTest {
   private Thief thief;
   private Enemy enemy;
 
-  private IWeaponKnight axeKnight;
-  private IWeaponEngineer axeEngineer;
-  private IWeaponEngineer bowEngineer;
-  private IWeaponThief bowThief;
-  private IWeaponKnight knifeKnight;
-  private IWeaponBlack knifeBlack;
-  private IWeaponThief staffThief;
-  private IWeaponBlack staffBlack;
-  private IWeaponWhite staffWhite;
-  private IWeaponKnight swordKnight;
-  private IWeaponThief swordThief;
+  private IWeapon axeKnight;
+  private IWeapon axeEngineer;
+  private IWeapon bowEngineer;
+  private IWeapon bowThief;
+  private IWeapon knifeKnight;
+  private IWeapon knifeBlack;
+  private IWeapon staffThief;
+  private IWeapon staffBlack;
+  private IWeapon staffWhite;
+  private IWeapon swordKnight;
+  private IWeapon swordThief;
 
   private Axe axe;
   private Bow bow;
@@ -260,44 +260,44 @@ public class AbstractSetUpTest {
     return enemy;
   }
 
-  public IWeaponKnight getAxeKnight(){
+  public IWeapon getAxeKnight(){
     return axeKnight;
   }
 
-  public IWeaponEngineer getAxeEngineer(){
+  public IWeapon getAxeEngineer(){
     return axeEngineer;
   }
 
-  public IWeaponEngineer getBowEngineer(){
+  public IWeapon getBowEngineer(){
     return bowEngineer;
   }
 
-  public IWeaponThief getBowThief(){
+  public IWeapon getBowThief(){
     return bowThief;
   }
 
-  public IWeaponKnight getKnifeKnight(){
+  public IWeapon getKnifeKnight(){
     return knifeKnight;
   }
 
-  public IWeaponBlack getKnifeBlack(){
+  public IWeapon getKnifeBlack(){
     return knifeBlack;
   }
 
-  public IWeaponThief getStaffThief(){
+  public IWeapon getStaffThief(){
     return staffThief;
   }
-  public IWeaponBlack getStaffBlack(){
+  public IWeapon getStaffBlack(){
     return staffBlack;
   }
-  public IWeaponWhite getStaffWhite(){
+  public IWeapon getStaffWhite(){
     return staffWhite;
   }
 
-  public IWeaponKnight getSwordKnight(){
+  public IWeapon getSwordKnight(){
     return swordKnight;
   }
-  public IWeaponThief getSwordThief(){
+  public IWeapon getSwordThief(){
     return swordThief;
   }
 

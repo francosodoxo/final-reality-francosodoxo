@@ -22,7 +22,7 @@ public class EngineerAttackTest extends AbstractSetUpTest {
   @Test
   public void engineerAttackWithAxe(){
     Engineer character = (Engineer) super.getEngineer().copy();
-    character.equip(getAxeEngineer());
+    character.tryToEquip(getAxeEngineer());
     Enemy enemy1 = getEnemy();
     int enemyHealthPoints = enemy1.getHealthPoints();
     character.attackTo(enemy1);
@@ -34,7 +34,7 @@ public class EngineerAttackTest extends AbstractSetUpTest {
   @Test
   public void engineerAtkWithAxeToDeadEnemy(){
     Engineer character = (Engineer) super.getEngineer().copy();
-    character.equip(getAxeEngineer());
+    character.tryToEquip(getAxeEngineer());
     Enemy enemy1 = getEnemy();
     enemy1.setHealthPoints(0);
     character.attackTo(enemy1);
@@ -44,7 +44,7 @@ public class EngineerAttackTest extends AbstractSetUpTest {
   @Test
   public void engineerAttackItselfWithAxe(){
     Engineer character = (Engineer) getEngineer().copy();
-    character.equip(getAxeEngineer());
+    character.tryToEquip(getAxeEngineer());
     int characterHp = character.getHealthPoints();
     character.attackTo(character);
     assertEquals(characterHp,character.getHealthPoints());
@@ -53,7 +53,7 @@ public class EngineerAttackTest extends AbstractSetUpTest {
   @Test
   public void engineerAttackWithBow(){
     Engineer character = (Engineer) super.getEngineer().copy();
-    character.equip(getBowEngineer());
+    character.tryToEquip(getBowEngineer());
     Enemy enemy1 = getEnemy();
     int enemyHealthPoints = enemy1.getHealthPoints();
     character.attackTo(enemy1);
@@ -65,7 +65,7 @@ public class EngineerAttackTest extends AbstractSetUpTest {
   @Test
   public void engineerAtkWithBowToDeadEnemy(){
     Engineer character = (Engineer) super.getEngineer().copy();
-    character.equip(getBowEngineer());
+    character.tryToEquip(getBowEngineer());
     Enemy enemy1 = getEnemy();
     enemy1.setHealthPoints(0);
     character.attackTo(enemy1);
@@ -75,7 +75,7 @@ public class EngineerAttackTest extends AbstractSetUpTest {
   @Test
   public void engineerAttackItselfWithBow(){
     Engineer character = (Engineer) getEngineer().copy();
-    character.equip(getBowEngineer());
+    character.tryToEquip(getBowEngineer());
     int characterHp = character.getHealthPoints();
     character.attackTo(character);
     assertEquals(characterHp,character.getHealthPoints());

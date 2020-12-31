@@ -22,7 +22,7 @@ public class FightControllerThiefAttack extends AbstractSetUpTest {
 
   @Test
   public void thiefAttacksWithBow(){
-    thief.equip(super.getBowThief());
+    thief.tryToEquip(super.getBowThief());
     int expectedHp = enemy.getHealthPoints() +
             enemy.getDefense() -
             thief.getEquippedWeapon().getDamage();
@@ -32,7 +32,7 @@ public class FightControllerThiefAttack extends AbstractSetUpTest {
 
   @Test
   public void thiefAttacksWithStaff(){
-    thief.equip(super.getStaffThief());
+    thief.tryToEquip(super.getStaffThief());
     int expectedHp = enemy.getHealthPoints() +
             enemy.getDefense() -
             thief.getEquippedWeapon().getDamage();
@@ -42,7 +42,7 @@ public class FightControllerThiefAttack extends AbstractSetUpTest {
 
   @Test
   public void thiefAttacksWithSword(){
-    thief.equip(super.getSwordThief());
+    thief.tryToEquip(super.getSwordThief());
     int expectedHp = enemy.getHealthPoints() +
             enemy.getDefense() -
             thief.getEquippedWeapon().getDamage();

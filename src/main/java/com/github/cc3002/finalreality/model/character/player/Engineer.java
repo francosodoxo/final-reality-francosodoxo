@@ -119,4 +119,13 @@ public class Engineer extends AbstractCharacter implements IEngineerAllowedWeapo
     super.getScheduledExecutor()
             .schedule(this::addToQueue, this.getEquippedWeapon().getWeight() / 10, TimeUnit.SECONDS);
   }
+
+  @Override
+  public void tryToEquip(IWeapon weapon) {
+    try{
+      this.equip((IWeaponEngineer) weapon);
+    }catch(Exception e){
+      e.printStackTrace();
+    }
+  }
 }

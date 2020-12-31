@@ -27,8 +27,4 @@ public class PlayerWinsState implements IGameState{
     return null;
   }
 
-  @Override
-  public void run() {
-    //here the animation is fired
-  }
 }

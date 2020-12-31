@@ -39,5 +39,5 @@ public interface ICharacter {
   void setDefense(int newDefense);
 
 
-
+  void tryToEquip(IWeapon weapon);
 }

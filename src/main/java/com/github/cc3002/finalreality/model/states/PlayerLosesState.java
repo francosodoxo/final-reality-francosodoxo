@@ -1,5 +1,9 @@
 package com.github.cc3002.finalreality.model.states;
 
+import com.github.cc3002.finalreality.model.character.ICharacter;
+import com.github.cc3002.finalreality.model.character.IUnit;
+import com.github.cc3002.finalreality.model.weapon.IWeapon;
+
 /**
  * Represents a player lose.
  */
@@ -27,8 +31,4 @@ public class PlayerLosesState implements IGameState {
     return null;
   }
 
-  @Override
-  public void run() {
-    //here the animation is fired
-  }
 }

@@ -73,5 +73,6 @@ public abstract class AbstractCharacter extends AbstractUnit implements ICharact
     super.getScheduledExecutor()
             .schedule(this::addToQueue, this.getEquippedWeapon().getWeight() / 10, TimeUnit.SECONDS);
   }*/
-
+  @Override
+  public abstract void tryToEquip(IWeapon weapon);
 }

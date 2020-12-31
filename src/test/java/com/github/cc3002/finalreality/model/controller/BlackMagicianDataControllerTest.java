@@ -48,7 +48,7 @@ public class BlackMagicianDataControllerTest extends AbstractSetUpTest {
 
   @Test
   public void getBlackWeapon(){
-    blackMagician.equip(super.getKnifeBlack());
+    blackMagician.tryToEquip(super.getKnifeBlack());
     IWeaponBlack weapon = characterController.getBlackWeapon(super.getBlackName());
     assertEquals(super.getKnifeBlack(),weapon);
   }
