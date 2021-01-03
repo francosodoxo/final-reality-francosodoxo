@@ -73,36 +73,30 @@ public class FlowControllerTest extends AbstractSetUpTest {
   }
 
   @Test
-  public void goToPlayerWinsWhenAlreadyWon(){
+  public void goToPlayerWinsWhenAlreadyWon() throws Exception {
     flowController.goToPlayerWins();
     flowController.goToPlayerWins();
     assertNull(flowController.getCurrentState());
   }
 
   @Test
-  public void goToPlayerLoseWhenAlreadyLoses(){
+  public void goToPlayerLoseWhenAlreadyLoses() throws Exception {
     flowController.goToPlayerLoses();
     flowController.goToPlayerLoses();
     assertNull(flowController.getCurrentState());
   }
 
   @Test
-  public void goToPlayerWinsWhenPlayerLoses(){
+  public void goToPlayerWinsWhenPlayerLoses() throws Exception {
     flowController.goToPlayerLoses();
     flowController.goToPlayerWins();
     assertNull(flowController.getCurrentState());
   }
 
   @Test
-  public void goToPlayerLosesWhenPlayerWins(){
+  public void goToPlayerLosesWhenPlayerWins() throws Exception {
     flowController.goToPlayerWins();
     flowController.goToPlayerLoses();
     assertNull(flowController.getCurrentState());
-  }
-
-  @Test
-  public void runCurrentState(){
-    flowController.runState();
-    assertEquals(new FightState(turnController), flowController.getCurrentState());
   }
 }

@@ -17,14 +17,15 @@ public class PlayerController {
   private PropertyChangeSupport noPlayersOnGame = new PropertyChangeSupport(this);
   private CharacterDeadHandler characterDeadHandler = new CharacterDeadHandler(this);
   private int charactersAlive;
-
+  private TurnController turnController;
   /**
    * Class to manage the player's actions
    */
-  public PlayerController(){
+  public PlayerController(TurnController turnController){
     playerCharacters = new HashMap<String,ICharacter>();
     weapons = new HashMap<String,IWeapon>();
     charactersAlive = 0;
+    this.turnController = turnController;
   }
 
   /**
@@ -38,12 +39,13 @@ public class PlayerController {
   /**
    * It is invoked when a character is dead
    */
-  public void characterDead(){
+  public void characterDead(ICharacter character){
     int oldCharactersAlive = charactersAlive;
     charactersAlive--;
     if(charactersAlive == 0){
       noPlayersOnGame.firePropertyChange("noCharactersOnGame",oldCharactersAlive,charactersAlive);
     }
+    turnController.delete((IUnit) character);
   }
 
   /**

@@ -136,7 +136,7 @@ public abstract class AbstractUnit implements IUnit{
     int oldHealthPoints = healthPoints;
     healthPoints = Math.max(0,newValue);
     if(healthPoints == 0){
-      unitDead.firePropertyChange("unitDead",oldHealthPoints,healthPoints);
+      unitDead.firePropertyChange("unitDead",oldHealthPoints,this);
     }
   }
 

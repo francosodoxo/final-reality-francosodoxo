@@ -111,7 +111,7 @@ public class WhiteMagician extends AbstractMagician implements IWhiteAllowedWeap
    */
   @Override
   public void attackTo(IUnit enemy) {
-    if(enemy.getHealthPoints()>0 && !enemy.equals(this)){
+    if(enemy.getHealthPoints()>0 && !enemy.equals(this) && this.getHealthPoints() > 0){
       enemy.receiveAtk(this.getEquippedWeapon().getDamage());
     }
   }

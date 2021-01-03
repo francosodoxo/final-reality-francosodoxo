@@ -118,11 +118,12 @@ public class AbstractSetUpTest {
     sword = new Sword(SWORD_NAME,DAMAGE,WEIGHT);
 
     characterController = new CharacterController();
-    enemyController = new EnemyController();
-    playerController = new PlayerController();
+    turnController = new TurnController();
+    enemyController = new EnemyController(turnController);
+    playerController = new PlayerController(turnController);
     weaponController = new WeaponController();
     fightController = new FightController();
-    turnController = new TurnController();
+
     flowController = new FlowController(enemyController, playerController, turnController);
   }
 

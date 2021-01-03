@@ -6,10 +6,14 @@ import com.github.cc3002.finalreality.model.character.IUnit;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
 
 public interface IFightState {
-  void setSelected(IUnit character);
   void setSelectedWeapon(IWeapon weapon);
-  void setTarget(Enemy unit);
+  void setTarget(IUnit unit);
 
-  void setAction(IAction action);
-  void doAction();
+  void attackTo();
+
+  void equip();
+
+  void setWeapon(IWeapon weapon);
+
+  void waitTurn();
 }

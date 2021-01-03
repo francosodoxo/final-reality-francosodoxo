@@ -12,15 +12,16 @@ import com.github.cc3002.finalreality.model.weapon.IWeapon;
  * Class that represents the fight game state
  */
 public class FightState implements IGameState, IFightState{
-  private TurnController turnController;
-  private IUnit selected;
+  private IUnit source;
+  private FightController fightController;
   private IWeapon selectedWeapon;
-  private Enemy target;
-  private IAction action;
+  private IUnit target;
+  private TurnController turnController;
 
   public FightState(TurnController turnController) {
+    fightController = new FightController();
     this.turnController = turnController;
-    selected = turnController.getUnit();
+    source = turnController.getUnit();
   }
 
   /**
@@ -41,37 +42,40 @@ public class FightState implements IGameState, IFightState{
     return new PlayerLosesState();
   }
 
-  @Override
-  public void setSelected(IUnit character) {
-    selected = character;
-  }
-
-  @Override
-  public void setSelectedWeapon(IWeapon weapon) {
-    selectedWeapon = weapon;
-  }
-
-  @Override
-  public void setTarget(Enemy unit) {
-    this.action.setTarget(unit);
-  }
-
-  @Override
-  public void setAction(IAction action) {
-    this.action = action;
-    this.action.setSelected(selected);
-    this.action.setSelectedWeapon(selectedWeapon);
-    this.action.setTarget(target);
-  }
-
-  @Override
-  public void doAction() {
-    action.performAction();
-  }
-
 
   @Override
   public boolean equals(Object o){
     return o instanceof FightState;
+  }
+
+
+  @Override
+  public void setSelectedWeapon(IWeapon weapon) {
+
+  }
+
+  @Override
+  public void setTarget(IUnit unit) {
+    target = unit;
+  }
+
+  @Override
+  public void attackTo() {
+    fightController.attacksTo(source, target);
+  }
+
+  @Override
+  public void equip() {
+    ((ICharacter)source).tryToEquip(selectedWeapon);
+  }
+
+  @Override
+  public void setWeapon(IWeapon weapon) {
+    selectedWeapon = weapon;
+  }
+
+  @Override
+  public void waitTurn() {
+    turnController.waitTurn(source);
   }
 }

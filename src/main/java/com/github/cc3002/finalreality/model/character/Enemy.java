@@ -112,7 +112,7 @@ public class Enemy extends AbstractUnit{
    * Attack to a unit
    * */
   public void attackTo(IUnit character){
-    if(character.getHealthPoints()>0 && !character.equals(this)) {
+    if(character.getHealthPoints()>0 && !character.equals(this) && this.getHealthPoints() > 0) {
       character.receiveAtk(getAtk());
     }
   }

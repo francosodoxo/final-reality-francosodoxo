@@ -9,6 +9,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public class TurnController {
   private final BlockingQueue<IUnit> turns;
+  private IUnit current;
 
   /**
    * Class to manage the player's turn
@@ -22,7 +23,8 @@ public class TurnController {
    * @return
    */
   public IUnit getUnit(){
-    return turns.poll();
+    current = turns.poll();
+    return current;
   }
 
   /**
@@ -54,5 +56,13 @@ public class TurnController {
   public void add(IUnit unit) {
     turns.add(unit);
     unit.setTurnsQueue(this.turns);
+  }
+
+  public IUnit getCurrent(){
+    return current;
+  }
+
+  public void delete(IUnit character) {
+    turns.remove(character);
   }
 }

@@ -15,13 +15,15 @@ public class EnemyController {
   private int enemiesAlive;
   private PropertyChangeSupport noEnemiesOnGame = new PropertyChangeSupport(this);
   private EnemyDeadHandler enemyDeadHandler= new EnemyDeadHandler(this);
+  private TurnController turnController;
 
   /**
    * Creates a Enemy Controller
    */
-  public EnemyController(){
+  public EnemyController(TurnController turnController){
     enemies = new HashMap<String,Enemy>();
     enemiesAlive = 0;
+    this.turnController = turnController;
   }
 
   /**
@@ -35,12 +37,13 @@ public class EnemyController {
   /**
    * This get fired when a enemy is dead
    */
-  public void enemyDead(){
+  public void enemyDead(Enemy enemyDead){
     int oldEnemiesAlive = enemiesAlive;
     enemiesAlive--;
     if(enemiesAlive==0){
       noEnemiesOnGame.firePropertyChange("enemiesDead", oldEnemiesAlive, enemiesAlive);
     }
+    turnController.delete(enemyDead);
   }
 
   /**

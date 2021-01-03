@@ -1,26 +1,17 @@
 package com.github.cc3002.finalreality.gui;
 
-import com.github.cc3002.finalreality.gui.actions.AttackAction;
-import com.github.cc3002.finalreality.gui.actions.EquipAction;
 import com.github.cc3002.finalreality.gui.elements.*;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.IUnit;
-import com.github.cc3002.finalreality.model.character.player.BlackMagician;
-import com.github.cc3002.finalreality.model.character.player.Knight;
-import com.github.cc3002.finalreality.model.character.player.Thief;
+import com.github.cc3002.finalreality.model.character.player.*;
 import com.github.cc3002.finalreality.model.controller.*;
+import com.github.cc3002.finalreality.model.weapon.*;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
 
 import java.io.FileNotFoundException;
-import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 
 /**
@@ -41,9 +32,10 @@ public class FinalReality extends Application {
   public void start(Stage primaryStage) throws FileNotFoundException {
     TurnController turnController = new TurnController();
     CharacterController characterController = new CharacterController();
-    EnemyController enemyController = new EnemyController();
-    PlayerController playerController = new PlayerController();
+    EnemyController enemyController = new EnemyController(turnController);
+    PlayerController playerController = new PlayerController(turnController);
     FightController fightController = new FightController();
+    WeaponController weaponController = new WeaponController();
     BlockingQueue<IUnit> turns = turnController.getTurnQueue();
     BlackMagician blackMagician = characterController.createBlack(
             "Kali",
@@ -66,6 +58,20 @@ public class FinalReality extends Application {
             6
     );
     turnController.add(knight);
+    WhiteMagician whiteMagician = characterController.createWhite(
+            "Solaris",
+            turns,
+            15,
+            6
+    );
+    turnController.add(whiteMagician);
+    Engineer engineer = characterController.createEngineer(
+            "Arch",
+            turns,
+            15,
+            6
+    );
+    turnController.add(engineer);
     Enemy enemy1 = enemyController.createEnemy(
             "The evil Dog",
             10,
@@ -84,130 +90,224 @@ public class FinalReality extends Application {
             4
     );
     turnController.add(enemy2);
-    FlowController flowController = new FlowController(enemyController,playerController,turnController);
+
+    Axe axe = weaponController.createAxe(
+            "Axe",
+            8,
+            20);
+    Bow bow = weaponController.createBow(
+            "Bow",
+            8,
+            20
+    );
+    Knife knife = weaponController.createKnife(
+            "Knife",
+            8,
+            20
+    );
+    Staff staff = weaponController.createStaff(
+            "Staff",
+            8,
+            20
+    );
+    Sword sword = weaponController.createSword(
+            "Sword",
+            8,
+            20
+    );
+    FlowController flowController = new FlowController(enemyController,
+            playerController,
+            turnController);
+    flowController.addApplication(this);
     primaryStage.setTitle("Final reality");
     int width = 1280;
     int height = 720;
+    int widthObj = 80;
+    int heightObj = 120;
+    int delta = 20;
     String RESOURCES_PATH = "src/main/java/com/github/cc3002/finalreality/gui/resources/";
     Group playerCharacters = new Group();
     Group enemies = new Group();
     Group info = new Group();
     Group actions = new Group();
+    Group weapons = new Group();
     Group mainGroup = new Group();
+
+    //Buttons
     var blackMagView = new UnitElementBuilder(playerCharacters)
             .setImagePath(RESOURCES_PATH +"black_magician.png")
-            .setPosition(0,0)
-            .setSize(150,200)
+            .setPosition(0, 0)
+            .setSize(widthObj,heightObj)
             .build();
     var knightView = new UnitElementBuilder(playerCharacters)
             .setImagePath(RESOURCES_PATH+"knight.png")
-            .setPosition(0,200)
-            .setSize(150,200)
+            .setPosition(0, heightObj)
+            .setSize(widthObj,heightObj)
             .build();
     var thiefView = new UnitElementBuilder(playerCharacters)
             .setImagePath(RESOURCES_PATH+"thief.png")
-            .setPosition(0,400)
-            .setSize(150,200)
+            .setPosition(0,heightObj * 2)
+            .setSize(widthObj,heightObj)
+            .build();
+    var whiteMagView = new UnitElementBuilder(playerCharacters)
+            .setImagePath(RESOURCES_PATH+"whiteMagician.jpeg")
+            .setPosition(0,heightObj * 3)
+            .setSize(widthObj,heightObj)
+            .build();
+    var engineerView = new UnitElementBuilder(playerCharacters)
+            .setImagePath(RESOURCES_PATH+"engineer.jpeg")
+            .setPosition(0,heightObj * 4)
+            .setSize(widthObj,heightObj)
             .build();
     var enemy1View=new UnitElementBuilder(enemies)
             .setImagePath(RESOURCES_PATH + "enemy1.png")
-            .setPosition(500,0)
-            .setSize(150,200)
+            .setPosition(widthObj * 4,0)
+            .setSize(widthObj,heightObj)
             .build();
     var enemy2View = new UnitElementBuilder(enemies)
             .setImagePath(RESOURCES_PATH + "enemy2.png")
-            .setPosition(500,200)
-            .setSize(150,200)
+            .setPosition(widthObj * 4,heightObj)
+            .setSize(widthObj, heightObj)
             .build();
 
     var buttonAttack = new ActionElementBuilder(actions)
-            .setPosition(300,200)
+            .setPosition(150,200)
             .setText("Attack")
             .build();
     var buttonEquip = new ActionElementBuilder(actions)
-            .setPosition(300,250)
+            .setPosition(150,250)
             .setText("Equip")
             .build();
-    var buttonOk = new ActionElementBuilder(actions)
-            .setPosition(300,300)
-            .setText("OK")
+    var buttonAxe = new UnitElementBuilder(weapons)
+            .setImagePath(RESOURCES_PATH+"axe.jpeg")
+            .setPosition(widthObj * 8,0)
+            .setSize(widthObj,heightObj)
             .build();
+    var buttonBow = new UnitElementBuilder(weapons)
+            .setImagePath(RESOURCES_PATH+"bow.jpeg")
+            .setPosition(widthObj * 8,heightObj)
+            .setSize(widthObj,heightObj)
+            .build();
+    var buttonKnife = new UnitElementBuilder(weapons)
+            .setImagePath(RESOURCES_PATH + "knife.jpeg")
+            .setPosition(widthObj * 8 ,heightObj * 2)
+            .setSize(widthObj,heightObj)
+            .build();
+    var buttonStaff = new UnitElementBuilder(weapons)
+            .setImagePath(RESOURCES_PATH + "staff.jpeg")
+            .setPosition(widthObj * 8,heightObj * 3)
+            .setSize(widthObj,heightObj)
+            .build();
+    var buttonSword = new UnitElementBuilder(weapons)
+            .setImagePath(RESOURCES_PATH + "sword.png")
+            .setPosition(widthObj * 8,heightObj * 4)
+            .setSize(widthObj,heightObj)
+            .build();
+    //Labels
     var labelBlackLife = new LabelElementBuilder(playerCharacters)
-            .setPosition(0,0)
+            .setPosition(widthObj,0)
             .setText("HP:"+characterController.getHealthPoints(characterController.getName(blackMagician)))
             .build();
     var labelBlackName = new LabelElementBuilder(playerCharacters)
-            .setPosition(0,50)
+            .setPosition(widthObj,20)
             .setText(characterController.getName(blackMagician))
             .build();
     var labelKnightLife = new LabelElementBuilder(playerCharacters)
-            .setPosition(0,200)
+            .setPosition(widthObj,heightObj)
             .setText("HP:" +characterController.getHealthPoints(characterController.getName(knight)))
             .build();
     var labelKnightName = new LabelElementBuilder(playerCharacters)
-            .setPosition(0,250)
+            .setPosition(widthObj,heightObj + 20)
             .setText(characterController.getName(knight))
             .build();
     var labelThiefLife = new LabelElementBuilder(playerCharacters)
-            .setPosition(0,400)
+            .setPosition(widthObj,heightObj * 2)
             .setText("HP:"+characterController.getHealthPoints(characterController.getName(thief)))
             .build();
     var labelThiefName = new LabelElementBuilder(playerCharacters)
-            .setPosition(0,450)
+            .setPosition(widthObj,heightObj * 2 + delta)
             .setText(characterController.getName(thief))
             .build();
+    var labelWhiteLife = new LabelElementBuilder(playerCharacters)
+            .setPosition(widthObj,heightObj * 3)
+            .setText("HP: "+characterController.getHealthPoints(characterController.getName(whiteMagician)))
+            .build();
+    var labelWhiteName= new LabelElementBuilder(playerCharacters)
+            .setPosition(widthObj,heightObj * 3 + delta)
+            .setText(characterController.getName(whiteMagician))
+            .build();
+    var labelEngineerLife = new LabelElementBuilder(playerCharacters)
+            .setPosition(widthObj,heightObj * 4)
+            .setText("HP: "+characterController.getHealthPoints(characterController.getName(engineer)))
+            .build();
+    var labelEngineerName = new LabelElementBuilder(playerCharacters)
+            .setPosition(widthObj,heightObj * 4 + delta)
+            .setText(characterController.getName(engineer))
+            .build();
     var labelEnemy1Life = new LabelElementBuilder(playerCharacters)
-            .setPosition(500,0)
+            .setPosition(widthObj * 5,0)
             .setText("HP:"+enemyController.getHealthPoints(enemyController.getName(enemy1)))
             .build();
+    var labelEnemy1Name = new LabelElementBuilder(playerCharacters)
+            .setPosition(widthObj * 5,delta)
+            .setText(enemyController.getName(enemy1))
+            .build();
     var labelEnemy2Life = new LabelElementBuilder(playerCharacters)
-            .setPosition(500,200)
-            .setText("HP:" +enemyController.getHealthPoints(enemyController.getName(enemy2)));
+            .setPosition(widthObj * 5,heightObj)
+            .setText("HP:" +enemyController.getHealthPoints(enemyController.getName(enemy2)))
+            .build();
+    var labelEnemy2Name = new LabelElementBuilder(playerCharacters)
+            .setPosition(widthObj *5,heightObj + delta)
+            .setText(enemyController.getName(enemy2))
+            .build();
     var labelCurrentTurn = new LabelElementBuilder(actions)
             .setPosition(300,350)
             .setText("Current turn: "+turnController.getUnit().getName())
             .build();
+
     mainGroup.getChildren().add(enemies);
     mainGroup.getChildren().add(playerCharacters);
     mainGroup.getChildren().add(info);
     mainGroup.getChildren().add(actions);
+    mainGroup.getChildren().add(weapons);
 
-    enemy1View.setButtonAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent actionEvent) {
-        flowController.setTarget(enemy1);
-      }
-    });
-    enemy2View.setButtonAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent actionEvent) {
-        flowController.setTarget(enemy2);
-      }
+    blackMagView.setButtonAction(actionEvent -> flowController.setTarget(blackMagician));
+
+    knightView.setButtonAction(actionEvent -> flowController.setTarget(knight));
+
+    thiefView.setButtonAction(actionEvent -> flowController.setTarget(thief));
+
+    whiteMagView.setButtonAction(actionEvent -> flowController.setTarget(whiteMagician));
+
+    engineerView.setButtonAction(actionEvent -> flowController.setTarget(engineer));
+
+    enemy1View.setButtonAction(actionEvent -> flowController.setTarget(enemy1));
+
+    enemy2View.setButtonAction(actionEvent -> flowController.setTarget(enemy2));
+
+    buttonAttack.setButtonAction(actionEvent -> {
+      flowController.doAttackAction();
+      labelBlackLife.setText("HP:" + characterController.getHealthPoints(characterController.getName(blackMagician)));
+      labelEnemy1Life.setText("HP: "+ enemyController.getHealthPoints(enemyController.getName(enemy1)));
+      labelEnemy2Life.setText("HP: "+ enemyController.getHealthPoints(enemyController.getName(enemy2)));
+      labelEngineerLife.setText("HP: "+ characterController.getHealthPoints(characterController.getName(engineer)));
+      labelKnightLife.setText("HP: "+ characterController.getHealthPoints(characterController.getName(knight)));
+      labelThiefLife.setText("HP: "+ characterController.getHealthPoints(characterController.getName(thief)));
+      labelWhiteLife.setText("HP: "+characterController.getHealthPoints(characterController.getName(whiteMagician)));
+      labelCurrentTurn.setText("Current Turn: " + turnController.getCurrent().getName());
     });
 
-    buttonAttack.setButtonAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent actionEvent) {
-        flowController.setAction(new AttackAction(fightController));
-      }
-    });
+    buttonEquip.setButtonAction(actionEvent -> flowController.equip());
 
-    buttonEquip.setButtonAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent actionEvent) {
-        flowController.setAction(new EquipAction());
-      }
-    });
+    buttonAxe.setButtonAction(actionEvent -> flowController.setWeapon(axe));
 
-    buttonOk.setButtonAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent actionEvent) {
-        flowController.doAction();
-        labelBlackLife.setText("HP:"+characterController.getHealthPoints(characterController.getName(blackMagician)));
-        labelKnightLife.setText("HP:"+characterController.getHealthPoints(characterController.getName(knight)));
-        labelThiefLife.setText("HP:"+characterController.getHealthPoints(characterController.getName(thief)));
-      }
-    });
+    buttonBow.setButtonAction(actionEvent -> flowController.setWeapon(bow));
+
+    buttonKnife.setButtonAction(actionEvent -> flowController.setWeapon(knife));
+
+    buttonStaff.setButtonAction(actionEvent -> flowController.setWeapon(staff));
+
+    buttonSword.setButtonAction(actionEvent -> flowController.setWeapon(sword));
     /*Label label = new Label("This will be a game sometime");
     label.setAlignment(Pos.CENTER);
     */

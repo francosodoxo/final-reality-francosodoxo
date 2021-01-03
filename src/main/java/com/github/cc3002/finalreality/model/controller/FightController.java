@@ -9,6 +9,7 @@ import com.github.cc3002.finalreality.model.character.player.*;
  * Controller for managing the fights
  */
 public class FightController {
+  private IUnit target;
 
   /**
    * Method invoked to perform an engineer's attack

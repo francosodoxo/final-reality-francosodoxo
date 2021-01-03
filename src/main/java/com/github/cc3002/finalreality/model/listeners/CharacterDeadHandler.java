@@ -1,5 +1,6 @@
 package com.github.cc3002.finalreality.model.listeners;
 
+import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.controller.PlayerController;
 import com.github.cc3002.finalreality.model.states.PlayerWinsState;
 
@@ -23,6 +24,7 @@ public class CharacterDeadHandler implements PropertyChangeListener {
    */
   @Override
   public void propertyChange(PropertyChangeEvent evt) {
-    playerController.characterDead();
+
+    playerController.characterDead((ICharacter) evt.getNewValue());
   }
 }

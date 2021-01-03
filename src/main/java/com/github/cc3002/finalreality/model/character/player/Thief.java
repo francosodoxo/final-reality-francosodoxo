@@ -104,7 +104,7 @@ public class Thief extends AbstractCharacter implements IThiefAllowedWeapons {
    */
   @Override
   public void attackTo(IUnit enemy) {
-    if(enemy.getHealthPoints()>0 && !enemy.equals(this)){
+    if(enemy.getHealthPoints()>0 && !enemy.equals(this) && this.getHealthPoints() > 0){
       enemy.receiveAtk(this.getEquippedWeapon().getDamage());
     }
   }
