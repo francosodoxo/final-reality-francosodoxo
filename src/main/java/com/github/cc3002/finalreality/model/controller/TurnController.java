@@ -1,5 +1,7 @@
 package com.github.cc3002.finalreality.model.controller;
 
+import com.github.cc3002.finalreality.model.character.Enemy;
+import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.IUnit;
 import com.github.cc3002.finalreality.model.character.player.BlackMagician;
 
@@ -24,6 +26,7 @@ public class TurnController {
    */
   public IUnit getUnit(){
     current = turns.poll();
+    current.isPlayable();
     return current;
   }
 
@@ -62,7 +65,11 @@ public class TurnController {
     return current;
   }
 
-  public void delete(IUnit character) {
-    turns.remove(character);
+  public void deleteEnemy(Enemy enemy){
+    turns.remove(enemy);
+  }
+
+  public void deleteCharacter(ICharacter character) {
+    turns.remove((IUnit) character);
   }
 }

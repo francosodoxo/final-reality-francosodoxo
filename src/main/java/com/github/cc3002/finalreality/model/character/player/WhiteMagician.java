@@ -116,6 +116,11 @@ public class WhiteMagician extends AbstractMagician implements IWhiteAllowedWeap
     }
   }
 
+  @Override
+  public void isPlayable() {
+    ;
+  }
+
   /**
    * Wait their turn
    */

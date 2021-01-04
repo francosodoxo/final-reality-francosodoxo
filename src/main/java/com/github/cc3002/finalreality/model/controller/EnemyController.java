@@ -2,6 +2,7 @@ package com.github.cc3002.finalreality.model.controller;
 
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.IUnit;
+import com.github.cc3002.finalreality.model.listeners.AttackToCharacterHandler;
 import com.github.cc3002.finalreality.model.listeners.EnemyDeadHandler;
 
 import java.beans.PropertyChangeListener;
@@ -15,15 +16,17 @@ public class EnemyController {
   private int enemiesAlive;
   private PropertyChangeSupport noEnemiesOnGame = new PropertyChangeSupport(this);
   private EnemyDeadHandler enemyDeadHandler= new EnemyDeadHandler(this);
+  private AttackToCharacterHandler attackToCharacterHandler;
   private TurnController turnController;
 
   /**
    * Creates a Enemy Controller
    */
-  public EnemyController(TurnController turnController){
+  public EnemyController(TurnController turnController, AttackToCharacterHandler attackToCharacterHandler){
     enemies = new HashMap<String,Enemy>();
     enemiesAlive = 0;
     this.turnController = turnController;
+    this.attackToCharacterHandler = attackToCharacterHandler;
   }
 
   /**
@@ -43,7 +46,7 @@ public class EnemyController {
     if(enemiesAlive==0){
       noEnemiesOnGame.firePropertyChange("enemiesDead", oldEnemiesAlive, enemiesAlive);
     }
-    turnController.delete(enemyDead);
+    turnController.deleteEnemy(enemyDead);
   }
 
   /**
@@ -61,6 +64,7 @@ public class EnemyController {
     enemy.addUnitDeadListener(enemyDeadHandler);
     enemies.put(enemy.getName(),enemy);
     enemiesAlive++;
+    enemy.addAttackToCharacterListener(attackToCharacterHandler);
     return enemy;
   }
 

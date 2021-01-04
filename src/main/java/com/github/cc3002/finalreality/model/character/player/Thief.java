@@ -109,6 +109,11 @@ public class Thief extends AbstractCharacter implements IThiefAllowedWeapons {
     }
   }
 
+  @Override
+  public void isPlayable() {
+    ;
+  }
+
   /**
    * Wait their turn
    */

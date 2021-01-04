@@ -16,7 +16,7 @@ class WinGame extends Application {
           .setText("YOU WIN THE GAME! YOU'RE A GOD")
           .build();
   public static void main(String[] args) {
-    launch(args);
+    //launch(args);
   }
 
   @Override

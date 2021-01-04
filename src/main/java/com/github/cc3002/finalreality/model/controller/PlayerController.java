@@ -3,19 +3,24 @@ package com.github.cc3002.finalreality.model.controller;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.IUnit;
 import com.github.cc3002.finalreality.model.character.player.*;
+import com.github.cc3002.finalreality.model.listeners.AttackToCharacterHandler;
 import com.github.cc3002.finalreality.model.listeners.CharacterDeadHandler;
 import com.github.cc3002.finalreality.model.weapon.*;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Random;
+import java.util.concurrent.Flow;
 
 public class PlayerController {
   private HashMap<String, ICharacter> playerCharacters;
   private HashMap<String, IWeapon> weapons;
   private PropertyChangeSupport noPlayersOnGame = new PropertyChangeSupport(this);
   private CharacterDeadHandler characterDeadHandler = new CharacterDeadHandler(this);
+  private AttackToCharacterHandler attackToCharacterHandler;
   private int charactersAlive;
   private TurnController turnController;
   /**
@@ -45,7 +50,7 @@ public class PlayerController {
     if(charactersAlive == 0){
       noPlayersOnGame.firePropertyChange("noCharactersOnGame",oldCharactersAlive,charactersAlive);
     }
-    turnController.delete((IUnit) character);
+    turnController.deleteCharacter(character);
   }
 
   /**
@@ -184,5 +189,20 @@ public class PlayerController {
    */
   public int getCharactersAlive() {
     return charactersAlive;
+  }
+
+  public ICharacter chooseCharacter() {
+    ICharacter[] characters = (ICharacter[]) playerCharacters.values().toArray();
+    Random rnd = new Random();
+    int index = rnd.nextInt(5);
+    return characters[index];
+  }
+
+  public AttackToCharacterHandler getAttackToCharacterHandler() {
+    return attackToCharacterHandler;
+  }
+
+  public void addFlowController(FlowController flowController){
+    attackToCharacterHandler = new AttackToCharacterHandler(this, flowController);
   }
 }

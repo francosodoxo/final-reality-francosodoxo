@@ -5,6 +5,7 @@ import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.IUnit;
 import com.github.cc3002.finalreality.model.character.player.*;
 import com.github.cc3002.finalreality.model.controller.*;
+import com.github.cc3002.finalreality.model.listeners.RefreshLabelsHandler;
 import com.github.cc3002.finalreality.model.weapon.*;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -32,9 +33,17 @@ public class FinalReality extends Application {
   public void start(Stage primaryStage) throws FileNotFoundException {
     TurnController turnController = new TurnController();
     CharacterController characterController = new CharacterController();
-    EnemyController enemyController = new EnemyController(turnController);
-    PlayerController playerController = new PlayerController(turnController);
     FightController fightController = new FightController();
+    PlayerController playerController = new PlayerController(turnController);
+    EnemyController enemyController = new EnemyController(turnController,playerController.getAttackToCharacterHandler());
+    FlowController flowController = new FlowController(enemyController,
+            playerController,
+            turnController);
+    playerController.addFlowController(flowController);
+
+    RefreshLabelsHandler refreshLabelsHandler = new RefreshLabelsHandler(characterController,enemyController);
+    flowController.addRefreshLabelListener(refreshLabelsHandler);
+
     WeaponController weaponController = new WeaponController();
     BlockingQueue<IUnit> turns = turnController.getTurnQueue();
     BlackMagician blackMagician = characterController.createBlack(
@@ -44,6 +53,7 @@ public class FinalReality extends Application {
             7
     );
     turnController.add(blackMagician);
+    playerController.add(blackMagician);
     Thief thief = characterController.createThief(
             "Debian",
             turns,
@@ -51,6 +61,7 @@ public class FinalReality extends Application {
             7
     );
     turnController.add(thief);
+    playerController.add(thief);
     Knight knight = characterController.createKnight(
             "Manjaro",
             turns,
@@ -58,6 +69,7 @@ public class FinalReality extends Application {
             6
     );
     turnController.add(knight);
+    playerController.add(knight);
     WhiteMagician whiteMagician = characterController.createWhite(
             "Solaris",
             turns,
@@ -65,6 +77,7 @@ public class FinalReality extends Application {
             6
     );
     turnController.add(whiteMagician);
+    playerController.add(whiteMagician);
     Engineer engineer = characterController.createEngineer(
             "Arch",
             turns,
@@ -72,6 +85,7 @@ public class FinalReality extends Application {
             6
     );
     turnController.add(engineer);
+    playerController.add(engineer);
     Enemy enemy1 = enemyController.createEnemy(
             "The evil Dog",
             10,
@@ -115,9 +129,6 @@ public class FinalReality extends Application {
             8,
             20
     );
-    FlowController flowController = new FlowController(enemyController,
-            playerController,
-            turnController);
     flowController.addApplication(this);
     primaryStage.setTitle("Final reality");
     int width = 1280;
@@ -264,6 +275,13 @@ public class FinalReality extends Application {
             .setPosition(300,350)
             .setText("Current turn: "+turnController.getUnit().getName())
             .build();
+    refreshLabelsHandler.addLabel(labelBlackLife);
+    refreshLabelsHandler.addLabel(labelEnemy1Life);
+    refreshLabelsHandler.addLabel(labelEnemy2Life);
+    refreshLabelsHandler.addLabel(labelEngineerLife);
+    refreshLabelsHandler.addLabel(labelKnightLife);
+    refreshLabelsHandler.addLabel(labelThiefLife);
+    refreshLabelsHandler.addLabel(labelWhiteLife);
 
     mainGroup.getChildren().add(enemies);
     mainGroup.getChildren().add(playerCharacters);
@@ -287,7 +305,7 @@ public class FinalReality extends Application {
 
     buttonAttack.setButtonAction(actionEvent -> {
       flowController.doAttackAction();
-      labelBlackLife.setText("HP:" + characterController.getHealthPoints(characterController.getName(blackMagician)));
+      /*labelBlackLife.setText("HP:" + characterController.getHealthPoints(characterController.getName(blackMagician)));
       labelEnemy1Life.setText("HP: "+ enemyController.getHealthPoints(enemyController.getName(enemy1)));
       labelEnemy2Life.setText("HP: "+ enemyController.getHealthPoints(enemyController.getName(enemy2)));
       labelEngineerLife.setText("HP: "+ characterController.getHealthPoints(characterController.getName(engineer)));
@@ -295,6 +313,7 @@ public class FinalReality extends Application {
       labelThiefLife.setText("HP: "+ characterController.getHealthPoints(characterController.getName(thief)));
       labelWhiteLife.setText("HP: "+characterController.getHealthPoints(characterController.getName(whiteMagician)));
       labelCurrentTurn.setText("Current Turn: " + turnController.getCurrent().getName());
+       */
     });
 
     buttonEquip.setButtonAction(actionEvent -> flowController.equip());
@@ -308,6 +327,8 @@ public class FinalReality extends Application {
     buttonStaff.setButtonAction(actionEvent -> flowController.setWeapon(staff));
 
     buttonSword.setButtonAction(actionEvent -> flowController.setWeapon(sword));
+
+    flowController.run();
     /*Label label = new Label("This will be a game sometime");
     label.setAlignment(Pos.CENTER);
     */

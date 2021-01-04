@@ -111,6 +111,11 @@ public class Engineer extends AbstractCharacter implements IEngineerAllowedWeapo
     }
   }
 
+  @Override
+  public void isPlayable() {
+    ;
+  }
+
   /**
    * Wait their turn
    */

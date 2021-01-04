@@ -22,6 +22,7 @@ public class FightState implements IGameState, IFightState{
     fightController = new FightController();
     this.turnController = turnController;
     source = turnController.getUnit();
+    source.isPlayable();
   }
 
   /**
@@ -62,6 +63,11 @@ public class FightState implements IGameState, IFightState{
   @Override
   public void attackTo() {
     fightController.attacksTo(source, target);
+    try {
+      Thread.sleep(100);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
   }
 
   @Override

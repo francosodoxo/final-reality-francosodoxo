@@ -118,6 +118,11 @@ public class BlackMagician extends AbstractMagician implements IBlackAllowedWeap
     }
   }
 
+  @Override
+  public void isPlayable() {
+    ;
+  }
+
   /***
    * Wait their turn
    */

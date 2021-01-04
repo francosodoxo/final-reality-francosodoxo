@@ -111,6 +111,11 @@ public class Knight extends AbstractCharacter implements IKnightAllowedWeapons {
     }
   }
 
+  @Override
+  public void isPlayable() {
+    ;
+  }
+
   /**
    * Wait their turn
    */

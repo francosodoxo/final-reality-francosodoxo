@@ -10,6 +10,7 @@ import com.github.cc3002.finalreality.model.character.IUnit;
 import com.github.cc3002.finalreality.model.character.player.BlackMagician;
 import com.github.cc3002.finalreality.model.listeners.NoCharactersOnGame;
 import com.github.cc3002.finalreality.model.listeners.NoEnemiesOnGame;
+import com.github.cc3002.finalreality.model.listeners.RefreshLabelsHandler;
 import com.github.cc3002.finalreality.model.states.FightState;
 import com.github.cc3002.finalreality.model.states.IFightState;
 import com.github.cc3002.finalreality.model.states.IGameState;
@@ -21,10 +22,8 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-
-
-
-
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeSupport;
 
 public class FlowController {
   private IGameState currentState;
@@ -33,6 +32,7 @@ public class FlowController {
   private TurnController turnController;
   private NoCharactersOnGame noCharactersOnGame = new NoCharactersOnGame(this);
   private NoEnemiesOnGame noEnemiesOnGame = new NoEnemiesOnGame(this);
+  private PropertyChangeSupport labelChange;
   private Application application;
   /**
    * Class for manage the game's flow, it has 3 states: fight, player wins and player loses
@@ -47,7 +47,7 @@ public class FlowController {
     this.enemyController = enemyController;
     playerController.addNoPlayersOnGameListener(noCharactersOnGame);
     enemyController.addNoEnemiesOnGameListener(noEnemiesOnGame);
-    currentState = new FightState(this.turnController);
+    labelChange = new PropertyChangeSupport(this);
 
   }
 
@@ -87,6 +87,7 @@ public class FlowController {
     }catch (ClassCastException e){
       ;
     }
+    refreshLabels();
   }
 
   public void equip() {
@@ -99,6 +100,18 @@ public class FlowController {
 
   public void addApplication(FinalReality finalReality) {
     application = finalReality;
+  }
+
+  public void run() {
+    currentState = new FightState(this.turnController);
+  }
+
+  public void addRefreshLabelListener(RefreshLabelsHandler refreshLabelsHandler) {
+    labelChange.addPropertyChangeListener(refreshLabelsHandler);
+  }
+
+  public void refreshLabels(){
+    labelChange.firePropertyChange("refresh",0,0);
   }
 }
 

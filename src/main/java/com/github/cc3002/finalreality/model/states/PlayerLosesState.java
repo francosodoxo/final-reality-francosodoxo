@@ -19,7 +19,7 @@ class LoseGame extends Application {
           .setText("Sorry, you did your best")
           .build();
   public static void main(String[] args) {
-    launch(args);
+    //launch(args);
   }
 
   @Override

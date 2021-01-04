@@ -119,8 +119,8 @@ public class AbstractSetUpTest {
 
     characterController = new CharacterController();
     turnController = new TurnController();
-    enemyController = new EnemyController(turnController);
     playerController = new PlayerController(turnController);
+    enemyController = new EnemyController(turnController,playerController.getAttackToCharacterHandler());
     weaponController = new WeaponController();
     fightController = new FightController();
 
