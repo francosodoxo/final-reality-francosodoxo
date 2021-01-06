@@ -41,7 +41,7 @@ public class FinalReality extends Application {
             turnController);
     playerController.addFlowController(flowController);
 
-    RefreshLabelsHandler refreshLabelsHandler = new RefreshLabelsHandler(characterController,enemyController);
+    RefreshLabelsHealthHandler refreshLabelsHealthHandler = new RefreshLabelsHealthHandler(characterController,enemyController);
     flowController.addRefreshLabelListener(refreshLabelsHandler);
 
     WeaponController weaponController = new WeaponController();
@@ -275,13 +275,13 @@ public class FinalReality extends Application {
             .setPosition(300,350)
             .setText("Current turn: "+turnController.getUnit().getName())
             .build();
-    refreshLabelsHandler.addLabel(labelBlackLife);
-    refreshLabelsHandler.addLabel(labelEnemy1Life);
-    refreshLabelsHandler.addLabel(labelEnemy2Life);
-    refreshLabelsHandler.addLabel(labelEngineerLife);
-    refreshLabelsHandler.addLabel(labelKnightLife);
-    refreshLabelsHandler.addLabel(labelThiefLife);
-    refreshLabelsHandler.addLabel(labelWhiteLife);
+    refreshLabelsHandler.addLabel(characterController.getName(blackMagician),labelBlackLife);
+    refreshLabelsHandler.addLabel(enemyController.getName(enemy1),labelEnemy1Life);
+    refreshLabelsHandler.addLabel(enemyController.getName(enemy2),labelEnemy2Life);
+    refreshLabelsHandler.addLabel(characterController.getName(engineer),labelEngineerLife);
+    refreshLabelsHandler.addLabel(characterController.getName(knight),labelKnightLife);
+    refreshLabelsHandler.addLabel(characterController.getName(thief),labelThiefLife);
+    refreshLabelsHandler.addLabel(characterController.getName(whiteMagician),labelWhiteLife);
 
     mainGroup.getChildren().add(enemies);
     mainGroup.getChildren().add(playerCharacters);
@@ -305,15 +305,6 @@ public class FinalReality extends Application {
 
     buttonAttack.setButtonAction(actionEvent -> {
       flowController.doAttackAction();
-      /*labelBlackLife.setText("HP:" + characterController.getHealthPoints(characterController.getName(blackMagician)));
-      labelEnemy1Life.setText("HP: "+ enemyController.getHealthPoints(enemyController.getName(enemy1)));
-      labelEnemy2Life.setText("HP: "+ enemyController.getHealthPoints(enemyController.getName(enemy2)));
-      labelEngineerLife.setText("HP: "+ characterController.getHealthPoints(characterController.getName(engineer)));
-      labelKnightLife.setText("HP: "+ characterController.getHealthPoints(characterController.getName(knight)));
-      labelThiefLife.setText("HP: "+ characterController.getHealthPoints(characterController.getName(thief)));
-      labelWhiteLife.setText("HP: "+characterController.getHealthPoints(characterController.getName(whiteMagician)));
-      labelCurrentTurn.setText("Current Turn: " + turnController.getCurrent().getName());
-       */
     });
 
     buttonEquip.setButtonAction(actionEvent -> flowController.equip());

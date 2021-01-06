@@ -84,4 +84,9 @@ public class FightState implements IGameState, IFightState{
   public void waitTurn() {
     turnController.waitTurn(source);
   }
+
+  @Override
+  public IUnit getTarget() {
+    return target;
+  }
 }

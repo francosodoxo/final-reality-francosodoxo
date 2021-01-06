@@ -32,7 +32,7 @@ public class FlowController {
   private TurnController turnController;
   private NoCharactersOnGame noCharactersOnGame = new NoCharactersOnGame(this);
   private NoEnemiesOnGame noEnemiesOnGame = new NoEnemiesOnGame(this);
-  private PropertyChangeSupport labelChange;
+  private PropertyChangeSupport labelHealthChange;
   private Application application;
   /**
    * Class for manage the game's flow, it has 3 states: fight, player wins and player loses
@@ -47,7 +47,7 @@ public class FlowController {
     this.enemyController = enemyController;
     playerController.addNoPlayersOnGameListener(noCharactersOnGame);
     enemyController.addNoEnemiesOnGameListener(noEnemiesOnGame);
-    labelChange = new PropertyChangeSupport(this);
+    labelHealthChange = new PropertyChangeSupport(this);
 
   }
 
@@ -79,15 +79,21 @@ public class FlowController {
     ((IFightState)currentState).setTarget(enemy);
   }
 
+  public IUnit getTarget(){
+    return ((IFightState) currentState).getTarget();
+  }
+
   public void doAttackAction() {
     ((IFightState) currentState).attackTo();
     try {
+      refreshHealthLabels(getTarget());
       ((IFightState) currentState).waitTurn();
       currentState = new FightState(turnController);
+      refreshCurrentUnit(currentState.getSource());
     }catch (ClassCastException e){
       ;
     }
-    refreshLabels();
+
   }
 
   public void equip() {
@@ -107,11 +113,11 @@ public class FlowController {
   }
 
   public void addRefreshLabelListener(RefreshLabelsHandler refreshLabelsHandler) {
-    labelChange.addPropertyChangeListener(refreshLabelsHandler);
+    labelHealthChange.addPropertyChangeListener(refreshLabelsHandler);
   }
 
-  public void refreshLabels(){
-    labelChange.firePropertyChange("refresh",0,0);
+  public void refreshHealthLabels(IUnit target){
+    labelHealthChange.firePropertyChange("refresh",0,target);
   }
 }
 

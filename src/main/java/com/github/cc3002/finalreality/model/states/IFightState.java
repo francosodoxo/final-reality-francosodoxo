@@ -16,4 +16,6 @@ public interface IFightState {
   void setWeapon(IWeapon weapon);
 
   void waitTurn();
+
+  IUnit getTarget();
 }
