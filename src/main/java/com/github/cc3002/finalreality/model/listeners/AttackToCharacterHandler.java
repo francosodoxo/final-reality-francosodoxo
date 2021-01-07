@@ -23,7 +23,7 @@ public class AttackToCharacterHandler implements PropertyChangeListener {
 
   @Override
   public void propertyChange(PropertyChangeEvent evt) {
-    Enemy enemy = (Enemy) evt.getSource();
+    Enemy enemy = (Enemy) evt.getNewValue();
     ICharacter character = playerController.chooseCharacter();
     flowController.setTarget((IUnit) character);
     try {

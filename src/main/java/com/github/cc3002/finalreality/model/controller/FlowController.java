@@ -1,28 +1,17 @@
 package com.github.cc3002.finalreality.model.controller;
 
 import com.github.cc3002.finalreality.gui.FinalReality;
-import com.github.cc3002.finalreality.gui.actions.IAction;
-import com.github.cc3002.finalreality.gui.elements.LabelElement;
-import com.github.cc3002.finalreality.gui.elements.LabelElementBuilder;
-import com.github.cc3002.finalreality.model.character.Enemy;
-import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.IUnit;
-import com.github.cc3002.finalreality.model.character.player.BlackMagician;
 import com.github.cc3002.finalreality.model.listeners.NoCharactersOnGame;
 import com.github.cc3002.finalreality.model.listeners.NoEnemiesOnGame;
-import com.github.cc3002.finalreality.model.listeners.RefreshLabelsHandler;
+import com.github.cc3002.finalreality.model.listeners.RefreshLabelCurrentTurn;
+import com.github.cc3002.finalreality.model.listeners.RefreshLabelsHealthHandler;
 import com.github.cc3002.finalreality.model.states.FightState;
 import com.github.cc3002.finalreality.model.states.IFightState;
 import com.github.cc3002.finalreality.model.states.IGameState;
-import com.github.cc3002.finalreality.model.states.PlayerWinsState;
-import com.github.cc3002.finalreality.model.weapon.Axe;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
 import javafx.application.Application;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
-import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeSupport;
 
 public class FlowController {
@@ -33,22 +22,19 @@ public class FlowController {
   private NoCharactersOnGame noCharactersOnGame = new NoCharactersOnGame(this);
   private NoEnemiesOnGame noEnemiesOnGame = new NoEnemiesOnGame(this);
   private PropertyChangeSupport labelHealthChange;
+  private PropertyChangeSupport refreshCurrentUnitLabel;
   private Application application;
   /**
    * Class for manage the game's flow, it has 3 states: fight, player wins and player loses
-   * @param enemyController
    * @param playerController
    */
-  public FlowController(EnemyController enemyController,
-                        PlayerController playerController,
+  public FlowController(PlayerController playerController,
                         TurnController turnController){
     this.turnController = turnController;
     this.playerController = playerController;
-    this.enemyController = enemyController;
     playerController.addNoPlayersOnGameListener(noCharactersOnGame);
-    enemyController.addNoEnemiesOnGameListener(noEnemiesOnGame);
     labelHealthChange = new PropertyChangeSupport(this);
-
+    refreshCurrentUnitLabel= new PropertyChangeSupport(this);
   }
 
   /**
@@ -56,7 +42,9 @@ public class FlowController {
    */
   public void goToPlayerWins() throws Exception {
     currentState = currentState.goToPlayerWins();
-    application.stop();
+    if(application != null) {
+      application.stop();
+    }
   }
 
   /**
@@ -64,7 +52,9 @@ public class FlowController {
    */
   public void goToPlayerLoses() throws Exception {
     currentState = currentState.goToPlayerLoses();
-    application.stop();
+    if (application != null) {
+      application.stop();
+    }
   }
 
   /**
@@ -89,11 +79,15 @@ public class FlowController {
       refreshHealthLabels(getTarget());
       ((IFightState) currentState).waitTurn();
       currentState = new FightState(turnController);
-      refreshCurrentUnit(currentState.getSource());
+      refreshCurrentUnit(((IFightState)currentState).getSource());
     }catch (ClassCastException e){
       ;
     }
 
+  }
+
+  public void refreshCurrentUnit(IUnit unit){
+    refreshCurrentUnitLabel.firePropertyChange("current",0,unit);
   }
 
   public void equip() {
@@ -112,12 +106,21 @@ public class FlowController {
     currentState = new FightState(this.turnController);
   }
 
-  public void addRefreshLabelListener(RefreshLabelsHandler refreshLabelsHandler) {
-    labelHealthChange.addPropertyChangeListener(refreshLabelsHandler);
+  public void addRefreshLabelListener(RefreshLabelsHealthHandler refreshLabelsHealthHandler) {
+    labelHealthChange.addPropertyChangeListener(refreshLabelsHealthHandler);
   }
 
   public void refreshHealthLabels(IUnit target){
     labelHealthChange.firePropertyChange("refresh",0,target);
+  }
+
+  public void addRefreshLabelCurrentTurnListener(RefreshLabelCurrentTurn refreshLabelCurrentTurn) {
+    refreshCurrentUnitLabel.addPropertyChangeListener(refreshLabelCurrentTurn);
+  }
+
+  public void addEnemyController(EnemyController enemyController) {
+    this.enemyController = enemyController;
+    enemyController.addNoEnemiesOnGameListener(noEnemiesOnGame);
   }
 }
 

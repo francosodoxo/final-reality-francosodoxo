@@ -89,4 +89,9 @@ public class FightState implements IGameState, IFightState{
   public IUnit getTarget() {
     return target;
   }
+
+  @Override
+  public IUnit getSource() {
+    return source;
+  }
 }

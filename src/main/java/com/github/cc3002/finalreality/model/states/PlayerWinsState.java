@@ -36,7 +36,11 @@ public class PlayerWinsState implements IGameState{
     new Thread(){
       @Override
       public void run(){
-        Application.launch(WinGame.class);
+        try {
+          new WinGame().start(new Stage());
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
       }
     }.start();
   }

@@ -38,7 +38,11 @@ public class PlayerLosesState implements IGameState {
     new Thread(){
       @Override
       public void run(){
-        Application.launch(LoseGame.class);
+        try {
+          new LoseGame().start(new Stage());
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
       }
     }.start();
   }

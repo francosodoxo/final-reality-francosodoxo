@@ -5,7 +5,8 @@ import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.IUnit;
 import com.github.cc3002.finalreality.model.character.player.*;
 import com.github.cc3002.finalreality.model.controller.*;
-import com.github.cc3002.finalreality.model.listeners.RefreshLabelsHandler;
+import com.github.cc3002.finalreality.model.listeners.RefreshLabelCurrentTurn;
+import com.github.cc3002.finalreality.model.listeners.RefreshLabelsHealthHandler;
 import com.github.cc3002.finalreality.model.weapon.*;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -35,14 +36,14 @@ public class FinalReality extends Application {
     CharacterController characterController = new CharacterController();
     FightController fightController = new FightController();
     PlayerController playerController = new PlayerController(turnController);
-    EnemyController enemyController = new EnemyController(turnController,playerController.getAttackToCharacterHandler());
-    FlowController flowController = new FlowController(enemyController,
+    FlowController flowController = new FlowController(
             playerController,
             turnController);
     playerController.addFlowController(flowController);
-
-    RefreshLabelsHealthHandler refreshLabelsHealthHandler = new RefreshLabelsHealthHandler(characterController,enemyController);
-    flowController.addRefreshLabelListener(refreshLabelsHandler);
+    EnemyController enemyController = new EnemyController(turnController,playerController.getAttackToCharacterHandler());
+    flowController.addEnemyController(enemyController);
+    RefreshLabelsHealthHandler refreshLabelsHealthHandler = new RefreshLabelsHealthHandler();
+    flowController.addRefreshLabelListener(refreshLabelsHealthHandler);
 
     WeaponController weaponController = new WeaponController();
     BlockingQueue<IUnit> turns = turnController.getTurnQueue();
@@ -275,13 +276,18 @@ public class FinalReality extends Application {
             .setPosition(300,350)
             .setText("Current turn: "+turnController.getUnit().getName())
             .build();
-    refreshLabelsHandler.addLabel(characterController.getName(blackMagician),labelBlackLife);
-    refreshLabelsHandler.addLabel(enemyController.getName(enemy1),labelEnemy1Life);
-    refreshLabelsHandler.addLabel(enemyController.getName(enemy2),labelEnemy2Life);
-    refreshLabelsHandler.addLabel(characterController.getName(engineer),labelEngineerLife);
-    refreshLabelsHandler.addLabel(characterController.getName(knight),labelKnightLife);
-    refreshLabelsHandler.addLabel(characterController.getName(thief),labelThiefLife);
-    refreshLabelsHandler.addLabel(characterController.getName(whiteMagician),labelWhiteLife);
+    refreshLabelsHealthHandler.addLabel(characterController.getName(blackMagician),labelBlackLife);
+    refreshLabelsHealthHandler.addLabel(enemyController.getName(enemy1),labelEnemy1Life);
+    refreshLabelsHealthHandler.addLabel(enemyController.getName(enemy2),labelEnemy2Life);
+    refreshLabelsHealthHandler.addLabel(characterController.getName(engineer),labelEngineerLife);
+    refreshLabelsHealthHandler.addLabel(characterController.getName(knight),labelKnightLife);
+    refreshLabelsHealthHandler.addLabel(characterController.getName(thief),labelThiefLife);
+    refreshLabelsHealthHandler.addLabel(characterController.getName(whiteMagician),labelWhiteLife);
+
+    RefreshLabelCurrentTurn refreshLabelCurrentTurn = new RefreshLabelCurrentTurn();
+    refreshLabelCurrentTurn.addLabel(labelCurrentTurn);
+    playerController.addFlowController(flowController);
+    flowController.addRefreshLabelCurrentTurnListener(refreshLabelCurrentTurn);
 
     mainGroup.getChildren().add(enemies);
     mainGroup.getChildren().add(playerCharacters);

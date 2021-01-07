@@ -18,4 +18,6 @@ public interface IFightState {
   void waitTurn();
 
   IUnit getTarget();
+
+  IUnit getSource();
 }

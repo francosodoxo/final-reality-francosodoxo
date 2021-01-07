@@ -29,6 +29,12 @@ Run this project with the Gradle script provided by default. Be careful
 with the java version you want to run. This will not run with newer java 
 versions unless you update the Gradle configurations.
 
+```sh
+gradle build && gradle run
+```
+Optionally, you can run this application with intellij by clicking
+the run button aside FinalReality gui's class
+
 Description
 -----------
 This project was designed using SOLID principles. The player has characters

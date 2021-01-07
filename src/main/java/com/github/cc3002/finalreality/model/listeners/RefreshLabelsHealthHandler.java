@@ -10,16 +10,13 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class RefreshLabelsHandler implements PropertyChangeListener {
+public class RefreshLabelsHealthHandler implements PropertyChangeListener {
 
   private HashMap<String,LabelElement> labels;
   private CharacterController characterController;
   private EnemyController enemyController;
 
-  public RefreshLabelsHandler(CharacterController characterController,
-                              EnemyController enemyController){
-    this.characterController = characterController;
-    this.enemyController = enemyController;
+  public RefreshLabelsHealthHandler(){
     labels = new HashMap<>();
   }
 

@@ -46,6 +46,7 @@ public class FlowControllerTest extends AbstractSetUpTest {
     turnController.add(blackMagician);
     turnController.add(whiteMagician);
     turnController.add(thief);
+    flowController.run();
   }
 
   @Test
