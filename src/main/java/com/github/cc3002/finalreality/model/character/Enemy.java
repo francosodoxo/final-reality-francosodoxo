@@ -1,5 +1,6 @@
 package com.github.cc3002.finalreality.model.character;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.Objects;
@@ -20,7 +21,7 @@ public class Enemy extends AbstractUnit{
 
   private final int weight;
   private int atk;
-
+  private final PropertyChangeSupport attackToCharacter;
   /**
    * Creates a new enemy with a name, a weight and the queue with the characters ready to
    * play.
@@ -44,6 +45,7 @@ public class Enemy extends AbstractUnit{
     super(turnsQueue, name, healthPoints, UnitClass.ENEMY,defense);
     this.weight = weight;
     this.atk = atk;
+    attackToCharacter = new PropertyChangeSupport(this);
   }
 
   /**
@@ -112,8 +114,18 @@ public class Enemy extends AbstractUnit{
    * Attack to a unit
    * */
   public void attackTo(IUnit character){
-    if(character.getHealthPoints()>0 && !character.equals(this)) {
+    if(character.getHealthPoints()>0 && !character.equals(this) && this.getHealthPoints() > 0) {
       character.receiveAtk(getAtk());
     }
+  }
+
+  public void addAttackToCharacterListener(PropertyChangeListener listener){
+    attackToCharacter.addPropertyChangeListener(listener);
+  }
+
+  @Override
+  public void isPlayable() {
+    System.out.println("isPlayable");
+    attackToCharacter.firePropertyChange(new PropertyChangeEvent(this,"attack",0,this));
   }
 }

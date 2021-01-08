@@ -22,7 +22,7 @@ public class FightControllerEngineerAttack extends AbstractSetUpTest {
   }
   @Test
   public void EngineerAttacksWithAxe(){
-    engineer.equip(super.getAxeEngineer());
+    engineer.tryToEquip(super.getAxeEngineer());
     int expectedHp = enemy.getHealthPoints() +
             enemy.getDefense() -
             engineer.getEquippedWeapon().getDamage();
@@ -32,7 +32,7 @@ public class FightControllerEngineerAttack extends AbstractSetUpTest {
 
   @Test
   public void EngineerAttacksWithBow(){
-    engineer.equip(super.getBowEngineer());
+    engineer.tryToEquip(super.getBowEngineer());
     int expectedHp = enemy.getHealthPoints() +
             enemy.getDefense() -
             engineer.getEquippedWeapon().getDamage();

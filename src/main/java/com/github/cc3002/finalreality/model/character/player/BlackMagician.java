@@ -87,6 +87,8 @@ public class BlackMagician extends AbstractMagician implements IBlackAllowedWeap
     }
   }
 
+
+
   /**
    * Get the equipped weapon
    * @return
@@ -111,9 +113,14 @@ public class BlackMagician extends AbstractMagician implements IBlackAllowedWeap
    */
   @Override
   public void attackTo(IUnit enemy) {
-    if(enemy.getHealthPoints()>0 && !enemy.equals(this)){
+    if(enemy.getHealthPoints()>0 && !enemy.equals(this) && this.getHealthPoints()>0){
       enemy.receiveAtk(this.getEquippedWeapon().getDamage());
     }
+  }
+
+  @Override
+  public void isPlayable() {
+    ;
   }
 
   /***
@@ -123,5 +130,15 @@ public class BlackMagician extends AbstractMagician implements IBlackAllowedWeap
   public void waitTurn() {
     super.getScheduledExecutor()
             .schedule(this::addToQueue, this.getEquippedWeapon().getWeight() / 10, TimeUnit.SECONDS);
+  }
+
+  @Override
+  public void tryToEquip(IWeapon weapon) {
+    try{
+      this.equip((IWeaponBlack) weapon);
+    }catch (Exception e){
+      e.printStackTrace();
+    }
+
   }
 }

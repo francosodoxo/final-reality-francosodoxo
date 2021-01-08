@@ -23,6 +23,10 @@ public class NoEnemiesOnGame implements PropertyChangeListener {
    */
   @Override
   public void propertyChange(PropertyChangeEvent evt) {
-    flowController.goToPlayerWins();
+    try {
+      flowController.goToPlayerWins();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }

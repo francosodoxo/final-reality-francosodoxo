@@ -3,9 +3,10 @@ package com.github.cc3002.finalreality.model.controller;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.IUnit;
 import com.github.cc3002.finalreality.model.character.player.*;
+import com.github.cc3002.finalreality.model.listeners.CharacterDeadHandler;
 import com.github.cc3002.finalreality.model.weapon.*;
 
-import java.util.ArrayList;
+import java.beans.PropertyChangeSupport;
 import java.util.HashMap;
 import java.util.concurrent.BlockingQueue;
 

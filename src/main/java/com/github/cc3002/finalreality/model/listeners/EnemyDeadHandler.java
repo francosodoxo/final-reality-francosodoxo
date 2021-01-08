@@ -1,5 +1,6 @@
 package com.github.cc3002.finalreality.model.listeners;
 
+import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.controller.EnemyController;
 
 import java.beans.PropertyChangeEvent;
@@ -22,6 +23,6 @@ public class EnemyDeadHandler implements PropertyChangeListener {
    */
   @Override
   public void propertyChange(PropertyChangeEvent evt) {
-    enemyController.enemyDead();
+    enemyController.enemyDead((Enemy) evt.getNewValue());
   }
 }

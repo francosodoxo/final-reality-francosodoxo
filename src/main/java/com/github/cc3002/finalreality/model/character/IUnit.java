@@ -75,4 +75,6 @@ public interface IUnit {
   void addUnitDeadListener(PropertyChangeListener listener);
 
   void setTurnsQueue(BlockingQueue<IUnit> turns);
+
+  void isPlayable();
 }

@@ -111,9 +111,14 @@ public class WhiteMagician extends AbstractMagician implements IWhiteAllowedWeap
    */
   @Override
   public void attackTo(IUnit enemy) {
-    if(enemy.getHealthPoints()>0 && !enemy.equals(this)){
+    if(enemy.getHealthPoints()>0 && !enemy.equals(this) && this.getHealthPoints() > 0){
       enemy.receiveAtk(this.getEquippedWeapon().getDamage());
     }
+  }
+
+  @Override
+  public void isPlayable() {
+    ;
   }
 
   /**
@@ -124,5 +129,14 @@ public class WhiteMagician extends AbstractMagician implements IWhiteAllowedWeap
 
     super.getScheduledExecutor()
             .schedule(this::addToQueue, this.getEquippedWeapon().getWeight() / 10, TimeUnit.SECONDS);
+  }
+
+  @Override
+  public void tryToEquip(IWeapon weapon) {
+    try{
+      this.equip((IWeaponWhite) weapon);
+    }catch(Exception e){
+      e.printStackTrace();
+    }
   }
 }

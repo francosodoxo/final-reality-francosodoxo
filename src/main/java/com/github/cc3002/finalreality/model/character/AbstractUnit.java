@@ -23,7 +23,7 @@ public abstract class AbstractUnit implements IUnit{
   private int healthPoints;
   private int defense;
   private UnitClass unitClass;
-  private PropertyChangeSupport unitDead = new PropertyChangeSupport(this);
+  private PropertyChangeSupport unitDead;
 
   private ScheduledExecutorService scheduledExecutor;
 
@@ -48,6 +48,7 @@ public abstract class AbstractUnit implements IUnit{
     this.unitClass = unitClass;
     this.defense = defense;
     scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
+    unitDead = new PropertyChangeSupport(this);
   }
   public void addUnitDeadListener(PropertyChangeListener listener){
     unitDead.addPropertyChangeListener(listener);
@@ -136,7 +137,7 @@ public abstract class AbstractUnit implements IUnit{
     int oldHealthPoints = healthPoints;
     healthPoints = Math.max(0,newValue);
     if(healthPoints == 0){
-      unitDead.firePropertyChange("unitDead",oldHealthPoints,healthPoints);
+      unitDead.firePropertyChange("unitDead",oldHealthPoints,this);
     }
   }
 
@@ -168,5 +169,7 @@ public abstract class AbstractUnit implements IUnit{
   public ScheduledExecutorService getScheduledExecutor(){
     return scheduledExecutor;
   }
+
+  public abstract void isPlayable();
 
 }

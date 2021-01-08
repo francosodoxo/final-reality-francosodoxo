@@ -42,7 +42,7 @@ public class WhiteMagicianDataControllerTest extends AbstractSetUpTest {
 
   @Test
   public void getWhiteWeapon(){
-    whiteMagician.equip(super.getStaffWhite());
+    whiteMagician.tryToEquip(super.getStaffWhite());
     IWeaponWhite weapon = characterController.getWhiteWeapon(super.getWhiteMagicianName());
     assertEquals(super.getStaffWhite(), weapon);
   }

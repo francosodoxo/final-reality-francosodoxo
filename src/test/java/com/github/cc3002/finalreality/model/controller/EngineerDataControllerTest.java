@@ -43,7 +43,7 @@ public class EngineerDataControllerTest extends AbstractSetUpTest {
 
   @Test
   public void getEngineerWeapon(){
-    engineer.equip(super.getAxeEngineer());
+    engineer.tryToEquip(super.getAxeEngineer());
     IWeaponEngineer weapon = characterController.getEngineerWeapon(super.getEngineerName());
     assertEquals(super.getAxeEngineer(),weapon);
   }

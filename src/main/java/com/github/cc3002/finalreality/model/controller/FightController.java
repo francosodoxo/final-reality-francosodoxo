@@ -9,14 +9,7 @@ import com.github.cc3002.finalreality.model.character.player.*;
  * Controller for managing the fights
  */
 public class FightController {
-  /**
-   * Method invoked to perform a black magician's attack
-   * @param blackMagician
-   * @param enemy
-   */
-  public void blackMagicianAttacksTo(BlackMagician blackMagician, Enemy enemy) {
-    blackMagician.attackTo(enemy);
-  }
+  private IUnit target;
 
   /**
    * Method invoked to perform an engineer's attack
@@ -61,5 +54,9 @@ public class FightController {
    */
   public void enemyAttacksTo(Enemy enemy, IUnit character) {
     enemy.attackTo(character);
+  }
+
+  public void attacksTo(IUnit source, IUnit target){
+    source.attackTo(target);
   }
 }

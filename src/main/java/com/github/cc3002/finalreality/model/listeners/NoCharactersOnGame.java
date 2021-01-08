@@ -22,6 +22,10 @@ public class NoCharactersOnGame implements PropertyChangeListener {
    */
   @Override
   public void propertyChange(PropertyChangeEvent evt) {
-    flowController.goToPlayerLoses();
+    try {
+      flowController.goToPlayerLoses();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }

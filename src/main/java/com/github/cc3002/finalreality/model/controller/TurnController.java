@@ -1,5 +1,7 @@
 package com.github.cc3002.finalreality.model.controller;
 
+import com.github.cc3002.finalreality.model.character.Enemy;
+import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.IUnit;
 import com.github.cc3002.finalreality.model.character.player.BlackMagician;
 
@@ -9,6 +11,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public class TurnController {
   private final BlockingQueue<IUnit> turns;
+  private IUnit current;
 
   /**
    * Class to manage the player's turn
@@ -22,7 +25,9 @@ public class TurnController {
    * @return
    */
   public IUnit getUnit(){
-    return turns.poll();
+    current = turns.poll();
+    current.isPlayable();
+    return current;
   }
 
   /**
@@ -54,5 +59,17 @@ public class TurnController {
   public void add(IUnit unit) {
     turns.add(unit);
     unit.setTurnsQueue(this.turns);
+  }
+
+  public IUnit getCurrent(){
+    return current;
+  }
+
+  public void deleteEnemy(Enemy enemy){
+    turns.remove(enemy);
+  }
+
+  public void deleteCharacter(ICharacter character) {
+    turns.remove((IUnit) character);
   }
 }

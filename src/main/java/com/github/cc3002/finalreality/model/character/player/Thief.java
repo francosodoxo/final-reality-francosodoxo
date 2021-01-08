@@ -1,6 +1,7 @@
 package com.github.cc3002.finalreality.model.character.player;
 
 import com.github.cc3002.finalreality.model.character.IUnit;
+import com.github.cc3002.finalreality.model.weapon.IWeapon;
 import com.github.cc3002.finalreality.model.weapon.IWeaponThief;
 import com.github.cc3002.finalreality.model.weapon.NullWeapon;
 import org.jetbrains.annotations.NotNull;
@@ -103,9 +104,14 @@ public class Thief extends AbstractCharacter implements IThiefAllowedWeapons {
    */
   @Override
   public void attackTo(IUnit enemy) {
-    if(enemy.getHealthPoints()>0 && !enemy.equals(this)){
+    if(enemy.getHealthPoints()>0 && !enemy.equals(this) && this.getHealthPoints() > 0){
       enemy.receiveAtk(this.getEquippedWeapon().getDamage());
     }
+  }
+
+  @Override
+  public void isPlayable() {
+    ;
   }
 
   /**
@@ -115,5 +121,14 @@ public class Thief extends AbstractCharacter implements IThiefAllowedWeapons {
   public void waitTurn() {
     super.getScheduledExecutor()
             .schedule(this::addToQueue, this.getEquippedWeapon().getWeight() / 10, TimeUnit.SECONDS);
+  }
+
+  @Override
+  public void tryToEquip(IWeapon weapon) {
+    try{
+      this.equip((IWeaponThief) weapon);
+    }catch(Exception e){
+      e.printStackTrace();
+    }
   }
 }

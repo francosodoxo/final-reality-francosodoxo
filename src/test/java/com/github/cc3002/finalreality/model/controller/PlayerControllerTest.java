@@ -81,35 +81,35 @@ public class PlayerControllerTest extends AbstractSetUpTest {
 
   @Test
   public void equipWeaponBlack(){
-    playerController.equipBlack(super.getBlackName(),getKnifeBlack());
+    playerController.tryToEquip(super.getBlackName(),getKnifeBlack());
     IWeaponBlack weapon = playerController.getBlackWeapon(super.getBlackName());
     assertEquals(super.getKnifeBlack(),weapon);
   }
 
   @Test
   public void equipWeaponEngineer(){
-    playerController.equipEngineer(super.getEngineerName(),super.getAxeEngineer());
+    playerController.tryToEquip(super.getEngineerName(),super.getAxeEngineer());
     IWeaponEngineer weapon = playerController.getEngineerWeapon(super.getEngineerName());
     assertEquals(super.getAxeEngineer(),weapon);
   }
 
   @Test
   public void equipWeaponKnight(){
-    playerController.equipKnight(super.getKnightName(),super.getKnifeKnight());
+    playerController.tryToEquip(super.getKnightName(),super.getKnifeKnight());
     IWeaponKnight weapon = playerController.getKnightWeapon(super.getKnightName());
     assertEquals(super.getKnifeKnight(),weapon);
   }
 
   @Test
   public void equipWeaponThief(){
-    playerController.equipThief(super.getThiefName(),super.getBowThief());
+    playerController.tryToEquip(super.getThiefName(),super.getBowThief());
     IWeaponThief weapon = playerController.getThiefWeapon(super.getThiefName());
     assertEquals(super.getBowThief(),weapon);
   }
 
   @Test
   public void equipWeaponWhite(){
-    playerController.equipWhite(super.getWhiteMagicianName(),super.getStaffWhite());
+    playerController.tryToEquip(super.getWhiteMagicianName(),super.getStaffWhite());
     IWeaponWhite weapon = playerController.getWhiteWeapon(super.getWhiteMagicianName());
     assertEquals(super.getStaffWhite(),weapon);
   }

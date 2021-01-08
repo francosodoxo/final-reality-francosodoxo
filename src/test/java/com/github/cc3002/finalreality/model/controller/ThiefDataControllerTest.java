@@ -41,7 +41,7 @@ public class ThiefDataControllerTest extends AbstractSetUpTest {
 
   @Test
   public void getThiefWeapon(){
-    thief.equip(super.getBowThief());
+    thief.tryToEquip(super.getBowThief());
     IWeaponThief weapon = characterController.getThiefWeapon(super.getThiefName());
     assertEquals(super.getBowThief(),weapon);
   }

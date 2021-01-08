@@ -3,28 +3,34 @@ package com.github.cc3002.finalreality.model.controller;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.IUnit;
 import com.github.cc3002.finalreality.model.character.player.*;
+import com.github.cc3002.finalreality.model.listeners.AttackToCharacterHandler;
 import com.github.cc3002.finalreality.model.listeners.CharacterDeadHandler;
 import com.github.cc3002.finalreality.model.weapon.*;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Random;
+import java.util.concurrent.Flow;
 
 public class PlayerController {
   private HashMap<String, ICharacter> playerCharacters;
   private HashMap<String, IWeapon> weapons;
   private PropertyChangeSupport noPlayersOnGame = new PropertyChangeSupport(this);
   private CharacterDeadHandler characterDeadHandler = new CharacterDeadHandler(this);
+  private AttackToCharacterHandler attackToCharacterHandler;
   private int charactersAlive;
-
+  private TurnController turnController;
   /**
    * Class to manage the player's actions
    */
-  public PlayerController(){
+  public PlayerController(TurnController turnController){
     playerCharacters = new HashMap<String,ICharacter>();
     weapons = new HashMap<String,IWeapon>();
     charactersAlive = 0;
+    this.turnController = turnController;
   }
 
   /**
@@ -38,12 +44,13 @@ public class PlayerController {
   /**
    * It is invoked when a character is dead
    */
-  public void characterDead(){
+  public void characterDead(ICharacter character){
     int oldCharactersAlive = charactersAlive;
     charactersAlive--;
     if(charactersAlive == 0){
       noPlayersOnGame.firePropertyChange("noCharactersOnGame",oldCharactersAlive,charactersAlive);
     }
+    turnController.deleteCharacter(character);
   }
 
   /**
@@ -92,14 +99,10 @@ public class PlayerController {
     return playerCharacters.get(name).getDefense();
   }
 
-  /**
-   * Equip a weapon to a black magician identified by their name
-   * @param name
-   * @param weapon
-   */
-  public void equipBlack(String name, IWeaponBlack weapon) {
-    ((IBlackAllowedWeapons) playerCharacters.get(name)).equip(weapon);
+  public void tryToEquip(String name, IWeapon weapon){
+    playerCharacters.get(name).tryToEquip(weapon);
   }
+
 
   /**
    * Get a black magician's weapon identified by their name
@@ -110,14 +113,6 @@ public class PlayerController {
     return ((IBlackAllowedWeapons) playerCharacters.get(name)).getEquippedWeapon();
   }
 
-  /**
-   * Equip a weapon to an engineer identified by their name
-   * @param engineerName
-   * @param weapon
-   */
-  public void equipEngineer(String engineerName, IWeaponEngineer weapon) {
-    ((IEngineerAllowedWeapons) playerCharacters.get(engineerName)).equip(weapon);
-  }
 
   /**
    * Get a engineer's weapon identified by their name
@@ -128,14 +123,7 @@ public class PlayerController {
     return ((IEngineerAllowedWeapons) playerCharacters.get(engineerName)).getEquippedWeapon();
   }
 
-  /**
-   * Equip a weapon to a knight identified by their name
-   * @param knightName
-   * @param weapon
-   */
-  public void equipKnight(String knightName, IWeaponKnight weapon) {
-    ((IKnightAllowedWeapons) playerCharacters.get(knightName)).equip(weapon);
-  }
+
 
   /**
    * Get a knight's weapon identified by their name
@@ -146,14 +134,7 @@ public class PlayerController {
     return ((IKnightAllowedWeapons) playerCharacters.get(knightName)).getEquippedWeapon();
   }
 
-  /**
-   * Equip a weapon to a thief identified by their name
-   * @param thiefName
-   * @param weapon
-   */
-  public void equipThief(String thiefName, IWeaponThief weapon) {
-    ((IThiefAllowedWeapons) playerCharacters.get(thiefName)).equip(weapon);
-  }
+
 
   /**
    * Get a thief's weapon identified by their name
@@ -164,14 +145,8 @@ public class PlayerController {
     return ((IThiefAllowedWeapons) playerCharacters.get(thiefName)).getEquippedWeapon();
   }
 
-  /**
-   * Equip a weapon to a white magician identified by their name
-   * @param whiteMagicianName
-   * @param weapon
-   */
-  public void equipWhite(String whiteMagicianName, IWeaponWhite weapon) {
-    ((IWhiteAllowedWeapons) playerCharacters.get(whiteMagicianName)).equip(weapon);
-  }
+
+
 
   /**
    * Get a white magician's weapon identified by their name
@@ -214,5 +189,20 @@ public class PlayerController {
    */
   public int getCharactersAlive() {
     return charactersAlive;
+  }
+
+  public ICharacter chooseCharacter() {
+    ICharacter[] characters = (ICharacter[]) playerCharacters.values().toArray();
+    Random rnd = new Random();
+    int index = rnd.nextInt(5);
+    return characters[index];
+  }
+
+  public AttackToCharacterHandler getAttackToCharacterHandler() {
+    return attackToCharacterHandler;
+  }
+
+  public void addFlowController(FlowController flowController){
+    attackToCharacterHandler = new AttackToCharacterHandler(this, flowController);
   }
 }

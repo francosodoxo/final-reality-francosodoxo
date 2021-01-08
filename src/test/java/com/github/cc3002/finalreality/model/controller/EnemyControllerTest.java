@@ -19,7 +19,7 @@ public class EnemyControllerTest extends AbstractSetUpTest {
   @BeforeEach
   public void  setUp(){
     super.setUp();
-    enemyController = new EnemyController();
+    enemyController = new EnemyController(super.getTurnController(), super.getPlayerController().getAttackToCharacterHandler());
     enemy = enemyController.createEnemy(super.getEnemyName(),
             super.getWeight(),
             super.getTurnsQueue(),

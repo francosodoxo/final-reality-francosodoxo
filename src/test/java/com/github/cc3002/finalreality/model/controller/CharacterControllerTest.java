@@ -2,8 +2,6 @@ package com.github.cc3002.finalreality.model.controller;
 
 import com.github.cc3002.finalreality.model.character.IUnit;
 import com.github.cc3002.finalreality.model.character.player.*;
-import com.github.cc3002.finalreality.model.weapon.*;
-import org.jetbrains.annotations.TestOnly;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
