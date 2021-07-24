@@ -276,6 +276,7 @@ public class FinalReality extends Application {
             .setPosition(300,350)
             .setText("Current turn: "+turnController.getUnit().getName())
             .build();
+    System.out.println(turnController.getCurrent().getName());
     refreshLabelsHealthHandler.addLabel(characterController.getName(blackMagician),labelBlackLife);
     refreshLabelsHealthHandler.addLabel(enemyController.getName(enemy1),labelEnemy1Life);
     refreshLabelsHealthHandler.addLabel(enemyController.getName(enemy2),labelEnemy2Life);
